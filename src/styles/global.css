@@ -193,6 +193,26 @@ p {
   color: var(--blue);
 }
 
+/* ---------- Reveal au scroll (classe posée par les composants, JS dans Layout) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ---------- Focus visible ---------- */
 a:focus-visible,
 button:focus-visible {

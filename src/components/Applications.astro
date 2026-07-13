@@ -1,0 +1,29 @@
+---
+// Section Applications : Agriculture / Food / Counterfeit.
+import SectionHead from './SectionHead.astro';
+import AppCard from './AppCard.astro';
+import { APPLICATIONS } from '../data/site';
+---
+
+<section class="section section--gray" id="applications">
+  <div class="container">
+    <div class="reveal">
+      <SectionHead kicker="Applications" title="Built for your field" />
+    </div>
+    <div class="apps">
+      {APPLICATIONS.map((app) => <AppCard title={app.title} text={app.text} icon={app.icon} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .apps {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 900px) {
+    .apps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

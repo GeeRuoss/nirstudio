@@ -1,0 +1,55 @@
+---
+// Section Hardware (fond sombre) : features du device + render produit.
+import SectionHead from './SectionHead.astro';
+import FeatureRow from './FeatureRow.astro';
+import { HARDWARE } from '../data/site';
+---
+
+<section class="section section--dark" id="hardware">
+  <div class="container hardware">
+    <div>
+      <div class="reveal">
+        <SectionHead kicker="Hardware" title="One device, every answer" />
+      </div>
+      <div class="hardware__list">
+        {HARDWARE.map((h) => <FeatureRow title={h.title} text={h.text} icon={h.icon} />)}
+      </div>
+    </div>
+    <img
+      src="/img/fieldlab-phone.png"
+      alt="Handheld NIRLAB spectrometer scanning a sample, with live results in the mobile app"
+      width="867"
+      height="765"
+      loading="lazy"
+      class="hardware__img reveal"
+    />
+  </div>
+</section>
+
+<style>
+  .hardware {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hardware :global(.section-head) {
+    margin-bottom: 2rem;
+  }
+  .hardware__list {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .hardware__img {
+    width: min(460px, 85%);
+    justify-self: center;
+    height: auto;
+  }
+  @media (min-width: 900px) {
+    .hardware {
+      grid-template-columns: 1.15fr 1fr;
+    }
+    .hardware__img {
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,67 @@
+---
+// Carte d'étape du process (01 Define / 02 Develop / 03 Deploy).
+interface Props {
+  n: string;
+  title: string;
+  text: string;
+}
+const { n, title, text } = Astro.props;
+---
+
+<article class="stepcard reveal">
+  <span class="stepcard__bar" aria-hidden="true"></span>
+  <span class="stepcard__n" aria-hidden="true">{n}</span>
+  <h3>{title}</h3>
+  <p>{text}</p>
+</article>
+
+<style>
+  .stepcard {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 2.25rem 1.75rem 2rem;
+    overflow: hidden;
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .stepcard:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  /* Filet dégradé en tête de carte, s'étire au hover */
+  .stepcard__bar {
+    position: absolute;
+    inset: 0 auto auto 0;
+    height: 4px;
+    width: 56px;
+    background: linear-gradient(90deg, var(--blue), #5e97f2);
+    border-radius: 0 0 4px 0;
+    transition: width 0.35s ease;
+  }
+  .stepcard:hover .stepcard__bar {
+    width: 100%;
+    border-radius: 0;
+  }
+  .stepcard__n {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 3.75rem;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--blue) 0%, #7fb0ff 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .stepcard p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+</style>

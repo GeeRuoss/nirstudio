@@ -1,0 +1,57 @@
+---
+// Ligne de feature de la section Hardware (icône + titre + texte, sur fond sombre).
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  text: string;
+  icon: string;
+}
+const { title, text, icon } = Astro.props;
+---
+
+<article class="feature reveal">
+  <span class="feature__icon">
+    <Icon name={icon} size={22} />
+  </span>
+  <div>
+    <h3>{title}</h3>
+    <p>{text}</p>
+  </div>
+</article>
+
+<style>
+  .feature {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.25rem;
+    margin-inline: -1.25rem;
+    border-radius: var(--radius-card);
+    transition: background 0.25s ease;
+  }
+  .feature:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .feature__icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    width: 46px;
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(3, 96, 232, 0.18);
+    border: 1px solid rgba(3, 96, 232, 0.35);
+    color: #5e97f2;
+  }
+  .feature h3 {
+    font-size: 1.1rem;
+  }
+  .feature p {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+    max-width: 26rem;
+  }
+</style>

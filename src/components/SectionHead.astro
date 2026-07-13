@@ -1,0 +1,33 @@
+---
+// En-tête de section : kicker + titre + lead optionnel.
+interface Props {
+  kicker: string;
+  title: string;
+  lead?: string;
+  center?: boolean;
+}
+const { kicker, title, lead, center = false } = Astro.props;
+---
+
+<header class:list={['section-head', { 'section-head--center': center }]}>
+  <span class="kicker">{kicker}</span>
+  <h2 set:html={title} />
+  {lead && <p class="lead">{lead}</p>}
+</header>
+
+<style>
+  .section-head {
+    max-width: 46rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .section-head--center {
+    margin-inline: auto;
+    text-align: center;
+  }
+  .section-head .lead {
+    margin-top: 1.25rem;
+  }
+  .section-head--center .lead {
+    margin-inline: auto;
+  }
+</style>

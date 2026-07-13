@@ -1,0 +1,79 @@
+---
+// Hero : background officiel du kit de marque (device + phone dans l'image).
+---
+
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <h1>Custom NIR solutions, on&nbsp;demand</h1>
+      <p class="hero__lead">
+        Your measurement problem, our chemometrics. NIR Studio designs tailored
+        near-infrared spectroscopy applications: from data acquisition to a
+        production-ready model in your team's hands.
+      </p>
+      <div class="hero__cta">
+        <a href="#contact" class="btn btn--primary">Request a solution</a>
+        <a href="#solution" class="btn btn--ghost">How it works</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    /* L'image place le produit à droite : le copy vit à gauche, comme nirlab.com */
+    background: var(--ink) url('/img/hero-bg.jpg') no-repeat center right / cover;
+    color: var(--text-on-dark);
+    min-height: min(88vh, 780px);
+    display: flex;
+    align-items: center;
+  }
+  .hero__inner {
+    width: 100%;
+    padding-block: clamp(5rem, 12vw, 9rem);
+  }
+  .hero h1 {
+    color: var(--white);
+    max-width: 13ch;
+    animation: hero-rise 0.7s ease both;
+  }
+  .hero__lead {
+    margin-top: 1.5rem;
+    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+    color: #c7ccd4;
+    max-width: 32rem;
+    animation: hero-rise 0.7s 0.12s ease both;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2.25rem;
+    animation: hero-rise 0.7s 0.24s ease both;
+  }
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (max-width: 700px) {
+    /* En mobile le produit reste visible mais sous un voile pour la lisibilité du texte */
+    .hero {
+      background:
+        linear-gradient(180deg, rgba(10, 10, 12, 0.3) 0%, rgba(10, 10, 12, 0.78) 55%, rgba(10, 10, 12, 0.9) 100%),
+        var(--ink) url('/img/hero-bg.jpg') no-repeat 72% center / cover;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero h1,
+    .hero__lead,
+    .hero__cta {
+      animation: none;
+    }
+  }
+</style>

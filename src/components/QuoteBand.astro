@@ -1,0 +1,46 @@
+---
+// Bandeau citation (fond sombre) : preuve ISO 17025.
+import { QUOTE } from '../data/site';
+---
+
+<section class="section section--dark">
+  <div class="container quote reveal">
+    <svg class="quote__mark" width="46" height="34" viewBox="0 0 46 34" fill="currentColor" aria-hidden="true">
+      <path d="M0 34V20.4C0 8.8 6.4 1.6 17.6 0l2 5.6C12.4 7.6 9 11.2 8.8 16H18v18H0zm26 0V20.4C26 8.8 32.4 1.6 43.6 0l2 5.6C38.4 7.6 35 11.2 34.8 16H44v18H26z" />
+    </svg>
+    <blockquote>
+      <p class="quote__text">{QUOTE.text}</p>
+      <footer class="quote__author">
+        {QUOTE.author} <span>{QUOTE.role}</span>
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<style>
+  .quote {
+    max-width: 56rem;
+  }
+  .quote__mark {
+    color: var(--blue);
+    margin-bottom: 1.75rem;
+  }
+  .quote__text {
+    font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--white);
+    text-wrap: balance;
+  }
+  .quote__author {
+    margin-top: 1.75rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .quote__author span {
+    display: block;
+    font-weight: 400;
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+</style>
