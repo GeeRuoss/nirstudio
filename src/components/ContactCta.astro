@@ -86,22 +86,21 @@ import { SITE } from '../data/site';
     background: var(--white);
     color: var(--blue);
     font-weight: 700;
+    box-shadow: 0 10px 26px rgba(2, 30, 80, 0.35);
   }
   .cta__primary:hover {
-    background: #eaf1ff;
-  }
-  .cta__primary :global(svg) {
-    transition: transform 0.2s ease;
-  }
-  .cta__primary:hover :global(svg) {
-    transform: translateX(3px);
+    transform: translateY(-2px);
+    background: #f2f7ff;
+    box-shadow: 0 16px 34px rgba(2, 30, 80, 0.45);
   }
   .cta__ghost {
     border: 1.5px solid rgba(255, 255, 255, 0.45);
     color: var(--white);
+    background: rgba(255, 255, 255, 0.05);
   }
   .cta__ghost:hover {
+    transform: translateY(-2px);
     border-color: var(--white);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.12);
   }
 </style>

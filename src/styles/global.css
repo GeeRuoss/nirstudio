@@ -157,40 +157,109 @@ p {
   color: #9ca3af;
 }
 
-/* ---------- Boutons (pill, comme nirlab.com) ---------- */
+/* ---------- Boutons (pill premium) ---------- */
 .btn {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  min-height: 48px;
-  padding: 0.7rem 1.6rem;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 50px;
+  padding: 0.8rem 1.8rem;
   border-radius: var(--radius-pill);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  letter-spacing: 0.01em;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
 }
+.btn:active {
+  transform: translateY(1px) scale(0.99);
+}
+/* La flèche (ou toute icône) glisse au hover */
+.btn svg {
+  transition: transform 0.22s ease;
+}
+.btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* Primaire : dégradé bleu avec relief et ombre portée colorée */
 .btn--primary {
-  background: var(--blue);
   color: var(--white);
+  background: linear-gradient(180deg, #2f7bf2 0%, var(--blue) 55%, #0250c4 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 8px 20px rgba(3, 96, 232, 0.32);
 }
 .btn--primary:hover {
-  background: var(--blue-dark);
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, #3f88f7 0%, #1a70ef 55%, #0357d3 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    0 14px 30px rgba(3, 96, 232, 0.42);
 }
+/* Sheen : reflet qui balaie le bouton au hover */
+.btn--primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.35) 48%,
+    rgba(255, 255, 255, 0.12) 54%,
+    transparent 70%
+  );
+  transform: translateX(-110%);
+}
+.btn--primary:hover::after {
+  transition: transform 0.6s ease;
+  transform: translateX(110%);
+}
+
+/* Ghost sur fond sombre : verre dépoli qui se remplit */
 .btn--ghost {
-  border: 1.5px solid var(--border-dark);
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
   color: var(--white);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 .btn--ghost:hover {
-  border-color: var(--blue);
-  color: var(--white);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.1);
 }
+
+/* Ghost sur fond clair */
 .btn--ghost-light {
   border: 1.5px solid var(--border);
   color: var(--text);
+  background: var(--white);
 }
 .btn--ghost-light:hover {
+  transform: translateY(-2px);
   border-color: var(--blue);
   color: var(--blue);
+  background: rgba(3, 96, 232, 0.05);
+  box-shadow: 0 8px 20px rgba(10, 10, 20, 0.07);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn svg,
+  .btn--primary::after {
+    transition: none;
+  }
+  .btn:hover {
+    transform: none;
+  }
 }
 
 /* ---------- Reveal au scroll (classe posée par les composants, JS dans Layout) ---------- */
