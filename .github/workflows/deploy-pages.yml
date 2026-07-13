@@ -1,0 +1,67 @@
+# Staging GitHub Pages : https://geeruoss.github.io/nirstudio/
+# Les polices Crystal (sous licence) ne sont PAS dans ce repo :
+# elles sont clonées depuis le repo privé nirstudio-assets via une
+# deploy key en lecture seule (secret ASSETS_DEPLOY_KEY), puis le
+# site est buildé avec STAGING=1 (base /nirstudio + noindex).
+name: Deploy Pages (staging)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Injecter les polices (repo privé nirstudio-assets)
+        env:
+          DEPLOY_KEY: ${{ secrets.ASSETS_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null
+          git clone --depth 1 git@github.com:GeeRuoss/nirstudio-assets.git /tmp/assets
+          mkdir -p src/fonts
+          cp /tmp/assets/fonts/*.woff2 src/fonts/
+          rm -f ~/.ssh/id_ed25519
+
+      - name: Node 22 (requis par Astro 7)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Installer et builder
+        run: |
+          npm ci
+          STAGING=1 npm run build
+
+      - name: Empaqueter pour Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déployer sur GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
