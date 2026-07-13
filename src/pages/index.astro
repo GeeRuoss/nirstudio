@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Icon from '../components/Icon.astro';
-import { SITE, APPLICATIONS, STEPS, VALUES, QUOTE } from '../data/site';
+import { SITE, APPLICATIONS, STEPS, HARDWARE, QUOTE } from '../data/site';
 ---
 
 <Layout
@@ -20,17 +20,17 @@ import { SITE, APPLICATIONS, STEPS, VALUES, QUOTE } from '../data/site';
         </p>
         <div class="hero__cta">
           <a href="#contact" class="btn btn--primary">Request a solution</a>
-          <a href="#how-it-works" class="btn btn--ghost">How it works</a>
+          <a href="#solution" class="btn btn--ghost">How it works</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ INTRO ============ -->
-  <section class="section" id="about">
+  <!-- ============ SOLUTION ============ -->
+  <section class="section" id="solution">
     <div class="container intro">
       <div class="intro__copy">
-        <span class="kicker">What is NIR Studio</span>
+        <span class="kicker">Solution</span>
         <h2>The on-demand lab of 908&nbsp;Devices</h2>
         <p class="lead" style="margin-top: 1.25rem;">
           NIRLAB brought lab-grade NIR spectroscopy into a handheld device. Now part of
@@ -40,42 +40,15 @@ import { SITE, APPLICATIONS, STEPS, VALUES, QUOTE } from '../data/site';
         </p>
       </div>
       <img
-        src="/img/fieldlab-phone.png"
-        alt="Handheld NIRLAB spectrometer scanning a sample, with live purity results in the mobile app"
-        width="867"
-        height="765"
+        src="/img/solution-olives.jpg"
+        alt="Handheld NIRLAB spectrometer with the mobile app showing oil and water content of an olive sample"
+        width="1200"
+        height="1000"
         loading="lazy"
         class="intro__img"
       />
     </div>
-  </section>
-
-  <!-- ============ APPLICATIONS ============ -->
-  <section class="section section--dark" id="solutions">
     <div class="container">
-      <span class="kicker">Solutions</span>
-      <h2>Built for your field</h2>
-      <div class="grid grid--3">
-        {
-          APPLICATIONS.map((app) => (
-            <article class="card card--dark">
-              <span class="card__icon">
-                <Icon name={app.icon} />
-              </span>
-              <h3>{app.title}</h3>
-              <p>{app.text}</p>
-            </article>
-          ))
-        }
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ HOW IT WORKS ============ -->
-  <section class="section" id="how-it-works">
-    <div class="container">
-      <span class="kicker">How it works</span>
-      <h2>From problem to deployment</h2>
       <div class="grid grid--3">
         {
           STEPS.map((step) => (
@@ -90,20 +63,53 @@ import { SITE, APPLICATIONS, STEPS, VALUES, QUOTE } from '../data/site';
     </div>
   </section>
 
-  <!-- ============ WHY ============ -->
-  <section class="section section--gray" id="why">
+  <!-- ============ HARDWARE ============ -->
+  <section class="section section--dark" id="hardware">
+    <div class="container hardware">
+      <div class="hardware__copy">
+        <span class="kicker">Hardware</span>
+        <h2>One device, every answer</h2>
+        <div class="hardware__list">
+          {
+            HARDWARE.map((h) => (
+              <article class="hardware__item">
+                <span class="card__icon">
+                  <Icon name={h.icon} />
+                </span>
+                <div>
+                  <h3>{h.title}</h3>
+                  <p>{h.text}</p>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+      <img
+        src="/img/fieldlab-phone.png"
+        alt="Handheld NIRLAB spectrometer scanning a sample, with live results in the mobile app"
+        width="867"
+        height="765"
+        loading="lazy"
+        class="hardware__img"
+      />
+    </div>
+  </section>
+
+  <!-- ============ APPLICATIONS ============ -->
+  <section class="section" id="applications">
     <div class="container">
-      <span class="kicker">Why NIR Studio</span>
-      <h2>Lab precision, field speed</h2>
-      <div class="grid grid--4">
+      <span class="kicker">Applications</span>
+      <h2>Built for your field</h2>
+      <div class="grid grid--3">
         {
-          VALUES.map((v) => (
+          APPLICATIONS.map((app) => (
             <article class="card">
               <span class="card__icon">
-                <Icon name={v.icon} />
+                <Icon name={app.icon} />
               </span>
-              <h3>{v.title}</h3>
-              <p>{v.text}</p>
+              <h3>{app.title}</h3>
+              <p>{app.text}</p>
             </article>
           ))
         }
@@ -183,14 +189,15 @@ import { SITE, APPLICATIONS, STEPS, VALUES, QUOTE } from '../data/site';
     }
   }
 
-  /* ---------- Intro (texte + render produit) ---------- */
+  /* ---------- Solution (texte + render olives + étapes) ---------- */
   .intro {
     display: grid;
     gap: 3rem;
     align-items: center;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
   }
   .intro__img {
-    width: min(420px, 80%);
+    width: min(460px, 85%);
     justify-self: center;
     height: auto;
   }
@@ -199,6 +206,44 @@ import { SITE, APPLICATIONS, STEPS, VALUES, QUOTE } from '../data/site';
       grid-template-columns: 1.2fr 1fr;
     }
     .intro__img {
+      width: 100%;
+    }
+  }
+
+  /* ---------- Hardware (liste + render device) ---------- */
+  .hardware {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hardware__list {
+    display: grid;
+    gap: 1.75rem;
+    margin-top: 2.5rem;
+  }
+  .hardware__item {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .hardware__item p {
+    color: #9ca3af;
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+  }
+  .hardware__item .card__icon {
+    flex-shrink: 0;
+  }
+  .hardware__img {
+    width: min(460px, 85%);
+    justify-self: center;
+    height: auto;
+  }
+  @media (min-width: 900px) {
+    .hardware {
+      grid-template-columns: 1.15fr 1fr;
+    }
+    .hardware__img {
       width: 100%;
     }
   }

@@ -19,44 +19,49 @@ export const SITE = {
   contactUrl: 'https://908devices.com/contact/',
 };
 
+// Structure de page validée par Guillermo : Solution / Hardware / Applications.
 export const NAV = [
-  { label: 'Solutions', href: '#solutions' },
-  { label: 'How it works', href: '#how-it-works' },
-  { label: 'Why NIR Studio', href: '#why' },
+  { label: 'Solution', href: '#solution' },
+  { label: 'Hardware', href: '#hardware' },
+  { label: 'Applications', href: '#applications' },
   { label: 'Contact', href: '#contact' },
 ];
 
-// Domaines d'application, hérités de l'offre NIRLAB.
+// Les 3 applications de NIR Studio : Agriculture, Food, Counterfeit.
 export const APPLICATIONS = [
   {
-    title: 'Law Enforcement',
-    text: 'Identify and quantify narcotics and explosives on-site within seconds. Point-and-shoot, made for field officers.',
-    icon: 'shield',
-  },
-  {
-    title: 'Drug Checking',
-    text: 'Instant purity and composition analysis for harm reduction programs and forensic labs.',
-    icon: 'flask',
-  },
-  {
-    title: 'Pharma',
-    text: 'Raw material identification and quality control, from goods-in to production line.',
-    icon: 'pill',
-  },
-  {
-    title: 'Polymers & Recycling',
-    text: 'Sort and verify plastics and recycled materials instantly, directly on the line.',
-    icon: 'recycle',
-  },
-  {
-    title: 'Agriculture & Feed',
-    text: 'Moisture, protein and fat analysis in the field, without sending samples to the lab.',
+    title: 'Agriculture',
+    text: 'Moisture, protein, fat and oil content measured directly in the field or on the farm: crops, feed, forage and soil amendments, without sending samples to the lab.',
     icon: 'leaf',
   },
   {
-    title: 'Your industry',
-    text: 'A measurement problem we have not solved yet? That is exactly what NIR Studio is for.',
-    icon: 'sparkles',
+    title: 'Food',
+    text: 'Quality control and authenticity along the whole chain: incoming goods, production line and final product. From olive oil to dairy, results in seconds.',
+    icon: 'apple',
+  },
+  {
+    title: 'Counterfeit',
+    text: 'Verify that a product is what it claims to be. Detect counterfeit and adulterated materials instantly, from pharmaceuticals to branded goods.',
+    icon: 'shield',
+  },
+];
+
+// Section Hardware : le device + l'app, copy hérité de nirlab.com (FIELDLAB / NIRLIGHT).
+export const HARDWARE = [
+  {
+    title: 'Handheld NIR spectrometer',
+    text: 'The world’s best performing handheld NIR device: ultra-light, robust, wireless and IP67 rated. Point, shoot, done.',
+    icon: 'bolt',
+  },
+  {
+    title: 'Mobile and web app',
+    text: 'Results on your phone in seconds, synced to a cloud platform where your team manages measurements, users and devices.',
+    icon: 'layers',
+  },
+  {
+    title: 'Custom models built in',
+    text: 'Your NIR Studio application ships pre-loaded on the device: your substances, your matrices, your thresholds.',
+    icon: 'check',
   },
 ];
 
@@ -75,29 +80,6 @@ export const STEPS = [
     n: '03',
     title: 'Deploy',
     text: 'Your teams get a handheld device and an app tuned to your use case. Results in seconds, anywhere, synced to the cloud.',
-  },
-];
-
-export const VALUES = [
-  {
-    title: 'Trustable data',
-    text: 'Lab-grade precision in the palm of your hand: the NIRLAB system is the first handheld NIR solution proven at ISO 17025 level.',
-    icon: 'check',
-  },
-  {
-    title: 'Automate',
-    text: 'Replace slow send-to-lab loops with instant on-site analysis embedded in your existing processes.',
-    icon: 'bolt',
-  },
-  {
-    title: 'Reduce',
-    text: 'Cut analysis time from days to seconds and reduce costs per measurement dramatically.',
-    icon: 'trend',
-  },
-  {
-    title: 'Scale',
-    text: 'One platform, unlimited applications: add new substances, sites and users as your needs grow.',
-    icon: 'layers',
   },
 ];
 
