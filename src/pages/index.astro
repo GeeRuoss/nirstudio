@@ -8,11 +8,10 @@ import { SITE, APPLICATIONS, STEPS, VALUES, QUOTE } from '../data/site';
   title="NIR Studio | Custom NIR spectroscopy solutions, on demand"
   description={SITE.description}
 >
-  <!-- ============ HERO (sombre, façon nirlab.com) ============ -->
+  <!-- ============ HERO (background officiel du kit de marque) ============ -->
   <section class="hero">
     <div class="container hero__inner">
       <div class="hero__copy">
-        <span class="kicker">By the team behind NIRLAB</span>
         <h1>Custom NIR solutions, on&nbsp;demand</h1>
         <p class="hero__lead">
           Your measurement problem, our chemometrics. NIR Studio designs tailored
@@ -24,54 +23,30 @@ import { SITE, APPLICATIONS, STEPS, VALUES, QUOTE } from '../data/site';
           <a href="#how-it-works" class="btn btn--ghost">How it works</a>
         </div>
       </div>
-
-      <!-- Spectre NIR stylisé : placeholder visuel en attendant les renders produit -->
-      <div class="hero__visual" aria-hidden="true">
-        <svg viewBox="0 0 520 320" fill="none">
-          <defs>
-            <linearGradient id="spectrum" x1="0" y1="0" x2="520" y2="0" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stop-color="#0360e8" stop-opacity="0.15" />
-              <stop offset="0.5" stop-color="#0360e8" />
-              <stop offset="1" stop-color="#5e97f2" stop-opacity="0.3" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M10 250 C60 240 80 180 120 175 S180 230 220 225 260 120 300 110 340 190 380 185 430 90 470 80 505 130 510 140"
-            stroke="url(#spectrum)"
-            stroke-width="3"
-            stroke-linecap="round"
-          />
-          <path
-            d="M10 270 C70 265 90 215 130 210 S190 255 230 250 270 160 310 150 350 220 390 215 440 130 480 120 508 160 512 168"
-            stroke="#26262e"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-          <g font-family="Manrope Variable, sans-serif" font-size="12" fill="#4b5563">
-            <text x="12" y="304">900</text>
-            <text x="245" y="304">1300 nm</text>
-            <text x="482" y="304">1700</text>
-          </g>
-        </svg>
-        <div class="hero__badge">
-          <span class="hero__badge-value">76.2%</span>
-          <span class="hero__badge-label">Purity, on-site, in seconds</span>
-        </div>
-      </div>
     </div>
   </section>
 
   <!-- ============ INTRO ============ -->
   <section class="section" id="about">
-    <div class="container">
-      <span class="kicker">What is NIR Studio</span>
-      <h2>The on-demand lab of 908&nbsp;Devices</h2>
-      <p class="lead" style="margin-top: 1.25rem;">
-        NIRLAB brought lab-grade NIR spectroscopy into a handheld device. Now part of
-        908 Devices, our studio builds the applications on top: custom models for your
-        substances, your matrices and your field conditions. You bring the problem, we
-        deliver the solution.
-      </p>
+    <div class="container intro">
+      <div class="intro__copy">
+        <span class="kicker">What is NIR Studio</span>
+        <h2>The on-demand lab of 908&nbsp;Devices</h2>
+        <p class="lead" style="margin-top: 1.25rem;">
+          NIRLAB brought lab-grade NIR spectroscopy into a handheld device. Now part of
+          908 Devices, our studio builds the applications on top: custom models for your
+          substances, your matrices and your field conditions. You bring the problem, we
+          deliver the solution.
+        </p>
+      </div>
+      <img
+        src="/img/fieldlab-phone.png"
+        alt="Handheld NIRLAB spectrometer scanning a sample, with live purity results in the mobile app"
+        width="867"
+        height="765"
+        loading="lazy"
+        class="intro__img"
+      />
     </div>
   </section>
 
@@ -170,25 +145,28 @@ import { SITE, APPLICATIONS, STEPS, VALUES, QUOTE } from '../data/site';
 </Layout>
 
 <style>
-  /* ---------- Hero ---------- */
+  /* ---------- Hero : background officiel (device + phone dans l'image) ---------- */
   .hero {
-    background: linear-gradient(180deg, var(--ink) 0%, #101017 100%);
+    /* L'image place le produit à droite : le copy vit à gauche, comme nirlab.com */
+    background: var(--ink) url('/img/hero-bg.jpg') no-repeat center right / cover;
     color: var(--text-on-dark);
-    padding-block: clamp(4rem, 10vw, 8rem);
+    min-height: min(88vh, 780px);
+    display: flex;
+    align-items: center;
   }
   .hero__inner {
-    display: grid;
-    gap: 3rem;
-    align-items: center;
+    width: 100%;
+    padding-block: clamp(5rem, 12vw, 9rem);
   }
   .hero h1 {
     color: var(--white);
+    max-width: 13ch;
   }
   .hero__lead {
     margin-top: 1.5rem;
     font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-    color: #9ca3af;
-    max-width: 34rem;
+    color: #c7ccd4;
+    max-width: 32rem;
   }
   .hero__cta {
     display: flex;
@@ -196,36 +174,32 @@ import { SITE, APPLICATIONS, STEPS, VALUES, QUOTE } from '../data/site';
     gap: 0.9rem;
     margin-top: 2.25rem;
   }
-  .hero__visual {
-    position: relative;
-    background: var(--ink-soft);
-    border: 1px solid var(--border-dark);
-    border-radius: var(--radius-card);
-    padding: 1.5rem;
+  @media (max-width: 700px) {
+    /* En mobile le produit reste visible mais sous un voile pour la lisibilité du texte */
+    .hero {
+      background:
+        linear-gradient(180deg, rgba(10, 10, 12, 0.3) 0%, rgba(10, 10, 12, 0.78) 55%, rgba(10, 10, 12, 0.9) 100%),
+        var(--ink) url('/img/hero-bg.jpg') no-repeat 72% center / cover;
+    }
   }
-  .hero__badge {
-    position: absolute;
-    right: 1.5rem;
-    top: 1.5rem;
-    background: rgba(3, 96, 232, 0.12);
-    border: 1px solid rgba(3, 96, 232, 0.4);
-    border-radius: 12px;
-    padding: 0.7rem 1rem;
+
+  /* ---------- Intro (texte + render produit) ---------- */
+  .intro {
     display: grid;
-    gap: 0.1rem;
+    gap: 3rem;
+    align-items: center;
   }
-  .hero__badge-value {
-    font-weight: 800;
-    font-size: 1.4rem;
-    color: var(--white);
-  }
-  .hero__badge-label {
-    font-size: 0.78rem;
-    color: #9ca3af;
+  .intro__img {
+    width: min(420px, 80%);
+    justify-self: center;
+    height: auto;
   }
   @media (min-width: 900px) {
-    .hero__inner {
-      grid-template-columns: 1.1fr 1fr;
+    .intro {
+      grid-template-columns: 1.2fr 1fr;
+    }
+    .intro__img {
+      width: 100%;
     }
   }
 
