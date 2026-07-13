@@ -11,7 +11,9 @@ interface Props {
   description: string;
 }
 const { title, description } = Astro.props;
-const canonical = SITE.domain + '/';
+// Canonical par page (trailingSlash: ignore → on normalise sans slash final, sauf racine).
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const canonical = SITE.domain + path;
 
 // Entité Organization : NIR Studio, rattachée à 908 Devices.
 const orgLd = {

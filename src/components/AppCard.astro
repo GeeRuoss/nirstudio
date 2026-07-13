@@ -1,41 +1,47 @@
 ---
-// Carte d'application (Agriculture / Food / Counterfeit).
+// Carte d'application cliquable (Agriculture / Food / Counterfeit) → page dédiée.
+// Style éditorial : gros titre Crystal, flèche, invert bleu au hover.
 import Icon from './Icon.astro';
 
 interface Props {
   title: string;
   text: string;
   icon: string;
+  href: string;
 }
-const { title, text, icon } = Astro.props;
+const { title, text, icon, href } = Astro.props;
 ---
 
-<article class="appcard reveal">
-  <span class="appcard__icon">
-    <Icon name={icon} size={26} />
+<a class="appcard reveal" href={href}>
+  <span class="appcard__top">
+    <span class="appcard__icon"><Icon name={icon} size={24} /></span>
+    <span class="appcard__arrow" aria-hidden="true"><Icon name="arrow" size={22} /></span>
   </span>
-  <h3>{title}</h3>
+  <span class="appcard__title">{title}</span>
   <p>{text}</p>
-</article>
+</a>
 
 <style>
   .appcard {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--radius-card);
     padding: 2rem 1.75rem;
-    display: grid;
-    gap: 0.75rem;
-    align-content: start;
+    min-height: 280px;
     transition:
-      transform 0.25s ease,
-      border-color 0.25s ease,
-      box-shadow 0.25s ease;
+      transform 0.28s ease,
+      background 0.28s ease,
+      border-color 0.28s ease,
+      box-shadow 0.28s ease;
   }
-  .appcard:hover {
-    transform: translateY(-4px);
-    border-color: rgba(3, 96, 232, 0.45);
-    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  .appcard__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
   }
   .appcard__icon {
     display: inline-flex;
@@ -44,17 +50,50 @@ const { title, text, icon } = Astro.props;
     align-items: center;
     justify-content: center;
     border-radius: 14px;
-    background: linear-gradient(135deg, rgba(3, 96, 232, 0.12), rgba(94, 151, 242, 0.18));
+    background: rgba(3, 96, 232, 0.1);
     color: var(--blue);
-    margin-bottom: 0.5rem;
-    transition: background 0.25s ease, color 0.25s ease;
+    transition: background 0.28s ease, color 0.28s ease;
   }
-  .appcard:hover .appcard__icon {
-    background: linear-gradient(135deg, var(--blue), #4d8bf5);
-    color: var(--white);
+  .appcard__arrow {
+    color: var(--text-muted);
+    opacity: 0.5;
+    transition: transform 0.28s ease, color 0.28s ease, opacity 0.28s ease;
+  }
+  .appcard__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 2.6vw, 2rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    transition: color 0.28s ease;
   }
   .appcard p {
     color: var(--text-muted);
     font-size: 0.95rem;
+    transition: color 0.28s ease;
+  }
+
+  /* Hover : la carte passe en bleu marque, tout s'inverse */
+  .appcard:hover {
+    background: var(--blue);
+    border-color: var(--blue);
+    transform: translateY(-6px);
+    box-shadow: 0 24px 48px rgba(3, 96, 232, 0.28);
+  }
+  .appcard:hover .appcard__title {
+    color: var(--white);
+  }
+  .appcard:hover p {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .appcard:hover .appcard__icon {
+    background: rgba(255, 255, 255, 0.16);
+    color: var(--white);
+  }
+  .appcard:hover .appcard__arrow {
+    color: var(--white);
+    opacity: 1;
+    transform: translateX(4px);
   }
 </style>

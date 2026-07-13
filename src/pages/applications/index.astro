@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import AppCard from '../../components/AppCard.astro';
+import ContactCta from '../../components/ContactCta.astro';
+import { APPLICATIONS } from '../../data/site';
+---
+
+<Layout
+  title="NIR Spectroscopy Applications: Agriculture, Food, Counterfeit | NIR Studio"
+  description="Custom NIR spectroscopy applications for agriculture and feed, food quality and fraud detection, and counterfeit product authentication. Built on demand for your industry."
+>
+  <PageHeader
+    kicker="Applications"
+    title="Built for your field"
+    lead="Three domains where handheld NIR already changes the game. Yours is different? That is exactly what on-demand means."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="apps">
+        {
+          APPLICATIONS.map((app) => (
+            <AppCard title={app.title} text={app.teaser} icon={app.icon} href={`/applications/${app.slug}`} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <ContactCta />
+</Layout>
+
+<style>
+  .apps {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 900px) {
+    .apps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

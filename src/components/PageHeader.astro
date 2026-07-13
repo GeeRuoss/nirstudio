@@ -1,0 +1,58 @@
+---
+// En-tête sombre des pages intérieures (Solution, Hardware, Applications).
+interface Props {
+  kicker: string;
+  title: string;
+  lead?: string;
+}
+const { kicker, title, lead } = Astro.props;
+---
+
+<header class="pagehead">
+  <div class="container">
+    <span class="kicker">{kicker}</span>
+    <h1 set:html={title} />
+    {lead && <p class="pagehead__lead">{lead}</p>}
+  </div>
+</header>
+
+<style>
+  .pagehead {
+    background: linear-gradient(180deg, var(--ink) 0%, #101017 100%);
+    color: var(--text-on-dark);
+    padding-block: clamp(4rem, 9vw, 7rem);
+    border-bottom: 1px solid var(--border-dark);
+  }
+  .pagehead h1 {
+    color: var(--white);
+    font-size: clamp(2.3rem, 5.5vw, 3.75rem);
+    max-width: 18ch;
+    animation: pagehead-rise 0.6s ease both;
+  }
+  .pagehead .kicker {
+    color: #5e97f2;
+  }
+  .pagehead__lead {
+    margin-top: 1.5rem;
+    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+    color: #c7ccd4;
+    max-width: 38rem;
+    animation: pagehead-rise 0.6s 0.1s ease both;
+  }
+  @keyframes pagehead-rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pagehead h1,
+    .pagehead__lead {
+      animation: none;
+    }
+  }
+</style>

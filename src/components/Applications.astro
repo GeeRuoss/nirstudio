@@ -11,7 +11,11 @@ import { APPLICATIONS } from '../data/site';
       <SectionHead kicker="Applications" title="Built for your field" />
     </div>
     <div class="apps">
-      {APPLICATIONS.map((app) => <AppCard title={app.title} text={app.text} icon={app.icon} />)}
+      {
+        APPLICATIONS.map((app) => (
+          <AppCard title={app.title} text={app.teaser} icon={app.icon} href={`/applications/${app.slug}`} />
+        ))
+      }
     </div>
   </div>
 </section>

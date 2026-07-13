@@ -1,0 +1,118 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import ContactCta from '../../components/ContactCta.astro';
+import AppCard from '../../components/AppCard.astro';
+import { APPLICATIONS } from '../../data/site';
+
+export function getStaticPaths() {
+  return APPLICATIONS.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+}
+
+const { app } = Astro.props;
+const others = APPLICATIONS.filter((a) => a.slug !== app.slug);
+---
+
+<Layout title={app.metaTitle} description={app.metaDescription}>
+  <PageHeader kicker="Applications" title={app.h1} lead={app.intro} />
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead kicker="Parameters" title="What you can measure" />
+      </div>
+      <ul class="chips">
+        {app.measures.map((m) => <li class="chip reveal">{m}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section--gray">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead kicker="Use cases" title={`${app.title} in the field`} />
+      </div>
+      <div class="cases">
+        {
+          app.useCases.map((c) => (
+            <article class="case reveal">
+              <h3>{c.title}</h3>
+              <p>{c.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead kicker="More applications" title="Explore the other fields" />
+      </div>
+      <div class="others">
+        {
+          others.map((o) => (
+            <AppCard title={o.title} text={o.teaser} icon={o.icon} href={`/applications/${o.slug}`} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <ContactCta />
+</Layout>
+
+<style>
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .chip {
+    padding: 0.65rem 1.25rem;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, color 0.2s ease;
+  }
+  .chip:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+  .cases {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .case {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 1.75rem;
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+  }
+  .case h3 {
+    font-size: 1.1rem;
+  }
+  .case p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .others {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 900px) {
+    .cases {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .others {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

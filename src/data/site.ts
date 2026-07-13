@@ -1,12 +1,13 @@
-// Contenu centralisé de la page nirstudio.com.
+// Contenu centralisé du site nirstudio.com.
 // ⚠️ Tout le copy est un DRAFT à faire valider par Guillermo / 908 Devices.
+// Mots-clés SEO issus de la recherche du 13/07 (voir SEO.md).
 
 export const SITE = {
   name: 'NIR Studio',
   domain: 'https://www.nirstudio.com',
   tagline: 'Custom NIR solutions, on demand',
   description:
-    'NIR Studio builds tailored near-infrared spectroscopy applications on demand: from data acquisition to production-ready models. By the team behind NIRLAB, now part of 908 Devices.',
+    'NIR Studio builds custom NIR spectroscopy applications on demand: chemometric model development, handheld NIR spectrometer and cloud platform. By the team behind NIRLAB, now part of 908 Devices.',
   parent: {
     name: '908 Devices',
     url: 'https://908devices.com',
@@ -19,34 +20,106 @@ export const SITE = {
   contactUrl: 'https://908devices.com/contact/',
 };
 
-// Structure de page validée par Guillermo : Solution / Hardware / Applications.
+// Structure validée par Guillermo : Solution / Hardware / Applications (pages séparées).
 export const NAV = [
-  { label: 'Solution', href: '#solution' },
-  { label: 'Hardware', href: '#hardware' },
-  { label: 'Applications', href: '#applications' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Solution', href: '/solution' },
+  { label: 'Hardware', href: '/hardware' },
+  { label: 'Applications', href: '/applications' },
+  { label: 'Contact', href: '/#contact' },
 ];
 
-// Les 3 applications de NIR Studio : Agriculture, Food, Counterfeit.
+// Les 3 applications : Agriculture, Food, Counterfeit. Une page SEO par application.
 export const APPLICATIONS = [
   {
+    slug: 'agriculture',
     title: 'Agriculture',
-    text: 'Moisture, protein, fat and oil content measured directly in the field or on the farm: crops, feed, forage and soil amendments, without sending samples to the lab.',
     icon: 'leaf',
+    // Mot-clé principal : portable NIR analyzer for agriculture / grain analysis
+    metaTitle: 'Portable NIR Analyzer for Agriculture & Feed | NIR Studio',
+    metaDescription:
+      'Measure moisture, protein, oil and starch in grain, feed and forage in seconds with a handheld NIR analyzer. Custom calibrations for your crops, without sending samples to the lab.',
+    h1: 'Portable NIR analysis for agriculture and feed',
+    teaser:
+      'Moisture, protein, fat and oil measured directly in the field: grain, feed, forage and more, without sending samples to the lab.',
+    intro:
+      'Grain traders, feed mills and farmers make quality decisions every day. NIR Studio puts a portable NIR analyzer in your pocket, calibrated for your crops and your quality parameters: results in seconds, at intake, in the field or on the line.',
+    measures: ['Moisture', 'Protein', 'Fat & oil', 'Starch', 'Fiber (ADF/NDF)', 'Ash'],
+    useCases: [
+      {
+        title: 'Grain intake and trading',
+        text: 'Grade incoming and outgoing grain in real time: protein, moisture and oil at the truck, not two days later at the lab.',
+      },
+      {
+        title: 'Feed and forage quality',
+        text: 'Check rations, silage and raw ingredients on the farm or at the mill, and adjust formulations immediately.',
+      },
+      {
+        title: 'Harvest decisions',
+        text: 'Measure crop maturity and dry matter in the field to pick the right harvest window.',
+      },
+    ],
   },
   {
+    slug: 'food',
     title: 'Food',
-    text: 'Quality control and authenticity along the whole chain: incoming goods, production line and final product. From olive oil to dairy, results in seconds.',
     icon: 'apple',
+    // Mots-clés : food fraud detection / food authenticity testing / NIR food quality control
+    metaTitle: 'Food Fraud Detection & Quality Control with NIR | NIR Studio',
+    metaDescription:
+      'Detect food fraud and control quality in seconds with handheld NIR spectroscopy: olive oil adulteration, incoming goods inspection, authenticity testing along your whole supply chain.',
+    h1: 'Food authenticity and quality control, in seconds',
+    teaser:
+      'Quality control and food fraud detection along the whole chain: incoming goods, production line and final product.',
+    intro:
+      'Food fraud costs the industry billions and one recall can cost a brand everything. NIR Studio builds food authenticity and quality applications on handheld NIR: verify incoming goods, monitor production and confirm the final product matches its label, without a lab.',
+    measures: ['Fat & oil content', 'Water content', 'Protein', 'Sugar', 'Adulterants', 'Authenticity match'],
+    useCases: [
+      {
+        title: 'Incoming goods inspection',
+        text: 'Verify every delivery against specification in seconds: oils, dairy powders, spices, sweeteners and more.',
+      },
+      {
+        title: 'Adulteration screening',
+        text: 'Detect diluted olive oil, stretched spices or substituted ingredients before they enter production.',
+      },
+      {
+        title: 'Production and final product',
+        text: 'Monitor fat, water or sugar content on the line and confirm the finished product matches its claim.',
+      },
+    ],
   },
   {
+    slug: 'counterfeit',
     title: 'Counterfeit',
-    text: 'Verify that a product is what it claims to be. Detect counterfeit and adulterated materials instantly, from pharmaceuticals to branded goods.',
     icon: 'shield',
+    // Mots-clés : counterfeit detection / product authentication / brand protection
+    metaTitle: 'Counterfeit Detection & Product Authentication | NIR Studio',
+    metaDescription:
+      'Authenticate products and detect counterfeits on-site in seconds with handheld NIR spectroscopy: pharmaceuticals, branded goods and materials. Non-destructive brand protection.',
+    h1: 'Counterfeit detection and product authentication',
+    teaser:
+      'Verify that a product is what it claims to be: detect counterfeit and adulterated goods instantly, without destroying them.',
+    intro:
+      'Counterfeit medicines endanger patients and fake goods erode brands. NIR Studio builds authentication applications on handheld NIR: scan a tablet, a package or a material and know in seconds whether it matches the genuine reference, non-destructively.',
+    measures: ['Authenticity match', 'Formulation fingerprint', 'API presence', 'Packaging materials', 'Adulterants'],
+    useCases: [
+      {
+        title: 'Pharmaceutical authentication',
+        text: 'Screen medicines in the field or at customs: a genuine reference model gives a clear match or no-match in seconds.',
+      },
+      {
+        title: 'Brand protection',
+        text: 'Give inspectors a point-and-shoot tool to verify branded goods and materials anywhere in the supply chain.',
+      },
+      {
+        title: 'Material verification',
+        text: 'Confirm that incoming materials, coatings or components are the genuine specified product.',
+      },
+    ],
   },
 ];
 
-// Section Hardware : le device + l'app, copy hérité de nirlab.com (FIELDLAB / NIRLIGHT).
+// Section Hardware : specs et features du device (copy hérité de nirlab.com FIELDLAB/NIRLIGHT).
 export const HARDWARE = [
   {
     title: 'Handheld NIR spectrometer',
@@ -63,6 +136,14 @@ export const HARDWARE = [
     text: 'Your NIR Studio application ships pre-loaded on the device: your substances, your matrices, your thresholds.',
     icon: 'check',
   },
+];
+
+// Stats du device pour la grille bento (valeurs publiques nirlab.com, à confirmer).
+export const HW_STATS = [
+  { value: 'IP67', label: 'Dust and water resistant' },
+  { value: '< 10 s', label: 'From scan to result' },
+  { value: 'ISO 17025', label: 'Proven system accuracy' },
+  { value: '0 wires', label: 'Fully wireless workflow' },
 ];
 
 export const STEPS = [

@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import StepCard from '../components/StepCard.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ContactCta from '../components/ContactCta.astro';
+import { STEPS } from '../data/site';
+---
+
+<Layout
+  title="Custom NIR Application Development | NIR Studio Solution"
+  description="From feasibility study to deployed application: NIR Studio develops custom chemometric models for your substances and matrices, delivered on a handheld NIR spectrometer with cloud platform."
+>
+  <PageHeader
+    kicker="Solution"
+    title="Your application, built by our chemometricians"
+    lead="NIR Studio is the on-demand lab of 908 Devices: we turn your measurement problem into a validated NIR application, from feasibility study to production."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead
+          kicker="How it works"
+          title="From problem to deployment"
+          lead="A proven three-step process, with your team involved at every milestone."
+        />
+      </div>
+      <div class="steps">
+        {STEPS.map((step) => <StepCard n={step.n} title={step.title} text={step.text} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--gray">
+    <div class="container solution-grid">
+      <div class="reveal">
+        <SectionHead
+          kicker="What you get"
+          title="A complete, validated application"
+        />
+        <ul class="checklist">
+          <li>Feasibility study on your real samples before you commit</li>
+          <li>Custom chemometric model, built and validated on lab-grade reference data</li>
+          <li>Handheld device pre-loaded with your application</li>
+          <li>Mobile and web app tuned to your workflow and thresholds</li>
+          <li>Cloud platform for your team: measurements, users, devices</li>
+          <li>Model updates as your substances and matrices evolve</li>
+        </ul>
+      </div>
+      <img
+        src="/img/solution-olives.jpg"
+        alt="Handheld NIRLAB spectrometer with the mobile app showing oil and water content of an olive sample"
+        width="1200"
+        height="1000"
+        loading="lazy"
+        class="solution-img reveal"
+      />
+    </div>
+  </section>
+
+  <ContactCta />
+</Layout>
+
+<style>
+  .steps {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .solution-grid {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  .solution-img {
+    width: min(460px, 85%);
+    justify-self: center;
+    height: auto;
+  }
+  .checklist {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 0.5rem;
+  }
+  .checklist li {
+    position: relative;
+    padding-left: 2rem;
+    color: var(--text-muted);
+  }
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    background: var(--blue);
+    /* Coche blanche inline (SVG data-URI avec xmlns, cf. règle assets) */
+    mask: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+    background-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  @media (min-width: 900px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .solution-grid {
+      grid-template-columns: 1.15fr 1fr;
+    }
+    .solution-img {
+      width: 100%;
+    }
+  }
+</style>

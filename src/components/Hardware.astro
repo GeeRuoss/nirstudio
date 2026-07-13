@@ -1,55 +1,191 @@
 ---
-// Section Hardware (fond sombre) : features du device + render produit.
+// Section Hardware (fond sombre) : grille bento — image produit, features, stats.
 import SectionHead from './SectionHead.astro';
-import FeatureRow from './FeatureRow.astro';
-import { HARDWARE } from '../data/site';
+import Icon from './Icon.astro';
+import { HARDWARE, HW_STATS } from '../data/site';
+
+interface Props {
+  /** Sur la page /hardware on masque le lien "Explore the hardware" */
+  standalone?: boolean;
+}
+const { standalone = false } = Astro.props;
 ---
 
 <section class="section section--dark" id="hardware">
-  <div class="container hardware">
-    <div>
-      <div class="reveal">
-        <SectionHead kicker="Hardware" title="One device, every answer" />
-      </div>
-      <div class="hardware__list">
-        {HARDWARE.map((h) => <FeatureRow title={h.title} text={h.text} icon={h.icon} />)}
+  <div class="container">
+    <div class="hardware__head reveal">
+      <SectionHead kicker="Hardware" title="One device, every answer" />
+      {
+        !standalone && (
+          <a href="/hardware" class="hardware__more">
+            Explore the hardware
+            <Icon name="arrow" size={18} />
+          </a>
+        )
+      }
+    </div>
+
+    <div class="bento">
+      <figure class="bento__tile bento__img reveal">
+        <img
+          src="/img/fieldlab-phone.png"
+          alt="Handheld NIRLAB spectrometer scanning a sample, with live results in the mobile app"
+          width="867"
+          height="765"
+          loading="lazy"
+        />
+      </figure>
+
+      {
+        HARDWARE.map((h) => (
+          <article class="bento__tile bento__feature reveal">
+            <span class="bento__icon">
+              <Icon name={h.icon} size={22} />
+            </span>
+            <h3>{h.title}</h3>
+            <p>{h.text}</p>
+          </article>
+        ))
+      }
+
+      <div class="bento__tile bento__stats reveal">
+        {
+          HW_STATS.map((s) => (
+            <div class="stat">
+              <span class="stat__value">{s.value}</span>
+              <span class="stat__label">{s.label}</span>
+            </div>
+          ))
+        }
       </div>
     </div>
-    <img
-      src="/img/fieldlab-phone.png"
-      alt="Handheld NIRLAB spectrometer scanning a sample, with live results in the mobile app"
-      width="867"
-      height="765"
-      loading="lazy"
-      class="hardware__img reveal"
-    />
   </div>
 </section>
 
 <style>
-  .hardware {
-    display: grid;
-    gap: 3rem;
+  .hardware__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .hardware__head :global(.section-head) {
+    margin-bottom: 0;
+  }
+  .hardware__more {
+    display: inline-flex;
     align-items: center;
-  }
-  .hardware :global(.section-head) {
-    margin-bottom: 2rem;
-  }
-  .hardware__list {
-    display: grid;
     gap: 0.5rem;
+    font-weight: 600;
+    color: #5e97f2;
+    margin-bottom: 0.5rem;
+    transition: color 0.2s ease, gap 0.2s ease;
   }
-  .hardware__img {
-    width: min(460px, 85%);
-    justify-self: center;
+  .hardware__more:hover {
+    color: var(--white);
+    gap: 0.75rem;
+  }
+
+  /* ---- Bento ---- */
+  .bento {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+  }
+  .bento__tile {
+    background: var(--ink-soft);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-card);
+    padding: 1.75rem;
+    transition: border-color 0.25s ease, transform 0.25s ease;
+  }
+  .bento__tile:hover {
+    border-color: rgba(3, 96, 232, 0.5);
+    transform: translateY(-3px);
+  }
+
+  .bento__img {
+    margin: 0;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(120% 90% at 70% 20%, rgba(3, 96, 232, 0.16) 0%, transparent 60%),
+      var(--ink-soft);
+    padding: 2rem;
+  }
+  .bento__img img {
+    width: min(420px, 100%);
     height: auto;
   }
+
+  .bento__feature {
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+  }
+  .bento__icon {
+    display: inline-flex;
+    width: 46px;
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(3, 96, 232, 0.18);
+    border: 1px solid rgba(3, 96, 232, 0.35);
+    color: #5e97f2;
+    margin-bottom: 0.35rem;
+  }
+  .bento__feature h3 {
+    font-size: 1.1rem;
+  }
+  .bento__feature p {
+    color: #9ca3af;
+    font-size: 0.92rem;
+  }
+
+  .bento__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    align-content: center;
+  }
+  .stat {
+    display: grid;
+    gap: 0.2rem;
+  }
+  .stat__value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    line-height: 1;
+    background: linear-gradient(135deg, var(--blue) 0%, #7fb0ff 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .stat__label {
+    font-size: 0.82rem;
+    color: #9ca3af;
+  }
+
+  /* Desktop : image en grande tuile verticale, features autour, stats en bas à droite */
   @media (min-width: 900px) {
-    .hardware {
-      grid-template-columns: 1.15fr 1fr;
+    .bento {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto auto;
     }
-    .hardware__img {
-      width: 100%;
+    .bento__img {
+      grid-column: 1;
+      grid-row: 1 / 3;
+    }
+    .bento__feature:nth-of-type(3) {
+      grid-column: 2;
+      grid-row: 2;
+    }
+    .bento__stats {
+      grid-column: 3;
+      grid-row: 2;
     }
   }
 </style>
