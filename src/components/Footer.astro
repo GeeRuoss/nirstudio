@@ -1,19 +1,39 @@
 ---
-import { SITE } from '../data/site';
+import { NAV, SITE } from '../data/site';
 const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
   <div class="container footer__inner">
-    <p class="footer__brand">
-      NIR<b>STUDIO</b>
-      <span class="footer__sub">Custom NIR solutions by the team behind NIRLAB, part of 908 Devices.</span>
-    </p>
-    <nav class="footer__links" aria-label="Footer">
+    <div class="footer__brand">
+      <span class="footer__logo">
+        <svg width="30" height="18" viewBox="0 0 92.13 53.19" fill="var(--blue)" aria-hidden="true">
+          <polygon points="46.06 0 46.06 26.6 0 53.19 0 26.59 46.06 0" />
+          <polygon points="92.13 0 92.13 26.6 46.07 53.19 46.06 53.19 46.06 26.6 92.13 0" />
+        </svg>
+        NIR<b>STUDIO</b>
+      </span>
+      <p>
+        Custom NIR spectroscopy solutions, on demand. By the team behind NIRLAB, part of
+        908 Devices.
+      </p>
+    </div>
+
+    <nav class="footer__col" aria-label="Pages">
+      <span class="footer__title">Pages</span>
+      {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <nav class="footer__col" aria-label="Company">
+      <span class="footer__title">Company</span>
       <a href={SITE.parent.url} target="_blank" rel="noopener">908devices.com</a>
       <a href={SITE.nirlab.url} target="_blank" rel="noopener">nirlab.com</a>
+      <a href={SITE.contactUrl} target="_blank" rel="noopener">Contact</a>
     </nav>
-    <p class="footer__legal">© {year} 908 Devices Inc. All rights reserved.</p>
+  </div>
+
+  <div class="container footer__bottom">
+    <p>© {year} 908 Devices Inc. All rights reserved.</p>
   </div>
 </footer>
 
@@ -21,39 +41,63 @@ const year = new Date().getFullYear();
   .footer {
     background: var(--ink);
     color: #94a3b8;
-    padding-block: 3rem;
-    font-size: 0.9rem;
+    padding-top: 4rem;
+    font-size: 0.92rem;
+    border-top: 1px solid var(--border-dark);
   }
   .footer__inner {
     display: grid;
-    gap: 1.5rem;
+    gap: 2.5rem;
+    padding-bottom: 3rem;
   }
-  .footer__brand {
+  .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
     color: var(--white);
-    font-size: 1.1rem;
   }
-  .footer__brand b {
-    font-weight: 800;
+  .footer__logo b {
+    font-weight: 700;
   }
-  .footer__sub {
-    display: block;
-    color: #94a3b8;
-    font-size: 0.9rem;
-    margin-top: 0.4rem;
-    max-width: 28rem;
+  .footer__brand p {
+    margin-top: 1rem;
+    max-width: 24rem;
+    line-height: 1.6;
   }
-  .footer__links {
-    display: flex;
-    gap: 1.5rem;
-    font-weight: 600;
+  .footer__col {
+    display: grid;
+    gap: 0.7rem;
+    align-content: start;
+    justify-items: start;
   }
-  .footer__links a:hover {
+  .footer__title {
+    font-weight: 700;
     color: var(--white);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .footer__col a {
+    position: relative;
+    transition: color 0.2s ease;
+  }
+  .footer__col a:hover {
+    color: var(--white);
+  }
+  .footer__bottom {
+    border-top: 1px solid var(--border-dark);
+    padding-block: 1.5rem;
+    font-size: 0.82rem;
+    color: #6b7280;
   }
   @media (min-width: 900px) {
     .footer__inner {
-      grid-template-columns: 1fr auto auto;
-      align-items: center;
+      grid-template-columns: 1.6fr 1fr 1fr;
     }
   }
 </style>

@@ -1,42 +1,107 @@
 ---
-// Bandeau final de contact : CTA vers 908 Devices.
+// Bandeau final de contact : grande carte en dégradé bleu marque, sur toutes les pages.
 import Icon from './Icon.astro';
 import { SITE } from '../data/site';
 ---
 
 <section class="section" id="contact">
-  <div class="container contact reveal">
-    <h2>Tell us what you need to measure</h2>
-    <p class="lead">
-      NIR Studio is made for professionals who want lab-grade answers in the field.
-      Get in touch through 908 Devices and describe your use case.
-    </p>
-    <div class="contact__cta">
-      <a href={SITE.contactUrl} class="btn btn--primary" target="_blank" rel="noopener">
-        Contact us
-        <Icon name="arrow" size={18} />
-      </a>
-      <a href={SITE.parent.url} class="btn btn--ghost-light" target="_blank" rel="noopener">
-        Visit 908devices.com
-      </a>
+  <div class="container">
+    <div class="cta reveal">
+      <!-- Spectre NIR décoratif en filigrane -->
+      <svg class="cta__wave" viewBox="0 0 900 300" fill="none" preserveAspectRatio="none" aria-hidden="true">
+        <path
+          d="M0 240 C90 230 130 150 200 145 S300 210 370 205 440 90 510 80 590 170 660 165 760 60 830 50 890 110 900 120"
+          stroke="rgba(255,255,255,0.16)"
+          stroke-width="3"
+          stroke-linecap="round"
+        />
+        <path
+          d="M0 275 C100 268 140 200 210 195 S310 245 380 240 450 140 520 132 600 210 670 205 770 115 840 108 895 150 900 158"
+          stroke="rgba(255,255,255,0.07)"
+          stroke-width="2"
+          stroke-linecap="round"
+        />
+      </svg>
+
+      <div class="cta__content">
+        <h2>Tell us what you need to&nbsp;measure</h2>
+        <p>
+          NIR Studio is made for professionals who want lab-grade answers in the field.
+          Get in touch through 908 Devices and describe your use case.
+        </p>
+        <div class="cta__buttons">
+          <a href={SITE.contactUrl} class="btn cta__primary" target="_blank" rel="noopener">
+            Contact us
+            <Icon name="arrow" size={18} />
+          </a>
+          <a href={SITE.parent.url} class="btn cta__ghost" target="_blank" rel="noopener">
+            Visit 908devices.com
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .contact {
-    text-align: center;
-    max-width: 52rem;
+  .cta {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    background:
+      radial-gradient(90% 140% at 85% -10%, rgba(127, 176, 255, 0.35) 0%, transparent 55%),
+      linear-gradient(135deg, #0d6bf0 0%, #0360e8 35%, #023f9e 100%);
+    color: var(--white);
+    padding: clamp(2.75rem, 6vw, 5rem) clamp(1.75rem, 5vw, 4.5rem);
+    box-shadow: 0 32px 64px rgba(3, 96, 232, 0.25);
   }
-  .contact .lead {
-    margin-inline: auto;
+  .cta__wave {
+    position: absolute;
+    inset: auto 0 0 0;
+    width: 100%;
+    height: 65%;
+    pointer-events: none;
+  }
+  .cta__content {
+    position: relative;
+    max-width: 40rem;
+  }
+  .cta h2 {
+    color: var(--white);
+    font-size: clamp(1.9rem, 4vw, 3rem);
+  }
+  .cta p {
     margin-top: 1.25rem;
+    font-size: clamp(1rem, 1.7vw, 1.15rem);
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 34rem;
   }
-  .contact__cta {
+  .cta__buttons {
     display: flex;
     flex-wrap: wrap;
     gap: 0.9rem;
-    justify-content: center;
     margin-top: 2.25rem;
+  }
+  .cta__primary {
+    background: var(--white);
+    color: var(--blue);
+    font-weight: 700;
+  }
+  .cta__primary:hover {
+    background: #eaf1ff;
+  }
+  .cta__primary :global(svg) {
+    transition: transform 0.2s ease;
+  }
+  .cta__primary:hover :global(svg) {
+    transform: translateX(3px);
+  }
+  .cta__ghost {
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    color: var(--white);
+  }
+  .cta__ghost:hover {
+    border-color: var(--white);
+    background: rgba(255, 255, 255, 0.08);
   }
 </style>

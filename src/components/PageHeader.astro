@@ -1,5 +1,5 @@
 ---
-// En-tête sombre des pages intérieures (Solution, Hardware, Applications).
+// En-tête sombre des pages intérieures : glow bleu + grille fine en filigrane.
 interface Props {
   kicker: string;
   title: string;
@@ -9,7 +9,7 @@ const { kicker, title, lead } = Astro.props;
 ---
 
 <header class="pagehead">
-  <div class="container">
+  <div class="container pagehead__inner">
     <span class="kicker">{kicker}</span>
     <h1 set:html={title} />
     {lead && <p class="pagehead__lead">{lead}</p>}
@@ -18,15 +18,39 @@ const { kicker, title, lead } = Astro.props;
 
 <style>
   .pagehead {
-    background: linear-gradient(180deg, var(--ink) 0%, #101017 100%);
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--ink) 0%, #0e0e14 100%);
     color: var(--text-on-dark);
-    padding-block: clamp(4rem, 9vw, 7rem);
+    padding-block: clamp(4.5rem, 10vw, 8rem);
     border-bottom: 1px solid var(--border-dark);
+  }
+  /* Grille fine + glow bleu, façon interface d'instrument */
+  .pagehead::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(120% 100% at 50% 0%, black 30%, transparent 85%);
+  }
+  .pagehead::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(55% 90% at 88% 8%, rgba(3, 96, 232, 0.28) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .pagehead__inner {
+    position: relative;
+    z-index: 1;
   }
   .pagehead h1 {
     color: var(--white);
-    font-size: clamp(2.3rem, 5.5vw, 3.75rem);
-    max-width: 18ch;
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    max-width: 17ch;
     animation: pagehead-rise 0.6s ease both;
   }
   .pagehead .kicker {
