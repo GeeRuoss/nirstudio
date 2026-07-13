@@ -1,0 +1,341 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, APPLICATIONS, STEPS, VALUES, QUOTE } from '../data/site';
+---
+
+<Layout
+  title="NIR Studio | Custom NIR spectroscopy solutions, on demand"
+  description={SITE.description}
+>
+  <!-- ============ HERO (sombre, façon nirlab.com) ============ -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <span class="kicker">By the team behind NIRLAB</span>
+        <h1>Custom NIR solutions, on&nbsp;demand</h1>
+        <p class="hero__lead">
+          Your measurement problem, our chemometrics. NIR Studio designs tailored
+          near-infrared spectroscopy applications: from data acquisition to a
+          production-ready model in your team's hands.
+        </p>
+        <div class="hero__cta">
+          <a href="#contact" class="btn btn--primary">Request a solution</a>
+          <a href="#how-it-works" class="btn btn--ghost">How it works</a>
+        </div>
+      </div>
+
+      <!-- Spectre NIR stylisé : placeholder visuel en attendant les renders produit -->
+      <div class="hero__visual" aria-hidden="true">
+        <svg viewBox="0 0 520 320" fill="none">
+          <defs>
+            <linearGradient id="spectrum" x1="0" y1="0" x2="520" y2="0" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#0360e8" stop-opacity="0.15" />
+              <stop offset="0.5" stop-color="#0360e8" />
+              <stop offset="1" stop-color="#5e97f2" stop-opacity="0.3" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M10 250 C60 240 80 180 120 175 S180 230 220 225 260 120 300 110 340 190 380 185 430 90 470 80 505 130 510 140"
+            stroke="url(#spectrum)"
+            stroke-width="3"
+            stroke-linecap="round"
+          />
+          <path
+            d="M10 270 C70 265 90 215 130 210 S190 255 230 250 270 160 310 150 350 220 390 215 440 130 480 120 508 160 512 168"
+            stroke="#26262e"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+          <g font-family="Manrope Variable, sans-serif" font-size="12" fill="#4b5563">
+            <text x="12" y="304">900</text>
+            <text x="245" y="304">1300 nm</text>
+            <text x="482" y="304">1700</text>
+          </g>
+        </svg>
+        <div class="hero__badge">
+          <span class="hero__badge-value">76.2%</span>
+          <span class="hero__badge-label">Purity, on-site, in seconds</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INTRO ============ -->
+  <section class="section" id="about">
+    <div class="container">
+      <span class="kicker">What is NIR Studio</span>
+      <h2>The on-demand lab of 908&nbsp;Devices</h2>
+      <p class="lead" style="margin-top: 1.25rem;">
+        NIRLAB brought lab-grade NIR spectroscopy into a handheld device. Now part of
+        908 Devices, our studio builds the applications on top: custom models for your
+        substances, your matrices and your field conditions. You bring the problem, we
+        deliver the solution.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ APPLICATIONS ============ -->
+  <section class="section section--dark" id="solutions">
+    <div class="container">
+      <span class="kicker">Solutions</span>
+      <h2>Built for your field</h2>
+      <div class="grid grid--3">
+        {
+          APPLICATIONS.map((app) => (
+            <article class="card card--dark">
+              <span class="card__icon">
+                <Icon name={app.icon} />
+              </span>
+              <h3>{app.title}</h3>
+              <p>{app.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW IT WORKS ============ -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <span class="kicker">How it works</span>
+      <h2>From problem to deployment</h2>
+      <div class="grid grid--3">
+        {
+          STEPS.map((step) => (
+            <article class="step">
+              <span class="step__n">{step.n}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY ============ -->
+  <section class="section section--gray" id="why">
+    <div class="container">
+      <span class="kicker">Why NIR Studio</span>
+      <h2>Lab precision, field speed</h2>
+      <div class="grid grid--4">
+        {
+          VALUES.map((v) => (
+            <article class="card">
+              <span class="card__icon">
+                <Icon name={v.icon} />
+              </span>
+              <h3>{v.title}</h3>
+              <p>{v.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUOTE ============ -->
+  <section class="section section--dark">
+    <div class="container quote">
+      <blockquote>
+        <p class="quote__text">“{QUOTE.text}”</p>
+        <footer class="quote__author">
+          {QUOTE.author} <span>{QUOTE.role}</span>
+        </footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section" id="contact">
+    <div class="container contact">
+      <h2>Tell us what you need to measure</h2>
+      <p class="lead" style="margin-inline: auto; margin-top: 1.25rem;">
+        NIR Studio is made for professionals who want lab-grade answers in the field.
+        Get in touch through 908 Devices and describe your use case.
+      </p>
+      <div class="contact__cta">
+        <a href={SITE.contactUrl} class="btn btn--primary" target="_blank" rel="noopener">
+          Contact us
+          <Icon name="arrow" size={18} />
+        </a>
+        <a href={SITE.parent.url} class="btn btn--ghost-light" target="_blank" rel="noopener">
+          Visit 908devices.com
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    background: linear-gradient(180deg, var(--ink) 0%, #101017 100%);
+    color: var(--text-on-dark);
+    padding-block: clamp(4rem, 10vw, 8rem);
+  }
+  .hero__inner {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hero h1 {
+    color: var(--white);
+  }
+  .hero__lead {
+    margin-top: 1.5rem;
+    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+    color: #9ca3af;
+    max-width: 34rem;
+  }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2.25rem;
+  }
+  .hero__visual {
+    position: relative;
+    background: var(--ink-soft);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+  }
+  .hero__badge {
+    position: absolute;
+    right: 1.5rem;
+    top: 1.5rem;
+    background: rgba(3, 96, 232, 0.12);
+    border: 1px solid rgba(3, 96, 232, 0.4);
+    border-radius: 12px;
+    padding: 0.7rem 1rem;
+    display: grid;
+    gap: 0.1rem;
+  }
+  .hero__badge-value {
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--white);
+  }
+  .hero__badge-label {
+    font-size: 0.78rem;
+    color: #9ca3af;
+  }
+  @media (min-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1.1fr 1fr;
+    }
+  }
+
+  /* ---------- Grilles et cartes ---------- */
+  .grid {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 3rem;
+  }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 1.75rem;
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+  }
+  .card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .card--dark {
+    background: var(--ink-soft);
+    border-color: var(--border-dark);
+  }
+  .card--dark p {
+    color: #9ca3af;
+  }
+  .card__icon {
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(3, 96, 232, 0.1);
+    color: var(--blue);
+    margin-bottom: 0.25rem;
+  }
+  .card--dark .card__icon {
+    color: #5e97f2;
+    background: rgba(3, 96, 232, 0.16);
+  }
+  @media (min-width: 700px) {
+    .grid--3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .grid--4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .grid--4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ---------- Steps ---------- */
+  .step {
+    border-top: 3px solid var(--blue);
+    padding-top: 1.25rem;
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+  }
+  .step__n {
+    font-weight: 800;
+    font-size: 0.9rem;
+    color: var(--blue);
+    letter-spacing: 0.08em;
+  }
+  .step p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Quote ---------- */
+  .quote {
+    max-width: 56rem;
+  }
+  .quote__text {
+    font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--white);
+    text-wrap: balance;
+  }
+  .quote__author {
+    margin-top: 1.75rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .quote__author span {
+    display: block;
+    font-weight: 400;
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+
+  /* ---------- Contact ---------- */
+  .contact {
+    text-align: center;
+    max-width: 52rem;
+  }
+  .contact__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    justify-content: center;
+    margin-top: 2.25rem;
+  }
+</style>

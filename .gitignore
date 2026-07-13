@@ -1,0 +1,23 @@
+# build
+dist/
+.astro/
+
+# deps
+node_modules/
+
+# macOS
+.DS_Store
+
+# config locale Claude Code
+.claude/settings.local.json
+
+# secrets et fichiers sensibles
+.env
+.env.*
+*.pem
+*.p8
+.secrets/
+
+# sources design HD (restent locales, jamais dans le repo)
+all/
+sources/

@@ -1,0 +1,37 @@
+---
+// Icônes SVG inline (traits type Lucide, 24x24, stroke currentColor).
+// Jamais d'émojis dans le site : règle Ozzy.
+interface Props {
+  name: string;
+  size?: number;
+}
+const { name, size = 24 } = Astro.props;
+
+const paths: Record<string, string> = {
+  shield: 'M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z',
+  flask: 'M9 3h6M10 3v6l-5.5 9.5A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.5L14 9V3',
+  pill: 'M10.5 3.5a5 5 0 0 1 7 7l-7 7a5 5 0 0 1-7-7l7-7zM7 7l7 7',
+  recycle: 'M7 19H4.8a1.8 1.8 0 0 1-1.6-2.7L5 13m4 6l-2-3m2 3H7m7-16l2.2.1a1.8 1.8 0 0 1 1.5 2.7L16 9m-2-6l-3 1.5M16 9l3.3 5.7a1.8 1.8 0 0 1-1.5 2.7H15m1.5 3l-2-3m0 0h3',
+  leaf: 'M11 20A7 7 0 0 1 4 13c0-5 4-9 16-9 0 12-4 16-9 16zM4 21c3-3 6-5 10-7',
+  sparkles: 'M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3zM19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z',
+  check: 'M20 6L9 17l-5-5',
+  bolt: 'M13 2L4 14h6l-1 8 9-12h-6l1-8z',
+  trend: 'M3 17l6-6 4 4 8-8m0 0h-5m5 0v5',
+  layers: 'M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5',
+  arrow: 'M5 12h14m-6-6l6 6-6 6',
+};
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.8"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <path d={paths[name] ?? paths.sparkles} />
+</svg>

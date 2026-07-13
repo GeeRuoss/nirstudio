@@ -1,0 +1,59 @@
+---
+import { SITE } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p class="footer__brand">
+      NIR<b>STUDIO</b>
+      <span class="footer__sub">Custom NIR solutions by the team behind NIRLAB, part of 908 Devices.</span>
+    </p>
+    <nav class="footer__links" aria-label="Footer">
+      <a href={SITE.parent.url} target="_blank" rel="noopener">908devices.com</a>
+      <a href={SITE.nirlab.url} target="_blank" rel="noopener">nirlab.com</a>
+    </nav>
+    <p class="footer__legal">© {year} 908 Devices Inc. All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--ink);
+    color: #94a3b8;
+    padding-block: 3rem;
+    font-size: 0.9rem;
+  }
+  .footer__inner {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .footer__brand {
+    color: var(--white);
+    font-size: 1.1rem;
+  }
+  .footer__brand b {
+    font-weight: 800;
+  }
+  .footer__sub {
+    display: block;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-top: 0.4rem;
+    max-width: 28rem;
+  }
+  .footer__links {
+    display: flex;
+    gap: 1.5rem;
+    font-weight: 600;
+  }
+  .footer__links a:hover {
+    color: var(--white);
+  }
+  @media (min-width: 900px) {
+    .footer__inner {
+      grid-template-columns: 1fr auto auto;
+      align-items: center;
+    }
+  }
+</style>
