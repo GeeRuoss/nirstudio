@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { withBase } from '../../lib/url';
 import PageHeader from '../../components/PageHeader.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import ContactCta from '../../components/ContactCta.astro';
@@ -56,7 +57,7 @@ const others = APPLICATIONS.filter((a) => a.slug !== app.slug);
       <div class="others">
         {
           others.map((o) => (
-            <AppCard title={o.title} text={o.teaser} icon={o.icon} href={`/applications/${o.slug}`} />
+            <AppCard title={o.title} text={o.teaser} icon={o.icon} href={withBase(`/applications/${o.slug}`)} />
           ))
         }
       </div>

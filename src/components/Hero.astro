@@ -1,8 +1,11 @@
 ---
 // Hero : background officiel du kit de marque (device + phone dans l'image).
+// L'image passe par une variable CSS pour respecter le base path (staging /nirstudio/).
+import { withBase } from '../lib/url';
+const heroBg = `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`;
 ---
 
-<section class="hero">
+<section class="hero" style={heroBg}>
   <div class="container hero__inner">
     <div class="hero__copy">
       <h1>Custom NIR solutions, on&nbsp;demand</h1>
@@ -22,7 +25,7 @@
 <style>
   .hero {
     /* L'image place le produit à droite : le copy vit à gauche, comme nirlab.com */
-    background: var(--ink) url('/img/hero-bg.jpg') no-repeat center right / cover;
+    background: var(--ink) var(--hero-bg) no-repeat center right / cover;
     color: var(--text-on-dark);
     min-height: min(88vh, 780px);
     display: flex;
@@ -66,7 +69,7 @@
     .hero {
       background:
         linear-gradient(180deg, rgba(10, 10, 12, 0.3) 0%, rgba(10, 10, 12, 0.78) 55%, rgba(10, 10, 12, 0.9) 100%),
-        var(--ink) url('/img/hero-bg.jpg') no-repeat 72% center / cover;
+        var(--ink) var(--hero-bg) no-repeat 72% center / cover;
     }
   }
   @media (prefers-reduced-motion: reduce) {

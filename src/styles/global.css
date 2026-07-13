@@ -4,16 +4,19 @@
    bleu #0360E8, hero sombre. Fonts officielles du kit client.
    ============================================================ */
 
+/* Chemins RELATIFS obligatoires : Vite fingerprinte et applique le base path
+   (GitHub Pages sert sous /nirstudio/). Les fichiers sont gitignorés,
+   injectés au build depuis le repo privé nirstudio-assets. */
 @font-face {
   font-family: 'Crystal';
-  src: url('/fonts/Crystal-Bold.woff2') format('woff2');
+  src: url('../fonts/Crystal-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Crystal';
-  src: url('/fonts/Crystal-Book.woff2') format('woff2');
+  src: url('../fonts/Crystal-Book.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;

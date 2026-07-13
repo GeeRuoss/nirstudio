@@ -1,6 +1,7 @@
 ---
 // Section Hardware (fond sombre) : grille bento (image produit, features, stats).
 import SectionHead from './SectionHead.astro';
+import { withBase } from '../lib/url';
 import Icon from './Icon.astro';
 import { HARDWARE, HW_STATS } from '../data/site';
 
@@ -17,7 +18,7 @@ const { standalone = false } = Astro.props;
       <SectionHead kicker="Hardware" title="One device, every answer" />
       {
         !standalone && (
-          <a href="/hardware" class="hardware__more">
+          <a href={withBase('/hardware')} class="hardware__more">
             Explore the hardware
             <Icon name="arrow" size={18} />
           </a>
@@ -28,7 +29,7 @@ const { standalone = false } = Astro.props;
     <div class="bento">
       <figure class="bento__tile bento__img reveal">
         <img
-          src="/img/fieldlab-phone.png"
+          src={withBase('/img/fieldlab-phone.png')}
           alt="Handheld NIRLAB spectrometer scanning a sample, with live results in the mobile app"
           width="867"
           height="765"

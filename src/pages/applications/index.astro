@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { withBase } from '../../lib/url';
 import PageHeader from '../../components/PageHeader.astro';
 import AppCard from '../../components/AppCard.astro';
 import ContactCta from '../../components/ContactCta.astro';
@@ -21,7 +22,7 @@ import { APPLICATIONS } from '../../data/site';
       <div class="apps">
         {
           APPLICATIONS.map((app) => (
-            <AppCard title={app.title} text={app.teaser} icon={app.icon} href={`/applications/${app.slug}`} />
+            <AppCard title={app.title} text={app.teaser} icon={app.icon} href={withBase(`/applications/${app.slug}`)} />
           ))
         }
       </div>

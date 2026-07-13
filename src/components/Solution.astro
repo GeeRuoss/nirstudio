@@ -1,6 +1,7 @@
 ---
 // Section Solution : intro on-demand + render olives + les 3 étapes du process.
 import SectionHead from './SectionHead.astro';
+import { withBase } from '../lib/url';
 import StepCard from './StepCard.astro';
 import { STEPS } from '../data/site';
 ---
@@ -15,7 +16,7 @@ import { STEPS } from '../data/site';
       />
     </div>
     <img
-      src="/img/solution-olives.jpg"
+      src={withBase('/img/solution-olives.jpg')}
       alt="Handheld NIRLAB spectrometer with the mobile app showing oil and water content of an olive sample"
       width="1200"
       height="1000"

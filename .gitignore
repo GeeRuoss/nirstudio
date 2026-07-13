@@ -18,6 +18,11 @@ node_modules/
 *.p8
 .secrets/
 
+# polices sous licence (Crystal) : jamais dans ce repo.
+# Elles vivent dans le repo privé GeeRuoss/nirstudio-assets et sont
+# injectées ici au build (CI) ou copiées à la main en local.
+src/fonts/
+
 # sources design HD (restent locales, jamais dans le repo)
 all/
 sources/

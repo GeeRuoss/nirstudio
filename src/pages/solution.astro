@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { withBase } from '../lib/url';
 import PageHeader from '../components/PageHeader.astro';
 import StepCard from '../components/StepCard.astro';
 import SectionHead from '../components/SectionHead.astro';
@@ -49,7 +50,7 @@ import { STEPS } from '../data/site';
         </ul>
       </div>
       <img
-        src="/img/solution-olives.jpg"
+        src={withBase('/img/solution-olives.jpg')}
         alt="Handheld NIRLAB spectrometer with the mobile app showing oil and water content of an olive sample"
         width="1200"
         height="1000"

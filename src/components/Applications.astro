@@ -1,6 +1,7 @@
 ---
 // Section Applications : Agriculture / Food / Counterfeit.
 import SectionHead from './SectionHead.astro';
+import { withBase } from '../lib/url';
 import AppCard from './AppCard.astro';
 import { APPLICATIONS } from '../data/site';
 ---
@@ -13,7 +14,7 @@ import { APPLICATIONS } from '../data/site';
     <div class="apps">
       {
         APPLICATIONS.map((app) => (
-          <AppCard title={app.title} text={app.teaser} icon={app.icon} href={`/applications/${app.slug}`} />
+          <AppCard title={app.title} text={app.teaser} icon={app.icon} href={withBase(`/applications/${app.slug}`)} />
         ))
       }
     </div>
