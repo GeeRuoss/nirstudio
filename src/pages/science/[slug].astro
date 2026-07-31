@@ -1,0 +1,346 @@
+---
+// Page article : contenu du knowledge-base NIRLAB (groupe 908 Devices),
+// hébergé en local avec ses images. Mise en page éditoriale.
+import Layout from '../../layouts/Layout.astro';
+import { withBase } from '../../lib/url';
+import ContactCta from '../../components/ContactCta.astro';
+import Icon from '../../components/Icon.astro';
+import articles from '../../data/articles-full.json';
+
+export function getStaticPaths() {
+  return articles.map((article) => ({ params: { slug: article.slug }, props: { article } }));
+}
+
+const { article } = Astro.props;
+
+// Les src du HTML migré sont racine-absolus : on applique le base path (staging).
+const base = withBase('');
+const html = base ? article.html.replaceAll('src="/img/', `src="${base}/img/`) : article.html;
+
+const related = articles
+  .filter((a) => a.slug !== article.slug && a.category === article.category)
+  .slice(0, 3);
+
+const formatDate = (iso: string) =>
+  new Date(`${iso}T00:00:00`).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+---
+
+<Layout title={`${article.title} | NIR Studio Science`} description={article.excerpt}>
+  <header class="arthead">
+    <div class="container arthead__inner">
+      <a href={withBase('/science')} class="arthead__back">
+        <Icon name="arrow" size={18} />
+        Science &amp; knowledge base
+      </a>
+      <div class="arthead__meta">
+        <span class="arthead__cat">{article.category}</span>
+        <time datetime={article.date}>{formatDate(article.date)}</time>
+      </div>
+      <h1>{article.title}</h1>
+    </div>
+  </header>
+
+  <article class="section artbody">
+    <div class="container">
+      {
+        article.cover && (
+          <img
+            src={withBase(article.cover)}
+            alt=""
+            width="1200"
+            height="675"
+            class="artbody__cover"
+            loading="eager"
+          />
+        )
+      }
+      <div class="prose" set:html={html} />
+    </div>
+  </article>
+
+  {
+    related.length > 0 && (
+      <section class="section section--gray">
+        <div class="container">
+          <div class="reveal">
+            <span class="kicker">Keep reading</span>
+            <h2 class="related__title">More from {article.category}</h2>
+          </div>
+          <div class="related">
+            {related.map((r) => (
+              <a class="relcard reveal" href={withBase(`/science/${r.slug}`)}>
+                {r.cover && <img src={withBase(r.cover)} alt="" width="800" height="450" loading="lazy" />}
+                <span class="relcard__body">
+                  <time datetime={r.date}>{formatDate(r.date)}</time>
+                  <h3>{r.title}</h3>
+                  <span class="relcard__read">
+                    Read the article
+                    <Icon name="arrow" size={16} />
+                  </span>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <ContactCta />
+</Layout>
+
+<style>
+  /* ---------- En-tête ---------- */
+  .arthead {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--ink) 0%, #0e0e14 100%);
+    color: var(--text-on-dark);
+    padding-block: clamp(3.5rem, 8vw, 6rem) clamp(4.5rem, 10vw, 8rem);
+    border-bottom: 1px solid var(--border-dark);
+  }
+  .arthead::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(120% 100% at 50% 0%, black 30%, transparent 85%);
+  }
+  .arthead::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(55% 90% at 88% 8%, rgba(3, 96, 232, 0.28) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .arthead__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 60rem;
+  }
+  .arthead__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: #9ca3af;
+    margin-bottom: 2rem;
+    transition: color 0.2s ease;
+  }
+  .arthead__back :global(svg) {
+    transform: rotate(180deg);
+    transition: transform 0.22s ease;
+  }
+  .arthead__back:hover {
+    color: var(--white);
+  }
+  .arthead__back:hover :global(svg) {
+    transform: rotate(180deg) translateX(3px);
+  }
+  .arthead__meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.88rem;
+    color: #9ca3af;
+  }
+  .arthead__cat {
+    display: inline-flex;
+    padding: 0.25rem 0.8rem;
+    border-radius: var(--radius-pill);
+    background: rgba(3, 96, 232, 0.18);
+    border: 1px solid rgba(94, 151, 242, 0.4);
+    color: #7fb0ff;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .arthead h1 {
+    color: var(--white);
+    font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+    max-width: 24ch;
+  }
+
+  /* ---------- Corps ---------- */
+  .artbody {
+    padding-top: 0;
+  }
+  .artbody__cover {
+    width: min(100%, 58rem);
+    height: auto;
+    margin: calc(-1 * clamp(2.5rem, 6vw, 4.5rem)) auto clamp(2.5rem, 5vw, 3.5rem);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
+    box-shadow: 0 24px 60px rgba(10, 10, 20, 0.18);
+    position: relative;
+    z-index: 2;
+  }
+  .artbody :global(.prose) {
+    max-width: 46rem;
+    margin-inline: auto;
+    padding-top: clamp(1rem, 3vw, 2rem);
+  }
+  .prose :global(h2) {
+    font-size: clamp(1.5rem, 2.6vw, 1.9rem);
+    margin: 2.5rem 0 1rem;
+  }
+  .prose :global(h3) {
+    margin: 2rem 0 0.8rem;
+  }
+  .prose :global(h4) {
+    margin: 1.6rem 0 0.6rem;
+    font-size: 1.05rem;
+  }
+  .prose :global(p) {
+    margin-bottom: 1.1rem;
+    color: #374151;
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 0 0 1.25rem;
+    padding-left: 1.4rem;
+    display: grid;
+    gap: 0.45rem;
+    color: #374151;
+  }
+  .prose :global(ul) {
+    list-style: disc;
+  }
+  .prose :global(ol) {
+    list-style: decimal;
+  }
+  .prose :global(a) {
+    color: var(--blue);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1.5px;
+  }
+  .prose :global(a:hover) {
+    color: var(--blue-dark);
+  }
+  .prose :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    margin: 1.75rem 0;
+    border: 1px solid var(--border);
+  }
+  .prose :global(figure) {
+    margin: 1.75rem 0;
+  }
+  .prose :global(figure img) {
+    margin: 0;
+  }
+  .prose :global(figcaption) {
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+  .prose :global(blockquote) {
+    margin: 1.75rem 0;
+    padding: 0.4rem 0 0.4rem 1.4rem;
+    border-left: 3px solid var(--blue);
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.75rem 0;
+    font-size: 0.92rem;
+  }
+  .prose :global(th),
+  .prose :global(td) {
+    border: 1px solid var(--border);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+  }
+  .prose :global(th) {
+    background: var(--gray-bg);
+    font-weight: 700;
+  }
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+  .prose :global(strong) {
+    color: var(--text);
+  }
+
+  /* ---------- Articles liés ---------- */
+  .related__title {
+    margin-bottom: 2rem;
+  }
+  .related {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .relcard {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .relcard:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  .relcard img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+  .relcard__body {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    padding: 1.4rem 1.4rem 1.6rem;
+  }
+  .relcard time {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+  .relcard h3 {
+    font-size: 1.02rem;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  .relcard__read {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--blue);
+  }
+  .relcard__read :global(svg) {
+    transition: transform 0.22s ease;
+  }
+  .relcard:hover .relcard__read :global(svg) {
+    transform: translateX(3px);
+  }
+  @media (min-width: 900px) {
+    .related {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

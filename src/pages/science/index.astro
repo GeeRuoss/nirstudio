@@ -1,12 +1,12 @@
 ---
-// Page Science : index de tous les articles du knowledge-base nirlab.com.
-// Les articles restent hébergés sur nirlab.com (contenu du groupe) : on liste
-// et on lie, pas de duplication de contenu (SEO + une seule source de vérité).
-import Layout from '../layouts/Layout.astro';
-import PageHeader from '../components/PageHeader.astro';
-import ContactCta from '../components/ContactCta.astro';
-import Icon from '../components/Icon.astro';
-import articles from '../data/articles.json';
+// Page Science : tous les articles du knowledge-base NIRLAB (groupe 908 Devices),
+// migrés en local : contenu et images self-hosted, une page par article.
+import Layout from '../../layouts/Layout.astro';
+import { withBase } from '../../lib/url';
+import PageHeader from '../../components/PageHeader.astro';
+import ContactCta from '../../components/ContactCta.astro';
+import Icon from '../../components/Icon.astro';
+import articles from '../../data/articles-full.json';
 
 const categories = [...new Set(articles.map((a) => a.category))].sort();
 
@@ -47,16 +47,25 @@ const formatDate = (iso: string) =>
       <div class="articles">
         {
           articles.map((a) => (
-            <a class="article reveal" href={a.url} target="_blank" rel="noopener" data-cat={a.category}>
-              <span class="article__meta">
+            <a class="article reveal" href={withBase(`/science/${a.slug}`)} data-cat={a.category}>
+              <span class="article__media">
+                {a.cover ? (
+                  <img src={withBase(a.cover)} alt="" width="800" height="450" loading="lazy" />
+                ) : (
+                  <span class="article__placeholder" aria-hidden="true">
+                    <Icon name="flask" size={34} />
+                  </span>
+                )}
                 <span class="article__cat">{a.category}</span>
-                <time datetime={a.date}>{formatDate(a.date)}</time>
               </span>
-              <h3>{a.title}</h3>
-              <p>{a.excerpt}</p>
-              <span class="article__read">
-                Read on nirlab.com
-                <Icon name="arrow" size={18} />
+              <span class="article__body">
+                <time datetime={a.date}>{formatDate(a.date)}</time>
+                <h3>{a.title}</h3>
+                <p>{a.excerpt}</p>
+                <span class="article__read">
+                  Read the article
+                  <Icon name="arrow" size={18} />
+                </span>
               </span>
             </a>
           ))
@@ -132,12 +141,11 @@ const formatDate = (iso: string) =>
   }
   .article {
     display: grid;
-    gap: 0.7rem;
-    align-content: start;
+    grid-template-rows: auto 1fr;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--radius-card);
-    padding: 1.9rem 1.7rem;
+    overflow: hidden;
     transition:
       transform 0.25s ease,
       border-color 0.25s ease,
@@ -148,29 +156,65 @@ const formatDate = (iso: string) =>
     border-color: rgba(3, 96, 232, 0.45);
     box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
   }
-  .article__meta {
+  .article__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    background: var(--gray-bg);
+    overflow: hidden;
+  }
+  .article__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .article:hover .article__media img {
+    transform: scale(1.04);
+  }
+  .article__placeholder {
     display: flex;
+    width: 100%;
+    height: 100%;
     align-items: center;
-    gap: 0.8rem;
+    justify-content: center;
+    color: #5e97f2;
+    background:
+      radial-gradient(60% 90% at 80% 10%, rgba(3, 96, 232, 0.25) 0%, transparent 60%),
+      var(--ink);
+  }
+  .article__cat {
+    position: absolute;
+    left: 0.9rem;
+    bottom: 0.9rem;
+    display: inline-flex;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    backdrop-filter: blur(4px);
+  }
+  .article__body {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    padding: 1.5rem 1.5rem 1.7rem;
+  }
+  .article__body time {
     font-size: 0.82rem;
     color: var(--text-muted);
   }
-  .article__cat {
-    display: inline-flex;
-    padding: 0.2rem 0.7rem;
-    border-radius: var(--radius-pill);
-    background: rgba(3, 96, 232, 0.09);
-    color: var(--blue);
-    font-weight: 700;
-    letter-spacing: 0.02em;
-  }
   .article h3 {
-    font-size: 1.12rem;
+    font-size: 1.1rem;
     line-height: 1.3;
+    color: var(--text);
   }
   .article p {
     color: var(--text-muted);
-    font-size: 0.93rem;
+    font-size: 0.92rem;
   }
   .article__read {
     display: inline-flex;
