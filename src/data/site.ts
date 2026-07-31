@@ -40,7 +40,7 @@ export const APPLICATIONS = [
       'Measure moisture, protein, oil and starch in grain, feed and forage in seconds with a handheld NIR analyzer. Custom calibrations for your crops, without sending samples to the lab.',
     h1: 'Portable NIR analysis for agriculture and feed',
     teaser:
-      'Moisture, protein, fat and oil measured directly in the field: grain, feed, forage and more, without sending samples to the lab.',
+      'NIR Studio builds custom models for soil, plant tissue, harvested crops and manure, trained on your fields, your crops and your local conditions. Measure nutrients, composition and quality on-site, without waiting on lab turnaround.',
     intro:
       'Grain traders, feed mills and farmers make quality decisions every day. NIR Studio puts a portable NIR analyzer in your pocket, calibrated for your crops and your quality parameters: results in seconds, at intake, in the field or on the line.',
     measures: ['Moisture', 'Protein', 'Fat & oil', 'Starch', 'Fiber (ADF/NDF)', 'Ash'],
@@ -69,7 +69,7 @@ export const APPLICATIONS = [
       'Detect food fraud and control quality in seconds with handheld NIR spectroscopy: olive oil adulteration, incoming goods inspection, authenticity testing along your whole supply chain.',
     h1: 'Food authenticity and quality control, in seconds',
     teaser:
-      'Quality control and food fraud detection along the whole chain: incoming goods, production line and final product.',
+      'From olive oil to salmon, cheese to meat, NIR Studio builds a model trained on your specific product and supply chain. Check quality and authenticity at intake or on the line, in seconds, without sending samples to a lab.',
     intro:
       'Food fraud costs the industry billions and one recall can cost a brand everything. NIR Studio builds food authenticity and quality applications on handheld NIR: verify incoming goods, monitor production and confirm the final product matches its label, without a lab.',
     measures: ['Fat & oil content', 'Water content', 'Protein', 'Sugar', 'Adulterants', 'Authenticity match'],
@@ -98,7 +98,7 @@ export const APPLICATIONS = [
       'Authenticate products and detect counterfeits on-site in seconds with handheld NIR spectroscopy: pharmaceuticals, branded goods and materials. Non-destructive brand protection.',
     h1: 'Counterfeit detection and product authentication',
     teaser:
-      'Verify that a product is what it claims to be: detect counterfeit and adulterated goods instantly, without destroying them.',
+      'NIR Studio builds detection models trained on your genuine product, from pharmaceutical products to tobacco, so counterfeits are identified on the spot, at customs, in the field or on the line. Models are updated as counterfeiting techniques evolve.',
     intro:
       'Counterfeit medicines endanger patients and fake goods erode brands. NIR Studio builds authentication applications on handheld NIR: scan a tablet, a package or a material and know in seconds whether it matches the genuine reference, non-destructively.',
     measures: ['Authenticity match', 'Formulation fingerprint', 'API presence', 'Packaging materials', 'Adulterants'],
@@ -114,6 +114,35 @@ export const APPLICATIONS = [
       {
         title: 'Material verification',
         text: 'Confirm that incoming materials, coatings or components are the genuine specified product.',
+      },
+    ],
+  },
+  {
+    slug: 'industrial',
+    title: 'Industrial',
+    icon: 'layers',
+    // Mots-clés : industrial NIR quality control / polymer identification / raw material testing
+    metaTitle: 'Industrial NIR Quality Control: Polymers & Raw Materials | NIR Studio',
+    metaDescription:
+      'Check polymers, raw materials and cosmetics for identity and consistency in seconds with handheld NIR. Custom models trained on your process, without the cost of a full process analyzer.',
+    h1: 'Industrial quality control, on the line and in the warehouse',
+    teaser:
+      'From polymers to raw materials and cosmetics, NIR Studio builds models for instant quality control, catching off-spec material before it becomes a shipped batch, checking homogeneity and mixes, without the cost of a full process analyzer.',
+    intro:
+      'Off-spec material found after shipping costs more than the incoming check that could have caught it. NIR Studio builds industrial quality control applications on handheld NIR: verify polymers, raw materials and cosmetics for identity, homogeneity and mix ratio, on-site, without the cost of a full process analyzer.',
+    measures: ['Identity confirmation', 'Homogeneity', 'Mix ratio', 'Moisture', 'Contaminants', 'Batch consistency'],
+    useCases: [
+      {
+        title: 'Incoming raw material checks',
+        text: 'Verify polymers and raw materials against specification before they enter production, without waiting on a lab result.',
+      },
+      {
+        title: 'Homogeneity and mix control',
+        text: 'Confirm that blends and mixes reach the right ratio and consistency, on the line, in real time.',
+      },
+      {
+        title: 'Batch release',
+        text: 'Catch off-spec material before it becomes a shipped batch, cutting rework and returns.',
       },
     ],
   },
@@ -149,18 +178,18 @@ export const HW_STATS = [
 export const STEPS = [
   {
     n: '01',
-    title: 'Define',
-    text: 'We scope your measurement problem together: substances, matrices, accuracy targets and field conditions.',
+    title: 'Scan and send',
+    text: 'You scan each sample with the NIR Studio device. At the same time, you send that same sample to a lab for a certified reference analysis.',
   },
   {
     n: '02',
-    title: 'Develop',
-    text: 'Our chemometricians build and validate your custom model on lab-grade reference data, with a seamless workflow from acquisition to production.',
+    title: 'We build your model',
+    text: 'We match each device scan to its certified lab result. From these pairs, we build and validate a model trained specifically on your material.',
   },
   {
     n: '03',
-    title: 'Deploy',
-    text: 'Your teams get a handheld device and an app tuned to your use case. Results in seconds, anywhere, synced to the cloud.',
+    title: 'Ready to use',
+    text: 'The validated model is loaded into the NIR Studio ecosystem, where your team can access it through the app, ready to use in the field.',
   },
 ];
 
