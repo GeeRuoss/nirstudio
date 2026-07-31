@@ -7,8 +7,12 @@ import ContactCta from '../../components/ContactCta.astro';
 import AppCard from '../../components/AppCard.astro';
 import { APPLICATIONS } from '../../data/site';
 
+// Agriculture a sa propre page riche (agriculture.astro) : on l'exclut d'ici.
 export function getStaticPaths() {
-  return APPLICATIONS.map((app) => ({ params: { slug: app.slug }, props: { app } }));
+  return APPLICATIONS.filter((app) => app.slug !== 'agriculture').map((app) => ({
+    params: { slug: app.slug },
+    props: { app },
+  }));
 }
 
 const { app } = Astro.props;

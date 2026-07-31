@@ -1,0 +1,204 @@
+---
+// Page Science : index de tous les articles du knowledge-base nirlab.com.
+// Les articles restent hébergés sur nirlab.com (contenu du groupe) : on liste
+// et on lie, pas de duplication de contenu (SEO + une seule source de vérité).
+import Layout from '../layouts/Layout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ContactCta from '../components/ContactCta.astro';
+import Icon from '../components/Icon.astro';
+import articles from '../data/articles.json';
+
+const categories = [...new Set(articles.map((a) => a.category))].sort();
+
+const formatDate = (iso: string) =>
+  new Date(`${iso}T00:00:00`).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  });
+---
+
+<Layout
+  title="Science & Knowledge Base: NIR Spectroscopy Articles | NIR Studio"
+  description="Explore the science behind NIR Studio: academic papers, chemometrics explainers, use cases and application notes on near-infrared spectroscopy, from the NIRLAB knowledge base."
+>
+  <PageHeader
+    kicker="Science"
+    title="The science behind the scan"
+    lead="Academic papers, chemometrics explainers and field use cases from the NIRLAB knowledge base. Everything that makes a handheld device speak the language of a laboratory."
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="filters reveal" role="group" aria-label="Filter articles by category">
+        <button class="filter is-active" data-cat="all">
+          All <span class="filter__count">{articles.length}</span>
+        </button>
+        {
+          categories.map((cat) => (
+            <button class="filter" data-cat={cat}>
+              {cat}
+              <span class="filter__count">{articles.filter((a) => a.category === cat).length}</span>
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="articles">
+        {
+          articles.map((a) => (
+            <a class="article reveal" href={a.url} target="_blank" rel="noopener" data-cat={a.category}>
+              <span class="article__meta">
+                <span class="article__cat">{a.category}</span>
+                <time datetime={a.date}>{formatDate(a.date)}</time>
+              </span>
+              <h3>{a.title}</h3>
+              <p>{a.excerpt}</p>
+              <span class="article__read">
+                Read on nirlab.com
+                <Icon name="arrow" size={18} />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+
+      <p class="articles__empty" hidden>No articles in this category yet.</p>
+    </div>
+  </section>
+
+  <ContactCta />
+</Layout>
+
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('.filter');
+  const articles = document.querySelectorAll<HTMLElement>('.article');
+  const empty = document.querySelector<HTMLElement>('.articles__empty');
+
+  filters.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      filters.forEach((b) => b.classList.toggle('is-active', b === btn));
+      const cat = btn.dataset.cat;
+      let shown = 0;
+      articles.forEach((card) => {
+        const show = cat === 'all' || card.dataset.cat === cat;
+        card.hidden = !show;
+        if (show) shown++;
+      });
+      if (empty) empty.hidden = shown > 0;
+    });
+  });
+</script>
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  }
+  .filter {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.1rem;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--text);
+    transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  }
+  .filter:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+    transform: translateY(-1px);
+  }
+  .filter.is-active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: var(--white);
+  }
+  .filter__count {
+    font-size: 0.78rem;
+    font-weight: 700;
+    opacity: 0.55;
+  }
+
+  .articles {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .article {
+    display: grid;
+    gap: 0.7rem;
+    align-content: start;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 1.9rem 1.7rem;
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .article:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  .article__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+  .article__cat {
+    display: inline-flex;
+    padding: 0.2rem 0.7rem;
+    border-radius: var(--radius-pill);
+    background: rgba(3, 96, 232, 0.09);
+    color: var(--blue);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .article h3 {
+    font-size: 1.12rem;
+    line-height: 1.3;
+  }
+  .article p {
+    color: var(--text-muted);
+    font-size: 0.93rem;
+  }
+  .article__read {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.35rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--blue);
+  }
+  .article__read :global(svg) {
+    transition: transform 0.22s ease;
+  }
+  .article:hover .article__read :global(svg) {
+    transform: translateX(3px);
+  }
+  .articles__empty {
+    margin-top: 2rem;
+    color: var(--text-muted);
+  }
+  @media (min-width: 700px) {
+    .articles {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1050px) {
+    .articles {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,925 @@
+---
+// Page Agriculture dédiée : reprend la structure de nirlab.com/agriculture
+// (contenu du groupe NIRLAB / 908 Devices) dans le design system nirstudio.
+// Cette route statique remplace la route dynamique [slug] pour "agriculture".
+import Layout from '../../layouts/Layout.astro';
+import { withBase } from '../../lib/url';
+import SectionHead from '../../components/SectionHead.astro';
+import ContactCta from '../../components/ContactCta.astro';
+import AppCard from '../../components/AppCard.astro';
+import Icon from '../../components/Icon.astro';
+import { APPLICATIONS } from '../../data/site';
+
+const others = APPLICATIONS.filter((a) => a.slug !== 'agriculture');
+const heroBg = `--agri-hero: url('${withBase('/img/agri/agri-hero.jpg')}')`;
+
+// Résultats d'exemple par matériau (valeurs de démonstration nirlab.com).
+const SAMPLES = [
+  {
+    id: 'corn',
+    label: 'Corn',
+    img: '/img/agri/corn.webp',
+    params: [
+      { name: 'Dry Matter', value: 86 },
+      { name: 'Crude Protein', value: 9 },
+      { name: 'Starch', value: 70 },
+      { name: 'Digestibility', value: 90 },
+      { name: 'NDF', value: 10 },
+      { name: 'ADF', value: 5 },
+      { name: 'Ash', value: 1 },
+    ],
+  },
+  {
+    id: 'silage',
+    label: 'Silage',
+    img: '/img/agri/silage.webp',
+    params: [
+      { name: 'Dry Matter', value: 36 },
+      { name: 'Crude Protein', value: 15 },
+      { name: 'Digestibility', value: 65 },
+      { name: 'NDF', value: 40 },
+      { name: 'ADF', value: 30 },
+      { name: 'Sugar', value: 5 },
+      { name: 'Ash', value: 4 },
+    ],
+  },
+  {
+    id: 'feed',
+    label: 'Compound Feed',
+    img: '/img/agri/feed.webp',
+    params: [
+      { name: 'Dry Matter', value: 88 },
+      { name: 'Crude Protein', value: 20 },
+      { name: 'Starch', value: 40 },
+      { name: 'NDF', value: 17 },
+      { name: 'ADF', value: 10 },
+      { name: 'Sugar', value: 5 },
+    ],
+  },
+];
+
+// Matériaux analysables et leurs paramètres (field-to-fork).
+const MATERIALS = [
+  {
+    id: 'soil',
+    label: 'Soil',
+    params: ['Nitrogen (N)', 'Phosphorus (P)', 'Potassium (K)', 'Organic matter', 'pH', 'Soil texture', 'Magnesium (Mg)', 'Calcium (Ca)', 'Other micronutrients'],
+  },
+  {
+    id: 'tissue',
+    label: 'Plant Tissue',
+    params: ['Nitrogen (N)', 'Phosphorus (P)', 'Potassium (K)', 'Magnesium (Mg)', 'Calcium (Ca)', 'Other micronutrients'],
+  },
+  {
+    id: 'feedsilage',
+    label: 'Feed & Silages',
+    params: ['Dry matter', 'Crude protein', 'Crude fiber', 'Starch', 'NDF', 'ADF', 'Ash', 'Fat', 'Energy values (NEL, ME, NEg)', 'Other parameters'],
+  },
+  {
+    id: 'dairy',
+    label: 'Dairy',
+    params: ['Fat', 'Protein', 'Moisture / dry matter', 'Lactose', 'Total solids', 'Ash / minerals', 'Salt', 'pH', 'Adulteration detection', 'Other parameters'],
+  },
+  {
+    id: 'manure',
+    label: 'Manure',
+    params: ['Total nitrogen (N)', 'Organic matter', 'DM/TS', 'Ammonia-N', 'Potassium (K)', 'Phosphorus (P)', 'Other parameters'],
+  },
+  {
+    id: 'fertilizer',
+    label: 'Fertilizer',
+    params: ['Nitrogen (N)', 'Phosphorus (P)', 'Potassium (K)', 'Organic matter', 'Ammonium nitrogen', 'Nitrate nitrogen', 'Other micronutrients'],
+  },
+];
+
+const FEATURES = [
+  {
+    icon: 'flask',
+    title: 'On-site nutrients analyses',
+    text: 'Instant results for key nutrients like protein, fat and moisture in grains, feed, manure and dairy, plus macro and micronutrients in soil, tissue and fertilizer.',
+  },
+  {
+    icon: 'check',
+    title: 'No sample preparation',
+    text: 'All agro materials can be analyzed without any sample preparation, at the press of one button. Scan straight in the field and collect more insights.',
+  },
+  {
+    icon: 'bolt',
+    title: 'Instant results',
+    text: 'The device connects to the mobile app via Bluetooth and scan results appear on a user-friendly app (iOS and Android) within seconds, with unlimited analyses per year.',
+  },
+  {
+    icon: 'sparkles',
+    title: 'Tailored to your needs',
+    text: 'Each agricultural company faces unique challenges. We build high quality solutions tailored to your brand and technical needs: optimize processes, secure consistency, drive sustainability.',
+  },
+];
+
+const NIRLIGHT_SPECS = [
+  'Length: 20 cm, diameter: 5.5 cm',
+  'Bluetooth or USB connectivity to tablet or PC',
+  'Point-and-click with a multi-function button',
+  'Rapid, real-time near-infrared analysis anywhere',
+  'Up to 8 hours continuous operation, USB-C fast charging',
+];
+
+const PORTAL_FEATURES = [
+  { title: 'Data analytics & history', text: 'Track, manage and compare scans across devices in one place.' },
+  { title: 'User management', text: 'Manage organizations, users and access controls with ease.' },
+  { title: 'Simple data management', text: 'Simplified tools to organize, edit and maintain your data.' },
+  { title: 'Export & PDF reports', text: 'Export your data in various formats or save scan results as PDF.' },
+];
+
+const FAQS = [
+  {
+    q: 'Can I use the same device for different types of samples like soil, manure, and plant tissue?',
+    a: 'Yes. The same device can analyze multiple sample types. The key is selecting the right calibration model in the app: soil, manure or plant tissue, and following basic sample preparation guidelines.',
+  },
+  {
+    q: 'Do I need an internet connection to scan samples in the field?',
+    a: 'No. The device and app work fully offline for scanning. Once you have internet access, results sync to your personal web portal for storage and analysis.',
+  },
+  {
+    q: 'How accurate are the results compared to laboratory analysis?',
+    a: 'Our models are built from thousands of lab-analyzed samples. While NIR is not a replacement for certified laboratory testing in all cases, it provides fast, affordable and reliable values for on-site decision making.',
+  },
+  {
+    q: 'Can I build my own calibrations for specific crops, soils, or regions?',
+    a: 'Yes. We offer custom calibration development. This is ideal for companies, cooperatives or consultants working with specific regions or products.',
+  },
+  {
+    q: 'How can I get technical support?',
+    a: 'We offer technical support and are happy to share more details about our solution through email, phone calls or video conferences. Get in touch through the 908 Devices contact page.',
+  },
+];
+---
+
+<Layout
+  title="Portable NIR Analyzer for Agriculture & Feed | NIR Studio"
+  description="Instant on-site analysis of soil, crops, feed, silages, manure and fertilizer with a handheld NIR analyzer. Custom calibrations, mobile app and web portal: smarter farming decisions anywhere."
+>
+  <header class="agrihero" style={heroBg}>
+    <div class="container agrihero__inner">
+      <span class="kicker">Applications / Agriculture</span>
+      <h1>Instant onsite analysis for smarter farming</h1>
+      <p class="agrihero__lead">
+        Unlock real-time insights with our integrated portable solution for on-the-spot analysis of soil,
+        crops, animal feed, silages, fertilizers, plant tissues and more. Optimize farm productivity,
+        improve resource efficiency and drive sustainable growth with fast, accurate data anytime, anywhere.
+      </p>
+      <div class="agrihero__cta">
+        <a href="#contact" class="btn btn--primary">Contact us</a>
+        <a href="#agro-solution" class="btn btn--ghost">Explore the solution</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section" id="agro-solution">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead
+          kicker="Agro solution"
+          title="From field to harvest, reliable insights"
+          lead="A portable, real-time analysis toolkit designed for modern agriculture. Measure key parameters such as moisture, protein and fiber directly on-site, and make faster, data-driven decisions with the support of our integrated app and web portal."
+        />
+      </div>
+      <div class="features">
+        {
+          FEATURES.map((f) => (
+            <article class="feature reveal">
+              <span class="feature__icon">
+                <Icon name={f.icon} size={24} />
+              </span>
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead
+          kicker="Live results"
+          title="See what one scan tells you"
+          lead="From a single press of the button, the app returns the full nutritional profile of your sample. Example results for three common materials:"
+        />
+      </div>
+      <div class="samples reveal">
+        <div class="samples__tabs" role="tablist" aria-label="Sample material">
+          {
+            SAMPLES.map((s, i) => (
+              <button
+                class:list={['samples__tab', { 'is-active': i === 0 }]}
+                role="tab"
+                aria-selected={i === 0 ? 'true' : 'false'}
+                data-sample={s.id}
+              >
+                {s.label}
+              </button>
+            ))
+          }
+        </div>
+        {
+          SAMPLES.map((s, i) => (
+            <div class:list={['samples__panel', { 'is-active': i === 0 }]} data-panel={s.id} role="tabpanel">
+              <img src={withBase(s.img)} alt={`${s.label} sample`} width="1080" height="433" loading="lazy" class="samples__img" />
+              <ul class="samples__bars">
+                {s.params.map((p) => (
+                  <li class="bar">
+                    <span class="bar__label">{p.name}</span>
+                    <span class="bar__track">
+                      <span class="bar__fill" style={`--w: ${p.value}%`} />
+                    </span>
+                    <span class="bar__value">{p.value}%</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead
+          kicker="Select your solution"
+          title="One device, the whole field-to-fork chain"
+          lead="Our solution is highly versatile: with a single hardware device you can analyze a wide range of materials across the agricultural and food production process, from raw inputs to finished products."
+        />
+      </div>
+      <div class="materials reveal">
+        <div class="materials__tabs" role="tablist" aria-label="Material type">
+          {
+            MATERIALS.map((m, i) => (
+              <button
+                class:list={['materials__tab', { 'is-active': i === 0 }]}
+                role="tab"
+                aria-selected={i === 0 ? 'true' : 'false'}
+                data-material={m.id}
+              >
+                {m.label}
+              </button>
+            ))
+          }
+        </div>
+        {
+          MATERIALS.map((m, i) => (
+            <ul class:list={['materials__panel', { 'is-active': i === 0 }]} data-panel={m.id} role="tabpanel">
+              {m.params.map((p) => (
+                <li class="chip">{p}</li>
+              ))}
+            </ul>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--gray">
+    <div class="container benefits">
+      <div class="reveal">
+        <SectionHead
+          kicker="Why it matters"
+          title="Data-driven decisions, in the field and on the farm"
+        />
+        <div class="benefits__text">
+          <p>
+            Fast, accurate analysis of key nutrients in soil, crops, feed and fertilizers lets you decide
+            on the spot, not two days later. Every scan is collected over time, giving you a complete view
+            of your agricultural performance.
+          </p>
+          <p>
+            That data flows into the web portal for detailed analytics: trend analysis, resource
+            optimization and more precise forecasting. Over time, the accumulated data supports proactive
+            decisions that improve crop yields, enhance sustainability, reduce costs and boost profitability.
+          </p>
+        </div>
+      </div>
+      <img
+        src={withBase('/img/agri/agri-cornfield.webp')}
+        alt="Farmer scanning corn plants in the field with the handheld NIR device"
+        width="1000"
+        height="500"
+        loading="lazy"
+        class="benefits__img reveal"
+      />
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container hardware">
+      <img
+        src={withBase('/img/agri/nirlight.webp')}
+        alt="NIRLIGHT handheld NIR spectrometer"
+        width="658"
+        height="1024"
+        loading="lazy"
+        class="hardware__img reveal"
+      />
+      <div class="reveal">
+        <SectionHead
+          kicker="Hardware"
+          title="High precision, one button"
+          lead="The NIRLIGHT handheld spectrometer allows quick, safe and accurate identification and measurement of materials and substances: anytime, anywhere, with a single button press."
+        />
+        <ul class="speclist">
+          {NIRLIGHT_SPECS.map((s) => <li>{s}</li>)}
+        </ul>
+        <a href={withBase('/hardware')} class="btn btn--ghost hardware__btn">Explore the hardware</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead
+          kicker="App & portal"
+          title="Results on your phone, analytics in the cloud"
+          lead="The mobile app (iOS and Android) pairs automatically via Bluetooth: point, press, and results appear within seconds. Multiple scans of one sample are averaged for better accuracy. The digital portal turns every scan into manageable data."
+        />
+      </div>
+      <div class="appshots reveal">
+        <img src={withBase('/img/agri/app-screen-1.jpg')} alt="Mobile app showing scan results for an agriculture sample" width="1280" height="1110" loading="lazy" />
+        <img src={withBase('/img/agri/app-screen-2.jpg')} alt="Mobile app showing nutrient parameters of a sample" width="1280" height="1110" loading="lazy" />
+        <img src={withBase('/img/agri/app-screen-3.jpg')} alt="Mobile app showing scan history" width="1280" height="1110" loading="lazy" />
+      </div>
+      <div class="portal">
+        <div class="portal__grid">
+          {
+            PORTAL_FEATURES.map((f) => (
+              <article class="portal__card reveal">
+                <h3>{f.title}</h3>
+                <p>{f.text}</p>
+              </article>
+            ))
+          }
+        </div>
+        <img
+          src={withBase('/img/agri/portal-dashboard.png')}
+          alt="Web portal dashboard with analytics across scans and devices"
+          width="1024"
+          height="932"
+          loading="lazy"
+          class="portal__img reveal"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--gray">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead
+          kicker="Accessories"
+          title="The right setup for every sample"
+          lead="Solid, liquid or powder: our accessories ensure optimal measurement setups tailored to different sample types and formats."
+        />
+      </div>
+      <div class="accessories">
+        <article class="accessory reveal">
+          <img src={withBase('/img/agri/accessory-transmission.jpg')} alt="Transmission fixture accessory for liquid samples" width="1000" height="640" loading="lazy" />
+          <div class="accessory__body">
+            <h3>Transmission fixture</h3>
+            <p>
+              Fast, real-time analysis of liquid samples for quality or nutritional attributes: ideal for
+              dairy, liquid fertilizer and more. Integrated tungsten lamp, standard cuvettes (0.5 to 10 mm)
+              and thin films or filters up to 3 mm thick.
+            </p>
+          </div>
+        </article>
+        <article class="accessory reveal">
+          <img src={withBase('/img/agri/accessory-tablet-probe.jpg')} alt="Tablet probe accessory analyzing grain kernels" width="1000" height="640" loading="lazy" />
+          <div class="accessory__body">
+            <h3>Tablet probe</h3>
+            <p>
+              Fast, non-destructive analysis of individual grain kernels and seeds, even through plastic
+              bags. Includes a 16 mm collection optic, a reference cell and an 8 mm adapter for smaller
+              samples: practical for quality control and research.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead kicker="FAQ" title="Frequently asked questions" />
+      </div>
+      <div class="faq reveal">
+        {
+          FAQS.map((f) => (
+            <details class="faq__item">
+              <summary>
+                {f.q}
+                <span class="faq__icon" aria-hidden="true" />
+              </summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--gray">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead kicker="More applications" title="Explore the other fields" />
+      </div>
+      <div class="others">
+        {
+          others.map((o) => (
+            <AppCard title={o.title} text={o.teaser} icon={o.icon} href={withBase(`/applications/${o.slug}`)} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <ContactCta />
+</Layout>
+
+<script>
+  function wireTabs(tabSelector: string, dataAttr: string) {
+    const tabs = document.querySelectorAll<HTMLButtonElement>(tabSelector);
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        const id = tab.dataset[dataAttr];
+        const scope = tab.closest('.samples, .materials');
+        if (!scope || !id) return;
+        scope.querySelectorAll('[role="tab"]').forEach((t) => {
+          t.classList.toggle('is-active', t === tab);
+          t.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+        });
+        scope.querySelectorAll<HTMLElement>('[data-panel]').forEach((p) => {
+          p.classList.toggle('is-active', p.dataset.panel === id);
+        });
+      });
+    });
+  }
+  wireTabs('.samples__tab', 'sample');
+  wireTabs('.materials__tab', 'material');
+</script>
+
+<style>
+  /* ---------- Hero ---------- */
+  .agrihero {
+    background:
+      linear-gradient(100deg, rgba(8, 10, 14, 0.88) 25%, rgba(8, 10, 14, 0.45) 60%, rgba(8, 10, 14, 0.25) 100%),
+      var(--ink) var(--agri-hero) no-repeat center / cover;
+    color: var(--text-on-dark);
+    min-height: min(80vh, 700px);
+    display: flex;
+    align-items: center;
+  }
+  .agrihero__inner {
+    width: 100%;
+    padding-block: clamp(5rem, 11vw, 8rem);
+  }
+  .agrihero .kicker {
+    color: #5e97f2;
+  }
+  .agrihero h1 {
+    color: var(--white);
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    max-width: 16ch;
+    animation: agri-rise 0.7s ease both;
+  }
+  .agrihero__lead {
+    margin-top: 1.5rem;
+    font-size: clamp(1.02rem, 1.7vw, 1.15rem);
+    color: #c7ccd4;
+    max-width: 36rem;
+    animation: agri-rise 0.7s 0.12s ease both;
+  }
+  .agrihero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2.25rem;
+    animation: agri-rise 0.7s 0.24s ease both;
+  }
+  @keyframes agri-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ---------- Features ---------- */
+  .features {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .feature {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 2rem 1.75rem;
+    display: grid;
+    gap: 0.7rem;
+    align-content: start;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .feature:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  .feature__icon {
+    display: inline-flex;
+    width: 52px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(3, 96, 232, 0.1);
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+  .feature p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Samples (résultats live) ---------- */
+  .samples__tabs,
+  .materials__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+  }
+  .samples__tab,
+  .materials__tab {
+    padding: 0.6rem 1.4rem;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border-dark);
+    background: transparent;
+    color: var(--text-on-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  }
+  .materials__tab {
+    border-color: var(--border);
+    color: var(--text);
+  }
+  .samples__tab:hover,
+  .materials__tab:hover {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+  .samples__tab.is-active,
+  .materials__tab.is-active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: var(--white);
+  }
+  .samples__panel {
+    display: none;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .samples__panel.is-active {
+    display: grid;
+  }
+  .samples__img {
+    border-radius: var(--radius-card);
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border-dark);
+  }
+  .samples__bars {
+    display: grid;
+    gap: 0.85rem;
+  }
+  .bar {
+    display: grid;
+    grid-template-columns: minmax(7rem, 10rem) 1fr 3.2rem;
+    align-items: center;
+    gap: 0.9rem;
+    font-size: 0.92rem;
+  }
+  .bar__label {
+    color: #c7ccd4;
+    font-weight: 600;
+  }
+  .bar__track {
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+  }
+  .bar__fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--blue), #7fb0ff);
+  }
+  .samples__panel.is-active .bar__fill {
+    width: var(--w);
+    transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .bar__value {
+    text-align: right;
+    font-weight: 700;
+    color: var(--white);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Materials ---------- */
+  .materials__panel {
+    display: none;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .materials__panel.is-active {
+    display: flex;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 1.35rem;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    font-weight: 600;
+    font-size: 0.98rem;
+  }
+  .chip::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue), #7fb0ff);
+    flex-shrink: 0;
+  }
+
+  /* ---------- Benefits ---------- */
+  .benefits {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  .benefits :global(.section-head) {
+    margin-bottom: 1rem;
+  }
+  .benefits__text {
+    display: grid;
+    gap: 1rem;
+    color: var(--text-muted);
+    max-width: 38rem;
+  }
+  .benefits__img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+  }
+
+  /* ---------- Hardware ---------- */
+  .hardware {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  .hardware__img {
+    width: min(300px, 60%);
+    height: auto;
+    justify-self: center;
+  }
+  .speclist {
+    display: grid;
+    gap: 0.8rem;
+    margin-block: 0.5rem 2rem;
+  }
+  .speclist li {
+    position: relative;
+    padding-left: 2rem;
+    color: #c7ccd4;
+  }
+  .speclist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.3em;
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    background: var(--blue);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+    background-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* ---------- App & portal ---------- */
+  .appshots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: clamp(3rem, 6vw, 4.5rem);
+  }
+  .appshots img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
+  }
+  .portal {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  .portal__grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .portal__card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 1.6rem 1.5rem;
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .portal__card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  .portal__card h3 {
+    font-size: 1.05rem;
+  }
+  .portal__card p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+  .portal__img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
+  }
+
+  /* ---------- Accessories ---------- */
+  .accessories {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .accessory {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .accessory:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  .accessory img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 25 / 16;
+    object-fit: cover;
+  }
+  .accessory__body {
+    padding: 1.75rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .accessory p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq {
+    display: grid;
+    gap: 0.9rem;
+    max-width: 52rem;
+  }
+  .faq__item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 0;
+    overflow: hidden;
+    transition: border-color 0.25s ease;
+  }
+  .faq__item[open] {
+    border-color: rgba(3, 96, 232, 0.45);
+  }
+  .faq__item summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    cursor: pointer;
+    padding: 1.3rem 1.6rem;
+    font-weight: 700;
+    font-size: 1.02rem;
+  }
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq__icon {
+    position: relative;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+  }
+  .faq__icon::before,
+  .faq__icon::after {
+    content: '';
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 14px;
+    height: 2.5px;
+    border-radius: 2px;
+    background: var(--blue);
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s ease;
+  }
+  .faq__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .faq__item[open] .faq__icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  .faq__item p {
+    padding: 0 1.6rem 1.4rem;
+    color: var(--text-muted);
+  }
+
+  .others {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 700px) {
+    .appshots {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (min-width: 900px) {
+    .features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .samples__panel.is-active {
+      grid-template-columns: 1fr 1.1fr;
+    }
+    .benefits {
+      grid-template-columns: 1.1fr 1fr;
+    }
+    .hardware {
+      grid-template-columns: 0.8fr 1.2fr;
+    }
+    .portal {
+      grid-template-columns: 1fr 1.2fr;
+    }
+    .accessories {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .others {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .features {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .agrihero h1,
+    .agrihero__lead,
+    .agrihero__cta {
+      animation: none;
+    }
+    .samples__panel.is-active .bar__fill {
+      transition: none;
+    }
+  }
+</style>
