@@ -127,6 +127,11 @@ p {
 }
 .section {
   padding-block: var(--section-y);
+  /* Chaque bloc remplit l'écran (direction bikeverbier), contenu centré verticalement */
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
 }
 .section--dark {
   background: var(--ink);

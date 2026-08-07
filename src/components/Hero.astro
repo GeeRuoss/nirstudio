@@ -27,7 +27,8 @@ const heroBg = `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`;
     /* L'image place le produit à droite : le copy vit à gauche, comme nirlab.com */
     background: var(--ink) var(--hero-bg) no-repeat center right / cover;
     color: var(--text-on-dark);
-    min-height: min(88vh, 780px);
+    min-height: calc(100vh - var(--nav-h));
+    min-height: calc(100svh - var(--nav-h));
     display: flex;
     align-items: center;
   }

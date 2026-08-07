@@ -92,6 +92,8 @@ const formatDate = (iso: string) =>
       articles.forEach((card) => {
         const show = cat === 'all' || card.dataset.cat === cat;
         card.hidden = !show;
+        // Révèle immédiatement : l'IntersectionObserver ne re-déclenche pas toujours après filtrage
+        if (show) card.classList.add('is-visible');
         if (show) shown++;
       });
       if (empty) empty.hidden = shown > 0;
@@ -138,6 +140,10 @@ const formatDate = (iso: string) =>
   .articles {
     display: grid;
     gap: 1.25rem;
+  }
+  /* L'attribut hidden (filtre) doit gagner sur display: grid */
+  .article[hidden] {
+    display: none;
   }
   .article {
     display: grid;

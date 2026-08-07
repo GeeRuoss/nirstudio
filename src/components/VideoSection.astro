@@ -1,0 +1,38 @@
+---
+// Vidéo de présentation "NIRStudio - Applications" (source Wistia 908 Devices,
+// self-hostée en 1080p conformément à la règle assets locaux).
+import SectionHead from './SectionHead.astro';
+import { withBase } from '../lib/url';
+---
+
+<section class="section" id="video">
+  <div class="container">
+    <div class="reveal">
+      <SectionHead kicker="In action" title="See NIRStudio at work" />
+    </div>
+    <video
+      class="promo reveal"
+      controls
+      preload="metadata"
+      playsinline
+      poster={withBase('/video/nirstudio-applications-poster.jpg')}
+      width="1920"
+      height="1080"
+    >
+      <source src={withBase('/video/nirstudio-applications.mp4')} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</section>
+
+<style>
+  .promo {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
+    background: var(--ink);
+    box-shadow: 0 32px 64px rgba(10, 10, 20, 0.16);
+  }
+</style>

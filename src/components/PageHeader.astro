@@ -24,6 +24,11 @@ const { kicker, title, lead } = Astro.props;
     color: var(--text-on-dark);
     padding-block: clamp(4.5rem, 10vw, 8rem);
     border-bottom: 1px solid var(--border-dark);
+    /* Le bloc sombre d'entrée remplit l'écran, comme le hero */
+    min-height: calc(100vh - var(--nav-h));
+    min-height: calc(100svh - var(--nav-h));
+    display: grid;
+    align-content: center;
   }
   /* Grille fine + glow bleu, façon interface d'instrument */
   .pagehead::before {
