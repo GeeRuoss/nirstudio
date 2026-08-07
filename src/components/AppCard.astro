@@ -1,6 +1,6 @@
 ---
-// Carte d'application cliquable (Agriculture / Food / Counterfeit) → page dédiée.
-// Style éditorial : gros titre Crystal, flèche, invert bleu au hover.
+// Carte d'application cliquable (Agriculture / Food / Counterfeit / Industrial).
+// Photo optionnelle en tête, gros titre Crystal, flèche, invert bleu au hover.
 import Icon from './Icon.astro';
 
 interface Props {
@@ -8,28 +8,38 @@ interface Props {
   text: string;
   icon: string;
   href: string;
+  img?: string;
 }
-const { title, text, icon, href } = Astro.props;
+const { title, text, icon, href, img } = Astro.props;
 ---
 
 <a class="appcard reveal" href={href}>
-  <span class="appcard__top">
-    <span class="appcard__icon"><Icon name={icon} size={24} /></span>
-    <span class="appcard__arrow" aria-hidden="true"><Icon name="arrow" size={22} /></span>
+  {
+    img && (
+      <span class="appcard__media">
+        <img src={img} alt="" width="1200" height="675" loading="lazy" />
+      </span>
+    )
+  }
+  <span class="appcard__body">
+    <span class="appcard__top">
+      <span class="appcard__icon"><Icon name={icon} size={24} /></span>
+      <span class="appcard__arrow" aria-hidden="true"><Icon name="arrow" size={22} /></span>
+    </span>
+    <span class="appcard__title">{title}</span>
+    <p>{text}</p>
   </span>
-  <span class="appcard__title">{title}</span>
-  <p>{text}</p>
 </a>
 
 <style>
   .appcard {
     display: grid;
-    gap: 1rem;
+    grid-template-rows: auto 1fr;
     align-content: start;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--radius-card);
-    padding: 2rem 1.75rem;
+    overflow: hidden;
     min-height: 280px;
     transition:
       transform 0.28s ease,
@@ -37,11 +47,32 @@ const { title, text, icon, href } = Astro.props;
       border-color 0.28s ease,
       box-shadow 0.28s ease;
   }
+  .appcard__media {
+    display: block;
+    overflow: hidden;
+  }
+  .appcard__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .appcard:hover .appcard__media img {
+    transform: scale(1.04);
+  }
+  .appcard__body {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    padding: 1.75rem;
+  }
   .appcard__top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
   }
   .appcard__icon {
     display: inline-flex;

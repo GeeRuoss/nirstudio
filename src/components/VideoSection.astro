@@ -1,8 +1,15 @@
 ---
-// Vidéo de présentation "NIRStudio - Applications" (source Wistia 908 Devices,
-// self-hostée en 1080p conformément à la règle assets locaux).
+// Vidéo de présentation (Wistia 908, self-hostée) + bloc "How it works" :
+// le scan au quotidien (distinct du process "Adding your material" qui
+// construit le modèle). Placement voulu par Vi : les steps à côté de la preuve visuelle.
 import SectionHead from './SectionHead.astro';
 import { withBase } from '../lib/url';
+
+const HIW_STEPS = [
+  { title: 'Connect', text: 'Pair the device with the NIRStudio app on your phone.' },
+  { title: 'Scan', text: 'Place the device on your sample and press the button.' },
+  { title: 'Result', text: 'See your result in the app, in seconds.' },
+];
 ---
 
 <section class="section section--dark" id="video">
@@ -10,23 +17,47 @@ import { withBase } from '../lib/url';
     <div class="reveal">
       <SectionHead kicker="In action" title="The solution for solid and liquid analysis" />
     </div>
-    <div class="promo reveal">
-      <video
-        preload="metadata"
-        playsinline
-        poster={withBase('/video/nirstudio-applications-poster.jpg')}
-        width="1920"
-        height="1080"
-      >
-        <source src={withBase('/video/nirstudio-applications.mp4')} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <button class="promo__watch" type="button">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M8 5.5v13l11-6.5-11-6.5z" />
-        </svg>
-        Watch
-      </button>
+    <div class="duo">
+      <div class="promo reveal">
+        <video
+          preload="metadata"
+          playsinline
+          poster={withBase('/video/nirstudio-applications-poster.jpg')}
+          width="1920"
+          height="1080"
+        >
+          <source src={withBase('/video/nirstudio-applications.mp4')} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <button class="promo__watch" type="button">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8 5.5v13l11-6.5-11-6.5z" />
+          </svg>
+          Watch
+        </button>
+      </div>
+
+      <aside class="hiw reveal">
+        <span class="kicker">How it works</span>
+        <h3>Three steps, seconds to a result</h3>
+        <p class="hiw__lead">
+          Once your model is built, or if a ready-to-use model is already available for
+          your material, testing is this simple.
+        </p>
+        <ol class="hiw__steps">
+          {
+            HIW_STEPS.map((s, i) => (
+              <li>
+                <span class="hiw__n" aria-hidden="true">{i + 1}</span>
+                <div>
+                  <b>{s.title}</b>
+                  <p>{s.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </aside>
     </div>
   </div>
 </section>
@@ -50,6 +81,13 @@ import { withBase } from '../lib/url';
 </script>
 
 <style>
+  .duo {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: center;
+  }
+
+  /* ---------- Vidéo ---------- */
   .promo {
     position: relative;
     border-radius: var(--radius-card);
@@ -82,5 +120,59 @@ import { withBase } from '../lib/url';
   .promo__watch:hover {
     transform: translate(-50%, -50%) scale(1.05);
     box-shadow: 0 20px 52px rgba(0, 0, 0, 0.55);
+  }
+
+  /* ---------- How it works ---------- */
+  .hiw h3 {
+    color: var(--white);
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+    margin-top: 0.25rem;
+  }
+  .hiw__lead {
+    margin-top: 0.9rem;
+    color: #9ca3af;
+    font-size: 0.98rem;
+  }
+  .hiw__steps {
+    list-style: none;
+    display: grid;
+    gap: 1.4rem;
+    margin-top: 1.75rem;
+    padding: 0;
+  }
+  .hiw__steps li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .hiw__n {
+    flex-shrink: 0;
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(3, 96, 232, 0.18);
+    border: 1px solid rgba(3, 96, 232, 0.4);
+    color: #7fb0ff;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .hiw__steps b {
+    display: block;
+    color: var(--white);
+    font-size: 1.02rem;
+  }
+  .hiw__steps p {
+    margin-top: 0.25rem;
+    color: #9ca3af;
+    font-size: 0.92rem;
+  }
+
+  @media (min-width: 980px) {
+    .duo {
+      grid-template-columns: 1.55fr 1fr;
+    }
   }
 </style>

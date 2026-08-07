@@ -113,10 +113,10 @@ const FAQS = [
         </div>
       </div>
       <img
-        src={withBase('/img/solution-olives.jpg')}
-        alt="Handheld NIR spectrometer with the mobile app showing oil and water content of an olive sample"
-        width="1200"
-        height="1000"
+        src={withBase('/img/solution/scene-olives.jpg')}
+        alt="Handheld NIR device next to a basket of fresh olives"
+        width="1600"
+        height="899"
         loading="lazy"
         class="benefits__img reveal"
       />
@@ -133,9 +133,9 @@ const FAQS = [
         />
       </div>
       <div class="appshots reveal">
-        <img src={withBase('/img/agri/app-screen-1.jpg')} alt="Mobile app showing scan results for a sample" width="1280" height="1110" loading="lazy" />
-        <img src={withBase('/img/agri/app-screen-2.jpg')} alt="Mobile app showing measured parameters of a sample" width="1280" height="1110" loading="lazy" />
-        <img src={withBase('/img/agri/app-screen-3.jpg')} alt="Mobile app showing scan history" width="1280" height="1110" loading="lazy" />
+        <img src={withBase('/img/solution/app-olive.webp')} alt="Mobile app showing the fat and moisture content of an olive sample" width="720" height="1247" loading="lazy" />
+        <img src={withBase('/img/solution/app-cheese.webp')} alt="Mobile app showing the fat, protein and moisture content of a cheese sample" width="720" height="1247" loading="lazy" />
+        <img src={withBase('/img/solution/app-salmon.webp')} alt="Mobile app showing the fat and pigment content of a salmon sample" width="720" height="1247" loading="lazy" />
       </div>
       <div class="portal">
         <div class="portal__grid">
@@ -149,10 +149,10 @@ const FAQS = [
           }
         </div>
         <img
-          src={withBase('/img/agri/portal-dashboard.png')}
-          alt="Web portal dashboard with analytics across scans and devices"
-          width="1024"
-          height="932"
+          src={withBase('/img/solution/portal-desktop.webp')}
+          alt="Web portal on a desktop screen with scan data and analytics"
+          width="1100"
+          height="665"
           loading="lazy"
           class="portal__img reveal"
         />
@@ -163,15 +163,25 @@ const FAQS = [
   <section class="section section--dark">
     <div class="container">
       <div class="hwband reveal">
-        {
-          HW_HIGHLIGHTS.map((s) => (
-            <div class="hwband__stat">
-              <span class="hwband__value">{s.value}</span>
-              <span class="hwband__label">{s.label}</span>
-            </div>
-          ))
-        }
-        <a href={withBase('/hardware')} class="btn btn--ghost hwband__btn">Explore the hardware</a>
+        <img
+          src={withBase('/img/solution/device-dark.jpg')}
+          alt="The handheld NIR spectrometer"
+          width="1400"
+          height="933"
+          loading="lazy"
+          class="hwband__img"
+        />
+        <div class="hwband__content">
+          {
+            HW_HIGHLIGHTS.map((s) => (
+              <div class="hwband__stat">
+                <span class="hwband__value">{s.value}</span>
+                <span class="hwband__label">{s.label}</span>
+              </div>
+            ))
+          }
+          <a href={withBase('/hardware')} class="btn btn--ghost hwband__btn">Explore the hardware</a>
+        </div>
       </div>
     </div>
   </section>
@@ -205,7 +215,7 @@ const FAQS = [
       <div class="others">
         {
           APPLICATIONS.map((app) => (
-            <AppCard title={app.title} text={app.teaser} icon={app.icon} href={withBase(`/applications/${app.slug}`)} />
+            <AppCard title={app.title} text={app.teaser} icon={app.icon} img={withBase(app.photo)} href={withBase(`/applications/${app.slug}`)} />
           ))
         }
       </div>
@@ -268,9 +278,9 @@ const FAQS = [
     max-width: 38rem;
   }
   .benefits__img {
-    width: min(460px, 85%);
-    justify-self: center;
+    width: 100%;
     height: auto;
+    border-radius: var(--radius-card);
   }
 
   /* ---------- App & portal ---------- */
@@ -327,8 +337,18 @@ const FAQS = [
   /* ---------- Hardware highlights ---------- */
   .hwband {
     display: grid;
-    gap: 2rem;
+    gap: clamp(2rem, 4vw, 3.5rem);
     align-items: center;
+  }
+  .hwband__img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border-dark);
+  }
+  .hwband__content {
+    display: grid;
+    gap: 2rem;
     justify-items: start;
   }
   .hwband__stat {
@@ -439,7 +459,7 @@ const FAQS = [
       grid-template-columns: 1fr 1.2fr;
     }
     .hwband {
-      grid-template-columns: repeat(3, 1fr) auto;
+      grid-template-columns: 1.25fr 1fr;
     }
     .others {
       grid-template-columns: repeat(2, 1fr);

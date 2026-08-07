@@ -27,9 +27,14 @@ const others = APPLICATIONS.filter((a) => a.slug !== app.slug);
       <div class="reveal">
         <SectionHead kicker="Parameters" title="What you can measure" />
       </div>
-      <ul class="chips">
-        {app.measures.map((m) => <li class="chip reveal">{m}</li>)}
-      </ul>
+      <div class="measures reveal">
+        <p class="measures__label">
+          What you can measure in <b>{app.title}</b>
+        </p>
+        <ul class="measures__list">
+          {app.measures.map((m) => <li>{m}</li>)}
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -61,7 +66,7 @@ const others = APPLICATIONS.filter((a) => a.slug !== app.slug);
       <div class="others">
         {
           others.map((o) => (
-            <AppCard title={o.title} text={o.teaser} icon={o.icon} href={withBase(`/applications/${o.slug}`)} />
+            <AppCard title={o.title} text={o.teaser} icon={o.icon} img={withBase(o.photo)} href={withBase(`/applications/${o.slug}`)} />
           ))
         }
       </div>
@@ -72,35 +77,47 @@ const others = APPLICATIONS.filter((a) => a.slug !== app.slug);
 </Layout>
 
 <style>
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.7rem 1.35rem;
-    border-radius: var(--radius-pill);
-    border: 1.5px solid var(--border);
+  .measures {
     background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    box-shadow: 0 24px 60px rgba(10, 10, 20, 0.06);
+  }
+  .measures__label {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+  .measures__label b {
+    color: var(--blue);
+    font-weight: 700;
+  }
+  .measures__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 0.9rem 1.5rem;
+  }
+  .measures__list li {
+    position: relative;
+    padding: 0.15rem 0 0.15rem 2rem;
     font-weight: 600;
     font-size: 0.98rem;
-    transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    list-style: none;
   }
-  .chip::before {
+  .measures__list li::before {
     content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue), #7fb0ff);
-    flex-shrink: 0;
-  }
-  .chip:hover {
-    border-color: var(--blue);
-    color: var(--blue);
-    transform: translateY(-2px);
+    position: absolute;
+    left: 0;
+    top: 0.32em;
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    background: var(--blue);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+    background-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
   }
   .cases {
     display: grid;

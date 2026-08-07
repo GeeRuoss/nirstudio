@@ -33,6 +33,7 @@ export const NAV = [
 export const APPLICATIONS = [
   {
     slug: 'agriculture',
+    photo: '/img/agri/agri-cornfield.webp',
     title: 'Agriculture',
     icon: 'leaf',
     // Mot-clé principal : portable NIR analyzer for agriculture / grain analysis
@@ -62,6 +63,7 @@ export const APPLICATIONS = [
   },
   {
     slug: 'food',
+    photo: '/img/apps/food.jpg',
     title: 'Food',
     icon: 'apple',
     // Mots-clés : food fraud detection / food authenticity testing / NIR food quality control
@@ -91,6 +93,7 @@ export const APPLICATIONS = [
   },
   {
     slug: 'counterfeit',
+    photo: '/img/apps/counterfeit.jpg',
     title: 'Counterfeit',
     icon: 'shield',
     // Mots-clés : counterfeit detection / product authentication / brand protection
@@ -120,6 +123,7 @@ export const APPLICATIONS = [
   },
   {
     slug: 'industrial',
+    photo: '/img/apps/industrial.jpg',
     title: 'Industrial',
     icon: 'layers',
     // Mots-clés : industrial NIR quality control / polymer identification / raw material testing

@@ -14,7 +14,7 @@ import { APPLICATIONS } from '../data/site';
     <div class="apps">
       {
         APPLICATIONS.map((app) => (
-          <AppCard title={app.title} text={app.teaser} icon={app.icon} href={withBase(`/applications/${app.slug}`)} />
+          <AppCard title={app.title} text={app.teaser} icon={app.icon} img={withBase(app.photo)} href={withBase(`/applications/${app.slug}`)} />
         ))
       }
     </div>

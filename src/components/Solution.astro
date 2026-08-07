@@ -16,10 +16,10 @@ import { STEPS } from '../data/site';
       />
     </div>
     <img
-      src={withBase('/img/solution-olives.jpg')}
-      alt="Handheld NIRLAB spectrometer with the mobile app showing oil and water content of an olive sample"
-      width="1200"
-      height="1000"
+      src={withBase('/img/solution/scan-hands.jpg')}
+      alt="Scanning real samples with the handheld NIR device, results in the mobile app"
+      width="1800"
+      height="1009"
       loading="lazy"
       class="intro__img reveal"
     />
@@ -44,9 +44,10 @@ import { STEPS } from '../data/site';
     margin-bottom: 0;
   }
   .intro__img {
-    width: min(460px, 85%);
-    justify-self: center;
+    width: 100%;
     height: auto;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
   }
   .steps {
     display: grid;
@@ -55,9 +56,6 @@ import { STEPS } from '../data/site';
   @media (min-width: 900px) {
     .intro {
       grid-template-columns: 1.2fr 1fr;
-    }
-    .intro__img {
-      width: 100%;
     }
     .steps {
       grid-template-columns: repeat(3, 1fr);

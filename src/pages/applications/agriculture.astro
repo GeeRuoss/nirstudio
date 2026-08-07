@@ -437,7 +437,7 @@ const FAQS = [
       <div class="others">
         {
           others.map((o) => (
-            <AppCard title={o.title} text={o.teaser} icon={o.icon} href={withBase(`/applications/${o.slug}`)} />
+            <AppCard title={o.title} text={o.teaser} icon={o.icon} img={withBase(o.photo)} href={withBase(`/applications/${o.slug}`)} />
           ))
         }
       </div>
