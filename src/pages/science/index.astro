@@ -6,7 +6,7 @@ import { withBase } from '../../lib/url';
 import PageHeader from '../../components/PageHeader.astro';
 import ContactCta from '../../components/ContactCta.astro';
 import Icon from '../../components/Icon.astro';
-import articles from '../../data/articles-full.json';
+import { SCIENCE_ARTICLES as articles } from '../../data/science';
 
 const categories = [...new Set(articles.map((a) => a.category))].sort();
 
