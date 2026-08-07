@@ -264,11 +264,16 @@ const FAQS = [
         </div>
         {
           MATERIALS.map((m, i) => (
-            <ul class:list={['materials__panel', { 'is-active': i === 0 }]} data-panel={m.id} role="tabpanel">
-              {m.params.map((p) => (
-                <li class="chip">{p}</li>
-              ))}
-            </ul>
+            <div class:list={['materials__panel', { 'is-active': i === 0 }]} data-panel={m.id} role="tabpanel">
+              <p class="materials__label">
+                What you can measure in <b>{m.label}</b>
+              </p>
+              <ul class="materials__list">
+                {m.params.map((p) => (
+                  <li class="chip">{p}</li>
+                ))}
+              </ul>
+            </div>
           ))
         }
       </div>
@@ -637,33 +642,71 @@ const FAQS = [
     font-variant-numeric: tabular-nums;
   }
 
-  /* ---------- Materials ---------- */
+  /* ---------- Materials : panneau structuré (onglets + grille de paramètres) ---------- */
+  .materials {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    box-shadow: 0 24px 60px rgba(10, 10, 20, 0.06);
+  }
+  .materials .materials__tabs {
+    margin-bottom: 0;
+    padding-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+    border-bottom: 1px solid var(--border);
+  }
   .materials__panel {
     display: none;
-    flex-wrap: wrap;
-    gap: 0.75rem;
+    padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
   }
   .materials__panel.is-active {
-    display: flex;
+    display: block;
+    animation: panel-in 0.35s ease both;
+  }
+  .materials__label {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+  .materials__label b {
+    color: var(--blue);
+    font-weight: 700;
+  }
+  .materials__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 0.9rem 1.5rem;
+  }
+  @keyframes panel-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.7rem 1.35rem;
-    border-radius: var(--radius-pill);
-    border: 1.5px solid var(--border);
-    background: var(--white);
+    position: relative;
+    padding: 0.15rem 0 0.15rem 2rem;
     font-weight: 600;
     font-size: 0.98rem;
+    list-style: none;
   }
   .chip::before {
     content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue), #7fb0ff);
-    flex-shrink: 0;
+    position: absolute;
+    left: 0;
+    top: 0.32em;
+    width: 18px;
+    height: 18px;
+    border-radius: 6px;
+    background: var(--blue);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+    background-size: 12px;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 
   /* ---------- Benefits ---------- */
