@@ -202,9 +202,3 @@ export const PORTAL_FEATURES = [
   { title: 'Simple data management', text: 'Simplified tools to organize, edit and maintain your data.' },
   { title: 'Export & PDF reports', text: 'Export your data in various formats or save scan results as PDF.' },
 ];
-
-export const QUOTE = {
-  text: 'It is unique to the world to be capable of generating data with a handheld device that is on equal level with the data of a gold standard laboratory. We have proven this with the ISO 17025 certification of the NIRStudio system.',
-  author: 'Prof. Pierre Esseiva',
-  role: 'NIRStudio',
-};

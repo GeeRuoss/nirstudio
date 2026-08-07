@@ -1,9 +1,9 @@
 ---
-// Section Solution : intro on-demand + render olives + les 3 étapes du process.
+// Section Solution : intro on-demand + photo de scan + lien vers la page /solution
+// (les 3 étapes "Adding your material" vivent désormais sur /solution).
 import SectionHead from './SectionHead.astro';
 import { withBase } from '../lib/url';
-import StepCard from './StepCard.astro';
-import { STEPS } from '../data/site';
+import Icon from './Icon.astro';
 ---
 
 <section class="section" id="solution">
@@ -14,6 +14,10 @@ import { STEPS } from '../data/site';
         title="From your data to your result"
         lead="It begins with your reference data — the real samples, the real conditions your team works in. A best-in-class NIR spectrometer scans them. Advanced modeling techniques turn those scans into a model trained on your material, not an industry average. And user-friendly software puts that model to work, turning every scan into an accurate result, on-site, in real time."
       />
+      <a href={withBase('/solution')} class="intro__more">
+        See how we build your model
+        <Icon name="arrow" size={18} />
+      </a>
     </div>
     <img
       src={withBase('/img/solution/scan-hands.jpg')}
@@ -24,12 +28,6 @@ import { STEPS } from '../data/site';
       class="intro__img reveal"
     />
   </div>
-  <div class="container">
-    <span class="kicker reveal">Adding your material</span>
-    <div class="steps">
-      {STEPS.map((step) => <StepCard title={step.title} text={step.text} />)}
-    </div>
-  </div>
 </section>
 
 <style>
@@ -37,11 +35,23 @@ import { STEPS } from '../data/site';
     display: grid;
     gap: 3rem;
     align-items: center;
-    margin-bottom: clamp(3rem, 6vw, 5rem);
   }
   /* Le SectionHead gère sa propre marge basse : on l'annule dans la grille intro */
   .intro :global(.section-head) {
     margin-bottom: 0;
+  }
+  .intro__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+  .intro__more:hover {
+    color: var(--blue-dark, #023f9e);
+    gap: 0.75rem;
   }
   .intro__img {
     width: 100%;
@@ -49,16 +59,9 @@ import { STEPS } from '../data/site';
     border-radius: var(--radius-card);
     border: 1px solid var(--border);
   }
-  .steps {
-    display: grid;
-    gap: 1.25rem;
-  }
   @media (min-width: 900px) {
     .intro {
       grid-template-columns: 1.2fr 1fr;
-    }
-    .steps {
-      grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>

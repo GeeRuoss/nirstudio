@@ -8,8 +8,9 @@ import PageHeader from '../components/PageHeader.astro';
 import SectionHead from '../components/SectionHead.astro';
 import ContactCta from '../components/ContactCta.astro';
 import AppCard from '../components/AppCard.astro';
+import StepCard from '../components/StepCard.astro';
 import Icon from '../components/Icon.astro';
-import { APPLICATIONS, PORTAL_FEATURES } from '../data/site';
+import { APPLICATIONS, PORTAL_FEATURES, STEPS } from '../data/site';
 
 const FEATURES = [
   {
@@ -89,6 +90,10 @@ const FAQS = [
             </article>
           ))
         }
+      </div>
+      <span class="kicker steps__kicker reveal">Adding your material</span>
+      <div class="steps">
+        {STEPS.map((step) => <StepCard title={step.title} text={step.text} />)}
       </div>
     </div>
   </section>
@@ -260,6 +265,21 @@ const FAQS = [
   .feature p {
     color: var(--text-muted);
     font-size: 0.95rem;
+  }
+
+  /* ---------- Adding your material (3 steps) ---------- */
+  .steps__kicker {
+    display: inline-block;
+    margin-top: clamp(3rem, 6vw, 5rem);
+  }
+  .steps {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 900px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   /* ---------- Why it matters ---------- */

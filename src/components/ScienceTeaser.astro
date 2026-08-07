@@ -1,0 +1,186 @@
+---
+// Section Science de l'accueil : 3 articles mis en avant (Agro / Use Cases / Polymers),
+// sélection Viktoriia du 07/08. Les cartes reprennent le style de la page Science.
+import SectionHead from './SectionHead.astro';
+import Icon from './Icon.astro';
+import { withBase } from '../lib/url';
+import { SCIENCE_ARTICLES } from '../data/science';
+
+const FEATURED_SLUGS = [
+  'unlocking-the-future-of-corn-production-with-real-time-analysis',
+  'counterfeit-medicines-unmasking-the-role-of-nir-spectroscopy',
+  'plastic-recycling-revolution-nir-spectroscopys-transformative-role',
+];
+
+const featured = FEATURED_SLUGS.map((slug) => {
+  const article = SCIENCE_ARTICLES.find((a) => a.slug === slug);
+  if (!article) throw new Error(`Article mis en avant introuvable : ${slug}`);
+  return article;
+});
+---
+
+<section class="section" id="research">
+  <div class="container">
+    <div class="research__head reveal">
+      <SectionHead
+        kicker="Science"
+        title="Backed by research"
+        lead="A closer look at how NIR spectroscopy performs across materials and industries."
+      />
+      <a href={withBase('/science')} class="research__more">
+        See all articles
+        <Icon name="arrow" size={18} />
+      </a>
+    </div>
+    <div class="research">
+      {
+        featured.map((a) => (
+          <a class="article reveal" href={withBase(`/science/${a.slug}`)}>
+            <span class="article__media">
+              {a.cover ? (
+                <img src={withBase(a.cover)} alt="" width="800" height="450" loading="lazy" />
+              ) : (
+                <span class="article__placeholder" aria-hidden="true">
+                  <Icon name="flask" size={34} />
+                </span>
+              )}
+              <span class="article__cat">{a.category}</span>
+            </span>
+            <span class="article__body">
+              <h3>{a.title}</h3>
+              <p>{a.excerpt}</p>
+              <span class="article__read">
+                Read the article
+                <Icon name="arrow" size={18} />
+              </span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .research__head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .research__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+  .research__more:hover {
+    color: var(--blue-dark, #023f9e);
+    gap: 0.75rem;
+  }
+  .research {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .article {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    transition:
+      transform 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+  .article:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  .article__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    background: var(--gray-bg);
+    overflow: hidden;
+  }
+  .article__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .article:hover .article__media img {
+    transform: scale(1.04);
+  }
+  .article__placeholder {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    color: #5e97f2;
+    background:
+      radial-gradient(60% 90% at 80% 10%, rgba(3, 96, 232, 0.25) 0%, transparent 60%),
+      var(--ink);
+  }
+  .article__cat {
+    position: absolute;
+    left: 0.9rem;
+    bottom: 0.9rem;
+    display: inline-flex;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--blue);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    backdrop-filter: blur(4px);
+  }
+  .article__body {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    padding: 1.5rem 1.5rem 1.7rem;
+  }
+  .article h3 {
+    font-size: 1.1rem;
+    line-height: 1.3;
+    color: var(--text);
+  }
+  .article p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .article__read {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.35rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--blue);
+  }
+  .article__read :global(svg) {
+    transition: transform 0.22s ease;
+  }
+  .article:hover .article__read :global(svg) {
+    transform: translateX(3px);
+  }
+  @media (min-width: 900px) {
+    .research {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
