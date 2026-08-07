@@ -24,8 +24,11 @@ const heroBg = `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`;
 
 <style>
   .hero {
-    /* L'image place le produit à droite : le copy vit à gauche, comme nirlab.com */
-    background: var(--ink) var(--hero-bg) no-repeat center right / cover;
+    /* L'image place le produit à droite : le copy vit à gauche, comme nirlab.com.
+       Scrim gauche pour la lisibilité du texte quand le viewport recadre le produit. */
+    background:
+      linear-gradient(90deg, rgba(4, 9, 24, 0.88) 0%, rgba(4, 9, 24, 0.55) 36%, rgba(4, 9, 24, 0) 62%),
+      var(--ink) var(--hero-bg) no-repeat center right / cover;
     color: var(--text-on-dark);
     min-height: calc(100vh - var(--nav-h));
     min-height: calc(100svh - var(--nav-h));

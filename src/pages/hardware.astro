@@ -1,8 +1,74 @@
 ---
+// Page Hardware : bento + ajouts Viktoriia (07/08) : avantages, specs condensées,
+// spec sheet PDF téléchargeable (rebrandé NIRStudio), CTA sous le hero, accessoires.
 import Layout from '../layouts/Layout.astro';
+import { withBase } from '../lib/url';
 import PageHeader from '../components/PageHeader.astro';
+import SectionHead from '../components/SectionHead.astro';
 import Hardware from '../components/Hardware.astro';
 import ContactCta from '../components/ContactCta.astro';
+import Icon from '../components/Icon.astro';
+import { SITE } from '../data/site';
+
+const ADVANTAGES = [
+  {
+    icon: 'bluetooth',
+    title: 'Wireless',
+    text: 'Every scan syncs to your model and the portal instantly, no cables.',
+  },
+  {
+    icon: 'shield',
+    title: 'Rugged',
+    text: 'Dust, water and shock resistant, built for the field, the line, or customs.',
+  },
+  {
+    icon: 'check',
+    title: 'Simple to use',
+    text: 'Point-and-click, no training needed, anyone on your team can scan.',
+  },
+  {
+    icon: 'bolt',
+    title: 'Fast',
+    text: 'Quick scan-to-result speed keeps pace with a production line.',
+  },
+  {
+    icon: 'battery',
+    title: 'Long battery life',
+    text: 'A full field day of scanning without going offline.',
+  },
+  {
+    icon: 'recycle',
+    title: 'Non-destructive',
+    text: "Samples aren't altered by the scan, so you can rescan anytime.",
+  },
+];
+
+const SPECS = [
+  { param: 'Wavelength range', value: '950–1650 nm' },
+  { param: 'Measurement time', value: '0.25–0.5 sec' },
+  { param: 'Connectivity', value: 'Bluetooth 4.1 (BLE) and USB 2.0' },
+  { param: 'Weight', value: '< 250 g (< 9 oz)' },
+  { param: 'Size', value: '194 mm x 47 mm (length x diameter)' },
+  { param: 'Battery life', value: '10 hours continuous use, 3.5 hr charge' },
+  { param: 'Dust and water resistance', value: 'IP67' },
+];
+
+const SPEC_SHEET = '/downloads/Technical-Specifications-NIRStudio-2026.pdf';
+
+const ACCESSORIES = [
+  {
+    img: '/img/agri/accessory-transmission.jpg',
+    alt: 'Transmission fixture accessory for liquid samples',
+    title: 'Transmission fixture',
+    text: 'Fast, real-time analysis of liquid samples for quality or composition attributes. Integrated tungsten lamp, standard cuvettes (0.5 to 10 mm) and thin films or filters up to 3 mm thick.',
+  },
+  {
+    img: '/img/agri/accessory-tablet-probe.jpg',
+    alt: 'Tablet probe accessory analyzing individual samples',
+    title: 'Tablet probe',
+    text: 'Fast, non-destructive analysis of individual samples such as grains, seeds or tablets, even through plastic bags. Includes a 16 mm collection optic, a reference cell and an 8 mm adapter for smaller samples.',
+  },
+];
 ---
 
 <Layout
@@ -13,9 +79,236 @@ import ContactCta from '../components/ContactCta.astro';
     kicker="Hardware"
     title="A handheld NIR spectrometer with lab-grade accuracy"
     lead="Ultra-light, robust, wireless and IP67 rated: the device your NIRStudio application ships on, paired with a mobile app and cloud platform."
-  />
+  >
+    <div class="pgcta">
+      <p class="pgcta__line">See it on your material</p>
+      <div class="pgcta__buttons">
+        <a href={SITE.contactUrl} class="btn btn--primary" target="_blank" rel="noopener">Book a demo</a>
+        <a href="#contact" class="btn btn--ghost">Contact us</a>
+      </div>
+    </div>
+  </PageHeader>
 
   <Hardware standalone />
 
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead
+          kicker="Why this hardware"
+          title="Built to carry the system into the field"
+          lead="The hardware is what makes the rest of the system usable outside a lab."
+        />
+      </div>
+      <div class="advantages">
+        {
+          ADVANTAGES.map((a) => (
+            <article class="advantage reveal">
+              <span class="advantage__icon">
+                <Icon name={a.icon} size={24} />
+              </span>
+              <h3>{a.title}</h3>
+              <p>{a.text}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="advantages__note reveal">
+        Not sold on its own: NIRStudio provides the hardware only as part of the full
+        system, paired with your custom model and the app and portal.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead
+          kicker="Specifications"
+          title="The essentials at a glance"
+          lead="A short, scannable overview. The full engineering details, box contents and warranty live in the spec sheet."
+        />
+      </div>
+      <dl class="specs reveal">
+        {
+          SPECS.map((s) => (
+            <div class="specs__row">
+              <dt>{s.param}</dt>
+              <dd>{s.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <a href={withBase(SPEC_SHEET)} class="btn btn--primary specs__dl reveal" download>
+        <Icon name="download" size={18} />
+        Download full spec sheet (PDF)
+      </a>
+    </div>
+  </section>
+
+  <section class="section section--gray">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead
+          kicker="Accessories"
+          title="The right setup for every sample"
+          lead="Solid, liquid or powder: our accessories ensure optimal measurement setups tailored to different sample types and formats."
+        />
+      </div>
+      <div class="accessories">
+        {
+          ACCESSORIES.map((a) => (
+            <article class="accessory reveal">
+              <img src={withBase(a.img)} alt={a.alt} width="1000" height="640" loading="lazy" />
+              <div class="accessory__body">
+                <h3>{a.title}</h3>
+                <p>{a.text}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <ContactCta />
 </Layout>
+
+<style>
+  /* ---------- CTA sous le hero ---------- */
+  .pgcta {
+    margin-top: 2.25rem;
+  }
+  .pgcta__line {
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .pgcta__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+  }
+
+  /* ---------- Avantages ---------- */
+  .advantages {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .advantage {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 2rem 1.75rem;
+    display: grid;
+    gap: 0.7rem;
+    align-content: start;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .advantage:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  .advantage__icon {
+    display: inline-flex;
+    width: 52px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(3, 96, 232, 0.1);
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+  .advantage p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .advantages__note {
+    margin-top: 2rem;
+    padding: 1.1rem 1.4rem;
+    border-left: 3px solid var(--blue);
+    background: rgba(3, 96, 232, 0.06);
+    border-radius: 0 12px 12px 0;
+    color: var(--text-muted);
+    max-width: 46rem;
+  }
+
+  /* ---------- Specs condensées ---------- */
+  .specs {
+    max-width: 52rem;
+    border-top: 1px solid var(--border-dark);
+  }
+  .specs__row {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--border-dark);
+  }
+  .specs dt {
+    font-weight: 600;
+    color: #9ca3af;
+    font-size: 0.9rem;
+  }
+  .specs dd {
+    color: var(--white);
+    font-weight: 600;
+  }
+  .specs__dl {
+    margin-top: 2.25rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  /* ---------- Accessoires ---------- */
+  .accessories {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .accessory {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .accessory:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  .accessory img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 25 / 16;
+    object-fit: cover;
+  }
+  .accessory__body {
+    padding: 1.75rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .accessory p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (min-width: 700px) {
+    .specs__row {
+      grid-template-columns: minmax(14rem, 18rem) 1fr;
+      gap: 2rem;
+      align-items: baseline;
+    }
+  }
+  @media (min-width: 900px) {
+    .advantages {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .accessories {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

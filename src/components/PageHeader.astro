@@ -13,6 +13,7 @@ const { kicker, title, lead } = Astro.props;
     <span class="kicker">{kicker}</span>
     <h1 set:html={title} />
     {lead && <p class="pagehead__lead">{lead}</p>}
+    <slot />
   </div>
 </header>
 
