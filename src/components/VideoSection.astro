@@ -5,7 +5,7 @@ import SectionHead from './SectionHead.astro';
 import { withBase } from '../lib/url';
 ---
 
-<section class="section" id="video">
+<section class="section section--dark" id="video">
   <div class="container">
     <div class="reveal">
       <SectionHead kicker="In action" title="See NIRStudio at work" />
@@ -31,8 +31,8 @@ import { withBase } from '../lib/url';
     width: 100%;
     height: auto;
     border-radius: var(--radius-card);
-    border: 1px solid var(--border);
+    border: 1px solid var(--border-dark);
     background: var(--ink);
-    box-shadow: 0 32px 64px rgba(10, 10, 20, 0.16);
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.45);
   }
 </style>
