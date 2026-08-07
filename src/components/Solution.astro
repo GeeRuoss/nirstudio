@@ -12,7 +12,7 @@ import { STEPS } from '../data/site';
       <SectionHead
         kicker="Solution"
         title="From your data to your result"
-        lead="It begins with your reference data: the real samples, the real conditions your team works in. A best-in-class NIR spectrometer scans them. Advanced modeling techniques turn those scans into a model trained on your material, not an industry average. And user-friendly software puts that model to work, turning every scan into an accurate result, on-site, in real time."
+        lead="It begins with your reference data — the real samples, the real conditions your team works in. A best-in-class NIR spectrometer scans them. Advanced modeling techniques turn those scans into a model trained on your material, not an industry average. And user-friendly software puts that model to work, turning every scan into an accurate result, on-site, in real time."
       />
     </div>
     <img
@@ -25,8 +25,9 @@ import { STEPS } from '../data/site';
     />
   </div>
   <div class="container">
+    <span class="kicker reveal">Adding your material</span>
     <div class="steps">
-      {STEPS.map((step) => <StepCard n={step.n} title={step.title} text={step.text} />)}
+      {STEPS.map((step) => <StepCard title={step.title} text={step.text} />)}
     </div>
   </div>
 </section>

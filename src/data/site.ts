@@ -3,11 +3,11 @@
 // Mots-clés SEO issus de la recherche du 13/07 (voir SEO.md).
 
 export const SITE = {
-  name: 'NIR Studio',
+  name: 'NIRStudio',
   domain: 'https://www.nirstudio.com',
   tagline: 'Custom NIR solutions, on demand',
   description:
-    'NIR Studio builds custom NIR spectroscopy applications on demand: chemometric model development, handheld NIR spectrometer and cloud platform. By the team behind NIRLAB, now part of 908 Devices.',
+    'NIRStudio builds custom NIR spectroscopy applications on demand: chemometric model development, handheld NIR spectrometer and cloud platform. By the team behind NIRLAB, now part of 908 Devices.',
   parent: {
     name: '908 Devices',
     url: 'https://908devices.com',
@@ -36,14 +36,14 @@ export const APPLICATIONS = [
     title: 'Agriculture',
     icon: 'leaf',
     // Mot-clé principal : portable NIR analyzer for agriculture / grain analysis
-    metaTitle: 'Portable NIR Analyzer for Agriculture & Feed | NIR Studio',
+    metaTitle: 'Portable NIR Analyzer for Agriculture & Feed | NIRStudio',
     metaDescription:
       'Measure moisture, protein, oil and starch in grain, feed and forage in seconds with a handheld NIR analyzer. Custom calibrations for your crops, without sending samples to the lab.',
     h1: 'Portable NIR analysis for agriculture and feed',
     teaser:
-      'NIR Studio builds custom models for soil, plant tissue, harvested crops and manure, trained on your fields, your crops and your local conditions. Measure nutrients, composition and quality on-site, without waiting on lab turnaround.',
+      'NIRStudio builds custom models for soil, plant tissue, harvested crops and manure, trained on your fields, your crops and your local conditions. Measure nutrients, composition and quality on-site, without waiting on lab turnaround.',
     intro:
-      'Grain traders, feed mills and farmers make quality decisions every day. NIR Studio puts a portable NIR analyzer in your pocket, calibrated for your crops and your quality parameters: results in seconds, at intake, in the field or on the line.',
+      'Grain traders, feed mills and farmers make quality decisions every day. NIRStudio puts a portable NIR analyzer in your pocket, calibrated for your crops and your quality parameters: results in seconds, at intake, in the field or on the line.',
     measures: ['Moisture', 'Protein', 'Fat & oil', 'Starch', 'Fiber (ADF/NDF)', 'Ash'],
     useCases: [
       {
@@ -65,14 +65,14 @@ export const APPLICATIONS = [
     title: 'Food',
     icon: 'apple',
     // Mots-clés : food fraud detection / food authenticity testing / NIR food quality control
-    metaTitle: 'Food Fraud Detection & Quality Control with NIR | NIR Studio',
+    metaTitle: 'Food Fraud Detection & Quality Control with NIR | NIRStudio',
     metaDescription:
       'Detect food fraud and control quality in seconds with handheld NIR spectroscopy: olive oil adulteration, incoming goods inspection, authenticity testing along your whole supply chain.',
     h1: 'Food authenticity and quality control, in seconds',
     teaser:
-      'From olive oil to salmon, cheese to meat, NIR Studio builds a model trained on your specific product and supply chain. Check quality and authenticity at intake or on the line, in seconds, without sending samples to a lab.',
+      'From olive oil to salmon, cheese to meat, NIRStudio builds a model trained on your specific product and supply chain. Check quality and authenticity at intake or on the line, in seconds, without sending samples to a lab.',
     intro:
-      'Food fraud costs the industry billions and one recall can cost a brand everything. NIR Studio builds food authenticity and quality applications on handheld NIR: verify incoming goods, monitor production and confirm the final product matches its label, without a lab.',
+      'Food fraud costs the industry billions and one recall can cost a brand everything. NIRStudio builds food authenticity and quality applications on handheld NIR: verify incoming goods, monitor production and confirm the final product matches its label, without a lab.',
     measures: ['Fat & oil content', 'Water content', 'Protein', 'Sugar', 'Adulterants', 'Authenticity match'],
     useCases: [
       {
@@ -94,14 +94,14 @@ export const APPLICATIONS = [
     title: 'Counterfeit',
     icon: 'shield',
     // Mots-clés : counterfeit detection / product authentication / brand protection
-    metaTitle: 'Counterfeit Detection & Product Authentication | NIR Studio',
+    metaTitle: 'Counterfeit Detection & Product Authentication | NIRStudio',
     metaDescription:
       'Authenticate products and detect counterfeits on-site in seconds with handheld NIR spectroscopy: pharmaceuticals, branded goods and materials. Non-destructive brand protection.',
     h1: 'Counterfeit detection and product authentication',
     teaser:
-      'NIR Studio builds detection models trained on your genuine product, from pharmaceutical products to tobacco, so counterfeits are identified on the spot, at customs, in the field or on the line. Models are updated as counterfeiting techniques evolve.',
+      'NIRStudio builds detection models trained on your genuine product, from pharmaceutical products to tobacco, so counterfeits are identified on the spot, at customs, in the field or on the line. Models are updated as counterfeiting techniques evolve.',
     intro:
-      'Counterfeit medicines endanger patients and fake goods erode brands. NIR Studio builds authentication applications on handheld NIR: scan a tablet, a package or a material and know in seconds whether it matches the genuine reference, non-destructively.',
+      'Counterfeit medicines endanger patients and fake goods erode brands. NIRStudio builds authentication applications on handheld NIR: scan a tablet, a package or a material and know in seconds whether it matches the genuine reference, non-destructively.',
     measures: ['Authenticity match', 'Formulation fingerprint', 'API presence', 'Packaging materials', 'Adulterants'],
     useCases: [
       {
@@ -123,14 +123,14 @@ export const APPLICATIONS = [
     title: 'Industrial',
     icon: 'layers',
     // Mots-clés : industrial NIR quality control / polymer identification / raw material testing
-    metaTitle: 'Industrial NIR Quality Control: Polymers & Raw Materials | NIR Studio',
+    metaTitle: 'Industrial NIR Quality Control: Polymers & Raw Materials | NIRStudio',
     metaDescription:
       'Check polymers, raw materials and cosmetics for identity and consistency in seconds with handheld NIR. Custom models trained on your process, without the cost of a full process analyzer.',
     h1: 'Industrial quality control, on the line and in the warehouse',
     teaser:
-      'From polymers to raw materials and cosmetics, NIR Studio builds models for instant quality control, catching off-spec material before it becomes a shipped batch, checking homogeneity and mixes, without the cost of a full process analyzer.',
+      'From polymers to raw materials and cosmetics, NIRStudio builds models for instant quality control, catching off-spec material before it becomes a shipped batch, checking homogeneity and mixes, without the cost of a full process analyzer.',
     intro:
-      'Off-spec material found after shipping costs more than the incoming check that could have caught it. NIR Studio builds industrial quality control applications on handheld NIR: verify polymers, raw materials and cosmetics for identity, homogeneity and mix ratio, on-site, without the cost of a full process analyzer.',
+      'Off-spec material found after shipping costs more than the incoming check that could have caught it. NIRStudio builds industrial quality control applications on handheld NIR: verify polymers, raw materials and cosmetics for identity, homogeneity and mix ratio, on-site, without the cost of a full process analyzer.',
     measures: ['Identity confirmation', 'Homogeneity', 'Mix ratio', 'Moisture', 'Contaminants', 'Batch consistency'],
     useCases: [
       {
@@ -163,7 +163,7 @@ export const HARDWARE = [
   },
   {
     title: 'Custom models built in',
-    text: 'Your NIR Studio application ships pre-loaded on the device: your substances, your matrices, your thresholds.',
+    text: 'Your NIRStudio application ships pre-loaded on the device: your substances, your matrices, your thresholds.',
     icon: 'check',
   },
 ];
@@ -172,30 +172,35 @@ export const HARDWARE = [
 export const HW_STATS = [
   { value: 'IP67', label: 'Dust and water resistant' },
   { value: '< 10 s', label: 'From scan to result' },
-  { value: 'ISO 17025', label: 'Proven system accuracy' },
+  { value: 'ISO 17025', label: 'Accreditation possible to obtain' },
   { value: '0 wires', label: 'Fully wireless workflow' },
 ];
 
 export const STEPS = [
   {
-    n: '01',
-    title: 'Scan and send',
-    text: 'You scan each sample with the NIR Studio device. At the same time, you send that same sample to a lab for a certified reference analysis.',
+    title: 'Step 1 — Scan and send',
+    text: 'You scan each sample with the NIRStudio device. At the same time, you send that same sample to a lab for a certified reference analysis.',
   },
   {
-    n: '02',
-    title: 'We build your model',
+    title: 'Step 2 — We build your model',
     text: 'We match each device scan to its certified lab result. From these pairs, we build and validate a model trained specifically on your material.',
   },
   {
-    n: '03',
-    title: 'Ready to use',
-    text: 'The validated model is loaded into the NIR Studio ecosystem, where your team can access it through the app, ready to use in the field.',
+    title: 'Step 3 — Ready to use',
+    text: 'The validated model is loaded into the NIRStudio ecosystem, where your team can access it through the app — ready to use in the field.',
   },
 ];
 
+// Features du portail web (partagées entre la page Agriculture et la page Solution).
+export const PORTAL_FEATURES = [
+  { title: 'Data analytics & history', text: 'Track, manage and compare scans across devices in one place.' },
+  { title: 'User management', text: 'Manage organizations, users and access controls with ease.' },
+  { title: 'Simple data management', text: 'Simplified tools to organize, edit and maintain your data.' },
+  { title: 'Export & PDF reports', text: 'Export your data in various formats or save scan results as PDF.' },
+];
+
 export const QUOTE = {
-  text: 'It is unique to the world to be capable of generating data with a handheld device that is on equal level with the data of a gold standard laboratory. We have proven this with the ISO 17025 certification of the NIRLAB system.',
+  text: 'It is unique to the world to be capable of generating data with a handheld device that is on equal level with the data of a gold standard laboratory. We have proven this with the ISO 17025 certification of the NIRStudio system.',
   author: 'Prof. Pierre Esseiva',
-  role: 'NIRLAB, Co-Founder',
+  role: 'NIRStudio',
 };

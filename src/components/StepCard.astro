@@ -1,16 +1,14 @@
 ---
-// Carte d'étape du process (01 Define / 02 Develop / 03 Deploy).
+// Carte d'étape du process (Step 1 / Step 2 / Step 3, numérotation dans le titre).
 interface Props {
-  n: string;
   title: string;
   text: string;
 }
-const { n, title, text } = Astro.props;
+const { title, text } = Astro.props;
 ---
 
 <article class="stepcard reveal">
   <span class="stepcard__bar" aria-hidden="true"></span>
-  <span class="stepcard__n" aria-hidden="true">{n}</span>
   <h3>{title}</h3>
   <p>{text}</p>
 </article>
@@ -49,16 +47,6 @@ const { n, title, text } = Astro.props;
   .stepcard:hover .stepcard__bar {
     width: 100%;
     border-radius: 0;
-  }
-  .stepcard__n {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 3.75rem;
-    line-height: 1;
-    background: linear-gradient(135deg, var(--blue) 0%, #7fb0ff 90%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
   }
   .stepcard p {
     color: var(--text-muted);

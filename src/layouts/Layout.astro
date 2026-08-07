@@ -19,12 +19,12 @@ const { title, description } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
 const canonical = SITE.domain + path;
 
-// Entité Organization : NIR Studio, rattachée à 908 Devices.
+// Entité Organization : NIRStudio, rattachée à 908 Devices.
 const orgLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   '@id': SITE.domain + '/#org',
-  name: 'NIR Studio',
+  name: 'NIRStudio',
   url: SITE.domain,
   description: SITE.description,
   parentOrganization: {

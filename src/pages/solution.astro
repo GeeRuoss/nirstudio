@@ -1,62 +1,214 @@
 ---
+// Page Solution générique : structure demandée par Viktoriia (07/08).
+// Intro + 4 features, Why it matters, App & portal (repris d'Agriculture),
+// Hardware highlights, FAQ génériquisée, transition vers les industries.
 import Layout from '../layouts/Layout.astro';
 import { withBase } from '../lib/url';
 import PageHeader from '../components/PageHeader.astro';
-import StepCard from '../components/StepCard.astro';
 import SectionHead from '../components/SectionHead.astro';
 import ContactCta from '../components/ContactCta.astro';
-import { STEPS } from '../data/site';
+import AppCard from '../components/AppCard.astro';
+import Icon from '../components/Icon.astro';
+import { APPLICATIONS, PORTAL_FEATURES } from '../data/site';
+
+const FEATURES = [
+  {
+    icon: 'flask',
+    title: 'On-site analysis',
+    text: "Instant results for the parameters that define your material's quality, composition and authenticity, measured where the sample is, not after a lab turnaround.",
+  },
+  {
+    icon: 'check',
+    title: 'No sample preparation',
+    text: 'Materials can be analyzed without any sample preparation, at the press of one button. Scan directly in the field, on the line or at intake.',
+  },
+  {
+    icon: 'bolt',
+    title: 'Instant results',
+    text: 'The device connects to the mobile app via Bluetooth and scan results appear in a user-friendly app (iOS and Android) within seconds.',
+  },
+  {
+    icon: 'sparkles',
+    title: 'Tailored to your needs',
+    text: 'Every industry faces unique challenges. We build custom models trained on your specific material and supply chain, not an industry average.',
+  },
+];
+
+// Stats condensées du hardware (l'ISO 17025 vit sur la section Hardware complète).
+const HW_HIGHLIGHTS = [
+  { value: 'IP67', label: 'Dust and water resistant' },
+  { value: '< 10 s', label: 'From scan to result' },
+  { value: '0 wires', label: 'Fully wireless workflow' },
+];
+
+const FAQS = [
+  {
+    q: 'Can I use the same device for different types of samples?',
+    a: 'Yes. The same device can analyze multiple sample types. The key is selecting the right calibration model in the app and following basic sample preparation guidelines.',
+  },
+  {
+    q: 'Do I need an internet connection to scan samples?',
+    a: 'No. The device and app work fully offline for scanning. Once you have internet access, results sync to your personal web portal for storage and analysis.',
+  },
+  {
+    q: 'How accurate are the results compared to laboratory analysis?',
+    a: 'Our models are built from thousands of lab-analyzed samples. While NIR is not a replacement for certified laboratory testing in all cases, it provides fast, affordable and reliable values for on-site decision making.',
+  },
+  {
+    q: 'Can I build my own calibrations for my specific material?',
+    a: 'Yes. We offer custom calibration development, ideal for companies working with specific materials, regions or products.',
+  },
+  {
+    q: 'How can I get technical support?',
+    a: 'We offer technical support and are happy to share more details about our solution through email, phone calls or video conferences. Get in touch through our contact form.',
+  },
+];
 ---
 
 <Layout
-  title="Custom NIR Application Development | NIR Studio Solution"
-  description="From feasibility study to deployed application: NIR Studio develops custom chemometric models for your substances and matrices, delivered on a handheld NIR spectrometer with cloud platform."
+  title="From Your Material to Your Result | NIRStudio Solution"
+  description="A portable, real-time NIR analysis toolkit built around your material: on-site measurements without sample preparation, instant results in the mobile app and detailed analytics in the web portal."
 >
   <PageHeader
     kicker="Solution"
-    title="Your application, built by our chemometricians"
-    lead="NIR Studio is the on-demand lab of 908 Devices: we turn your measurement problem into a validated NIR application, from feasibility study to production."
+    title="From your material to your result"
+    lead="A portable, real-time analysis toolkit built around your material or substance. Measure the parameters that matter directly on-site, and make faster, data-driven decisions with the support of our integrated app and web portal."
   />
 
   <section class="section">
     <div class="container">
-      <div class="reveal">
-        <SectionHead
-          kicker="How it works"
-          title="From problem to deployment"
-          lead="A proven three-step process, with your team involved at every milestone."
-        />
-      </div>
-      <div class="steps">
-        {STEPS.map((step) => <StepCard n={step.n} title={step.title} text={step.text} />)}
+      <div class="features">
+        {
+          FEATURES.map((f) => (
+            <article class="feature reveal">
+              <span class="feature__icon">
+                <Icon name={f.icon} size={24} />
+              </span>
+              <h3>{f.title}</h3>
+              <p>{f.text}</p>
+            </article>
+          ))
+        }
       </div>
     </div>
   </section>
 
   <section class="section section--gray">
-    <div class="container solution-grid">
+    <div class="container benefits">
       <div class="reveal">
         <SectionHead
-          kicker="What you get"
-          title="A complete, validated application"
+          kicker="Why it matters"
+          title="Data-driven decisions, wherever you work"
         />
-        <ul class="checklist">
-          <li>Feasibility study on your real samples before you commit</li>
-          <li>Custom chemometric model, built and validated on lab-grade reference data</li>
-          <li>Handheld device pre-loaded with your application</li>
-          <li>Mobile and web app tuned to your workflow and thresholds</li>
-          <li>Cloud platform for your team: measurements, users, devices</li>
-          <li>Model updates as your substances and matrices evolve</li>
-        </ul>
+        <div class="benefits__text">
+          <p>
+            Fast, accurate analysis of the parameters that matter lets you decide on the spot,
+            not two days later. Every scan is collected over time, giving you a complete view
+            of your process.
+          </p>
+          <p>
+            That data flows into the web portal for detailed analytics: trend analysis, resource
+            optimization and more precise forecasting.
+          </p>
+        </div>
       </div>
       <img
         src={withBase('/img/solution-olives.jpg')}
-        alt="Handheld NIRLAB spectrometer with the mobile app showing oil and water content of an olive sample"
+        alt="Handheld NIR spectrometer with the mobile app showing oil and water content of an olive sample"
         width="1200"
         height="1000"
         loading="lazy"
-        class="solution-img reveal"
+        class="benefits__img reveal"
       />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead
+          kicker="App & portal"
+          title="Results on your phone, analytics in the cloud"
+          lead="The mobile app (iOS and Android) pairs automatically via Bluetooth: point, press, and results appear within seconds. Multiple scans of one sample are averaged for better accuracy. The digital portal turns every scan into manageable data."
+        />
+      </div>
+      <div class="appshots reveal">
+        <img src={withBase('/img/agri/app-screen-1.jpg')} alt="Mobile app showing scan results for a sample" width="1280" height="1110" loading="lazy" />
+        <img src={withBase('/img/agri/app-screen-2.jpg')} alt="Mobile app showing measured parameters of a sample" width="1280" height="1110" loading="lazy" />
+        <img src={withBase('/img/agri/app-screen-3.jpg')} alt="Mobile app showing scan history" width="1280" height="1110" loading="lazy" />
+      </div>
+      <div class="portal">
+        <div class="portal__grid">
+          {
+            PORTAL_FEATURES.map((f) => (
+              <article class="portal__card reveal">
+                <h3>{f.title}</h3>
+                <p>{f.text}</p>
+              </article>
+            ))
+          }
+        </div>
+        <img
+          src={withBase('/img/agri/portal-dashboard.png')}
+          alt="Web portal dashboard with analytics across scans and devices"
+          width="1024"
+          height="932"
+          loading="lazy"
+          class="portal__img reveal"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="container">
+      <div class="hwband reveal">
+        {
+          HW_HIGHLIGHTS.map((s) => (
+            <div class="hwband__stat">
+              <span class="hwband__value">{s.value}</span>
+              <span class="hwband__label">{s.label}</span>
+            </div>
+          ))
+        }
+        <a href={withBase('/hardware')} class="btn btn--ghost hwband__btn">Explore the hardware</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead kicker="FAQ" title="Frequently asked questions" />
+      </div>
+      <div class="faq reveal">
+        {
+          FAQS.map((f) => (
+            <details class="faq__item">
+              <summary>
+                {f.q}
+                <span class="faq__icon" aria-hidden="true" />
+              </summary>
+              <p>{f.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--gray">
+    <div class="container">
+      <div class="reveal">
+        <SectionHead kicker="Industries" title="Built for your field" />
+      </div>
+      <div class="others">
+        {
+          APPLICATIONS.map((app) => (
+            <AppCard title={app.title} text={app.teaser} icon={app.icon} href={withBase(`/applications/${app.slug}`)} />
+          ))
+        }
+      </div>
     </div>
   </section>
 
@@ -64,55 +216,238 @@ import { STEPS } from '../data/site';
 </Layout>
 
 <style>
-  .steps {
+  /* ---------- Features ---------- */
+  .features {
     display: grid;
     gap: 1.25rem;
   }
-  .solution-grid {
+  .feature {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 2rem 1.75rem;
+    display: grid;
+    gap: 0.7rem;
+    align-content: start;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .feature:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  .feature__icon {
+    display: inline-flex;
+    width: 52px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(3, 96, 232, 0.1);
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+  .feature p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  /* ---------- Why it matters ---------- */
+  .benefits {
     display: grid;
     gap: 3rem;
     align-items: center;
   }
-  .solution-img {
+  .benefits :global(.section-head) {
+    margin-bottom: 1rem;
+  }
+  .benefits__text {
+    display: grid;
+    gap: 1rem;
+    color: var(--text-muted);
+    max-width: 38rem;
+  }
+  .benefits__img {
     width: min(460px, 85%);
     justify-self: center;
     height: auto;
   }
-  .checklist {
+
+  /* ---------- App & portal ---------- */
+  .appshots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin-bottom: clamp(3rem, 6vw, 4.5rem);
+  }
+  .appshots img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
+  }
+  .portal {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  .portal__grid {
+    display: grid;
+    gap: 1.25rem;
+  }
+  .portal__card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 1.6rem 1.5rem;
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .portal__card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  .portal__card h3 {
+    font-size: 1.05rem;
+  }
+  .portal__card p {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+  .portal__img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-card);
+    border: 1px solid var(--border);
+  }
+
+  /* ---------- Hardware highlights ---------- */
+  .hwband {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    justify-items: start;
+  }
+  .hwband__stat {
+    display: grid;
+    gap: 0.3rem;
+  }
+  .hwband__value {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    line-height: 1;
+    background: linear-gradient(135deg, var(--blue) 0%, #7fb0ff 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .hwband__label {
+    font-size: 0.9rem;
+    color: #9ca3af;
+  }
+  .hwband__btn {
+    justify-self: start;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq {
     display: grid;
     gap: 0.9rem;
-    margin-top: 0.5rem;
+    max-width: 52rem;
   }
-  .checklist li {
+  .faq__item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 0;
+    overflow: hidden;
+    transition: border-color 0.25s ease;
+  }
+  .faq__item[open] {
+    border-color: rgba(3, 96, 232, 0.45);
+  }
+  .faq__item summary {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    cursor: pointer;
+    padding: 1.3rem 1.6rem;
+    font-weight: 700;
+    font-size: 1.02rem;
+  }
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq__icon {
     position: relative;
-    padding-left: 2rem;
-    color: var(--text-muted);
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
   }
-  .checklist li::before {
+  .faq__icon::before,
+  .faq__icon::after {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0.3em;
-    width: 18px;
-    height: 18px;
-    border-radius: 6px;
+    inset: 50% auto auto 50%;
+    width: 14px;
+    height: 2.5px;
+    border-radius: 2px;
     background: var(--blue);
-    /* Coche blanche inline (SVG data-URI avec xmlns, cf. règle assets) */
-    mask: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
-    background-size: 12px;
-    background-position: center;
-    background-repeat: no-repeat;
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s ease;
+  }
+  .faq__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+  .faq__item[open] .faq__icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  .faq__item p {
+    padding: 0 1.6rem 1.4rem;
+    color: var(--text-muted);
+  }
+
+  /* ---------- Industries ---------- */
+  .others {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 700px) {
+    .appshots {
+      grid-template-columns: 1fr;
+    }
   }
   @media (min-width: 900px) {
-    .steps {
-      grid-template-columns: repeat(3, 1fr);
+    .features {
+      grid-template-columns: repeat(2, 1fr);
     }
-    .solution-grid {
-      grid-template-columns: 1.15fr 1fr;
+    .benefits {
+      grid-template-columns: 1.1fr 1fr;
     }
-    .solution-img {
-      width: 100%;
+    .benefits__img {
+      width: min(460px, 100%);
+    }
+    .portal {
+      grid-template-columns: 1fr 1.2fr;
+    }
+    .hwband {
+      grid-template-columns: repeat(3, 1fr) auto;
+    }
+    .others {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .features {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 </style>

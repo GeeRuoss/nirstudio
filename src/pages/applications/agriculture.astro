@@ -8,7 +8,7 @@ import SectionHead from '../../components/SectionHead.astro';
 import ContactCta from '../../components/ContactCta.astro';
 import AppCard from '../../components/AppCard.astro';
 import Icon from '../../components/Icon.astro';
-import { APPLICATIONS } from '../../data/site';
+import { APPLICATIONS, PORTAL_FEATURES } from '../../data/site';
 
 const others = APPLICATIONS.filter((a) => a.slug !== 'agriculture');
 const heroBg = `--agri-hero: url('${withBase('/img/agri/agri-hero.jpg')}')`;
@@ -123,13 +123,6 @@ const NIRLIGHT_SPECS = [
   'Up to 8 hours continuous operation, USB-C fast charging',
 ];
 
-const PORTAL_FEATURES = [
-  { title: 'Data analytics & history', text: 'Track, manage and compare scans across devices in one place.' },
-  { title: 'User management', text: 'Manage organizations, users and access controls with ease.' },
-  { title: 'Simple data management', text: 'Simplified tools to organize, edit and maintain your data.' },
-  { title: 'Export & PDF reports', text: 'Export your data in various formats or save scan results as PDF.' },
-];
-
 const FAQS = [
   {
     q: 'Can I use the same device for different types of samples like soil, manure, and plant tissue?',
@@ -155,7 +148,7 @@ const FAQS = [
 ---
 
 <Layout
-  title="Portable NIR Analyzer for Agriculture & Feed | NIR Studio"
+  title="Portable NIR Analyzer for Agriculture & Feed | NIRStudio"
   description="Instant on-site analysis of soil, crops, feed, silages, manure and fertilizer with a handheld NIR analyzer. Custom calibrations, mobile app and web portal: smarter farming decisions anywhere."
 >
   <header class="agrihero" style={heroBg}>

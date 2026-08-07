@@ -26,16 +26,13 @@ import { SITE } from '../data/site';
       <div class="cta__content">
         <h2>Tell us what you need to&nbsp;measure</h2>
         <p>
-          NIR Studio is made for professionals who want lab-grade answers in the field.
-          Get in touch through 908 Devices and describe your use case.
+          NIRStudio is made for professionals who want lab-grade answers in the field.
+          Get in touch through our contact form and describe your use case.
         </p>
         <div class="cta__buttons">
           <a href={SITE.contactUrl} class="btn cta__primary" target="_blank" rel="noopener">
             Contact us
             <Icon name="arrow" size={18} />
-          </a>
-          <a href={SITE.parent.url} class="btn cta__ghost" target="_blank" rel="noopener">
-            Visit 908devices.com
           </a>
         </div>
       </div>
@@ -92,15 +89,5 @@ import { SITE } from '../data/site';
     transform: translateY(-2px);
     background: #f2f7ff;
     box-shadow: 0 16px 34px rgba(2, 30, 80, 0.45);
-  }
-  .cta__ghost {
-    border: 1.5px solid rgba(255, 255, 255, 0.45);
-    color: var(--white);
-    background: rgba(255, 255, 255, 0.05);
-  }
-  .cta__ghost:hover {
-    transform: translateY(-2px);
-    border-color: var(--white);
-    background: rgba(255, 255, 255, 0.12);
   }
 </style>
