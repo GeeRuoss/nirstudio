@@ -1,7 +1,8 @@
 ---
-// Bandeau final de contact : grande carte en dégradé bleu marque, sur toutes les pages.
+// Bandeau final de contact : grande carte en dégradé bleu marque, sur les pages
+// intérieures. Le bouton mène au formulaire de l'accueil (#contact).
 import Icon from './Icon.astro';
-import { SITE } from '../data/site';
+import { withBase } from '../lib/url';
 ---
 
 <section class="section" id="contact">
@@ -30,7 +31,7 @@ import { SITE } from '../data/site';
           Get in touch through our contact form and describe your use case.
         </p>
         <div class="cta__buttons">
-          <a href={SITE.contactUrl} class="btn cta__primary" target="_blank" rel="noopener">
+          <a href={withBase('/#contact')} class="btn cta__primary">
             Contact us
             <Icon name="arrow" size={18} />
           </a>

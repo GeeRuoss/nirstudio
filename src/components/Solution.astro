@@ -1,9 +1,34 @@
 ---
-// Section Solution : intro on-demand + photo de scan + lien vers la page /solution
-// (les 3 étapes "Adding your material" vivent désormais sur /solution).
+// Section Solution : la carte du système en 4 maillons (spec Vi 10/08).
+// Le lede reste court ; l'explication vit dans la chaîne, le hardware est
+// explicitement le maillon 2 avec un lien vers /hardware.
 import SectionHead from './SectionHead.astro';
 import { withBase } from '../lib/url';
 import Icon from './Icon.astro';
+
+const CHAIN = [
+  {
+    icon: 'flask',
+    title: 'Your reference data',
+    text: 'Real samples from the real conditions your team works in.',
+  },
+  {
+    icon: 'bolt',
+    title: 'NIRStudio device',
+    text: 'A best-in-class NIR spectrometer scans them.',
+    link: { label: 'See the hardware that powers this', href: '/hardware' },
+  },
+  {
+    icon: 'sparkles',
+    title: 'Custom model',
+    text: 'Advanced modeling turns those scans into a model trained on your material, not an industry average.',
+  },
+  {
+    icon: 'layers',
+    title: 'App / result',
+    text: 'User-friendly software turns every scan into an accurate result, on-site, in real time.',
+  },
+];
 ---
 
 <section class="section" id="solution">
@@ -12,7 +37,7 @@ import Icon from './Icon.astro';
       <SectionHead
         kicker="Solution"
         title="From your data to your result"
-        lead="It begins with your reference data — the real samples, the real conditions your team works in. A best-in-class NIR spectrometer scans them. Advanced modeling techniques turn those scans into a model trained on your material, not an industry average. And user-friendly software puts that model to work, turning every scan into an accurate result, on-site, in real time."
+        lead="It begins with your reference data — the real samples, the real conditions your team works in."
       />
       <a href={withBase('/solution')} class="intro__more">
         See how we build your model
@@ -28,6 +53,33 @@ import Icon from './Icon.astro';
       class="intro__img reveal"
     />
   </div>
+  <div class="container">
+    <ol class="chain">
+      {
+        CHAIN.map((c, i) => (
+          <li class="chain__node reveal">
+            <span class="chain__arrow" aria-hidden="true">
+              <Icon name="arrow" size={20} />
+            </span>
+            <span class="chain__badge">
+              <span class="chain__n">{i + 1}</span>
+              <span class="chain__icon">
+                <Icon name={c.icon} size={22} />
+              </span>
+            </span>
+            <h3>{c.title}</h3>
+            <p>{c.text}</p>
+            {c.link && (
+              <a href={withBase(c.link.href)} class="chain__link">
+                {c.link.label}
+                <Icon name="arrow" size={16} />
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </div>
 </section>
 
 <style>
@@ -35,6 +87,7 @@ import Icon from './Icon.astro';
     display: grid;
     gap: 3rem;
     align-items: center;
+    margin-bottom: clamp(3rem, 6vw, 5rem);
   }
   /* Le SectionHead gère sa propre marge basse : on l'annule dans la grille intro */
   .intro :global(.section-head) {
@@ -59,9 +112,102 @@ import Icon from './Icon.astro';
     border-radius: var(--radius-card);
     border: 1px solid var(--border);
   }
+
+  /* ---------- Chaîne système ---------- */
+  .chain {
+    list-style: none;
+    display: grid;
+    gap: 1.25rem;
+    padding: 0;
+    margin: 0;
+    counter-reset: none;
+  }
+  .chain__node {
+    position: relative;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    padding: 2rem 1.75rem;
+    display: grid;
+    gap: 0.65rem;
+    align-content: start;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .chain__node:hover {
+    transform: translateY(-4px);
+    border-color: rgba(3, 96, 232, 0.45);
+    box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
+  }
+  .chain__badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .chain__n {
+    display: inline-flex;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    background: var(--blue);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .chain__icon {
+    display: inline-flex;
+    width: 46px;
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 13px;
+    background: rgba(3, 96, 232, 0.1);
+    color: var(--blue);
+  }
+  .chain__node h3 {
+    font-size: 1.1rem;
+  }
+  .chain__node p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+  .chain__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 0.4rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--blue);
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+  .chain__link:hover {
+    color: var(--blue-dark, #023f9e);
+    gap: 0.7rem;
+  }
+  /* Flèche de liaison entre les maillons */
+  .chain__arrow {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: -1.05rem;
+    transform: translateY(-50%);
+    color: var(--blue);
+    opacity: 0.55;
+  }
+
   @media (min-width: 900px) {
     .intro {
       grid-template-columns: 1.2fr 1fr;
+    }
+    .chain {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+    .chain__node + .chain__node .chain__arrow {
+      display: inline-flex;
     }
   }
 </style>

@@ -15,7 +15,11 @@ const { standalone = false } = Astro.props;
 <section class="section section--dark" id="hardware">
   <div class="container">
     <div class="hardware__head reveal">
-      <SectionHead kicker="Hardware" title="One device for multiple applications" />
+      <SectionHead
+        kicker="Hardware"
+        title="The hardware behind your NIRStudio model"
+        lead="Ultra-light, robust, wireless and IP67 rated: the device your NIRStudio application ships on."
+      />
       {
         !standalone && (
           <a href={withBase('/hardware')} class="hardware__more">
@@ -64,13 +68,7 @@ const { standalone = false } = Astro.props;
 </section>
 
 <style>
-  .hardware__head {
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
+  /* Le lien vient APRÈS l'intro, pas avant le copy (spec Vi 10/08) */
   .hardware__head :global(.section-head) {
     margin-bottom: 0;
   }
@@ -78,9 +76,9 @@ const { standalone = false } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-weight: 600;
+    font-weight: 700;
     color: #5e97f2;
-    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
     transition: color 0.2s ease, gap 0.2s ease;
   }
   .hardware__more:hover {

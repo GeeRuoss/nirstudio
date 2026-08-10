@@ -29,8 +29,10 @@ const isActive = (href: string) => href !== '/#contact' && path.startsWith(href)
       }
     </nav>
 
-    <a href={SITE.parent.url} class="nav__parent" target="_blank" rel="noopener">
-      A 908 Devices Company
+    <a href={SITE.parent.url} class="nav__parent" target="_blank" rel="noopener" aria-label="908 Devices, parent company">
+      <span class="nav__parent-label">A</span>
+      <img src={withBase('/img/908devices-logo-white.png')} alt="908 Devices" width="640" height="108" />
+      <span class="nav__parent-label">company</span>
     </a>
   </div>
 </header>
@@ -110,18 +112,29 @@ const isActive = (href: string) => href !== '/#contact' && path.startsWith(href)
     transform: scaleX(1);
   }
   .nav__parent {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
     font-size: 0.78rem;
     font-weight: 600;
     color: #94a3b8;
-    border: 1px solid var(--border-dark);
-    border-radius: var(--radius-pill);
-    padding: 0.45rem 0.9rem;
     white-space: nowrap;
-    transition: color 0.2s ease, border-color 0.2s ease;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+  .nav__parent img {
+    display: block;
+    height: 20px;
+    width: auto;
   }
   .nav__parent:hover {
-    color: var(--white);
-    border-color: var(--blue);
+    opacity: 1;
+  }
+  /* En très petit écran on ne garde que le logo */
+  @media (max-width: 480px) {
+    .nav__parent-label {
+      display: none;
+    }
   }
   @media (min-width: 900px) {
     .nav__links {

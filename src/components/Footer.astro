@@ -12,13 +12,16 @@ const year = new Date().getFullYear();
           <polygon points="46.06 0 46.06 26.6 0 53.19 0 26.59 46.06 0" />
           <polygon points="92.13 0 92.13 26.6 46.07 53.19 46.06 53.19 46.06 26.6 92.13 0" />
         </svg>
-        NIR<b>Studio</b>
+        <span class="footer__name">NIR<b>STUDIO</b></span>
       </span>
       <p>
         NIRStudio builds custom NIR spectroscopy applications, on demand: chemometric
         modeling, a handheld spectrometer and a cloud platform, delivered as one system.
         By the team behind NIRLAB, part of 908 Devices.
       </p>
+      <a href={SITE.parent.url} class="footer__parent" target="_blank" rel="noopener" aria-label="908 Devices, parent company">
+        <img src={withBase('/img/908devices-logo-white.png')} alt="908 Devices" width="640" height="108" />
+      </a>
     </div>
 
     <nav class="footer__col" aria-label="Pages">
@@ -29,7 +32,7 @@ const year = new Date().getFullYear();
     <nav class="footer__col" aria-label="Company">
       <span class="footer__title">Company</span>
       <a href={SITE.parent.url} target="_blank" rel="noopener">908devices.com</a>
-      <a href={SITE.contactUrl} target="_blank" rel="noopener">Contact</a>
+      <a href={withBase('/#contact')}>Contact</a>
     </nav>
   </div>
 
@@ -51,23 +54,40 @@ const year = new Date().getFullYear();
     gap: 2.5rem;
     padding-bottom: 3rem;
   }
+  /* Wordmark identique à la nav : NIRSTUDIO d'un seul bloc (pas d'item flex séparé) */
   .footer__logo {
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
+    color: var(--white);
+  }
+  .footer__name {
     font-family: var(--font-display);
     font-weight: 400;
     font-size: 1.2rem;
     letter-spacing: 0.04em;
-    color: var(--white);
   }
-  .footer__logo b {
+  .footer__name b {
     font-weight: 700;
   }
   .footer__brand p {
     margin-top: 1rem;
     max-width: 24rem;
     line-height: 1.6;
+  }
+  .footer__parent {
+    display: inline-block;
+    margin-top: 1.5rem;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+  .footer__parent:hover {
+    opacity: 1;
+  }
+  .footer__parent img {
+    display: block;
+    height: 26px;
+    width: auto;
   }
   .footer__col {
     display: grid;
