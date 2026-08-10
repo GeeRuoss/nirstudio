@@ -1,44 +1,29 @@
 /* ============================================================
    Design system nirstudio.com
-   Marque NIRLAB 2026 : Crystal Bold (titres) + Manrope (corps),
-   bleu #0360E8, hero sombre. Fonts officielles du kit client.
+   Charte 908 Devices (Corporate Brand Guide) : Lato only,
+   Deep Blue #0b2939 / Medium Blue #0074C2 / Orange #F37137.
    ============================================================ */
 
-/* Chemins RELATIFS obligatoires : Vite fingerprinte et applique le base path
-   (GitHub Pages sert sous /nirstudio/). Les fichiers sont gitignorés,
-   injectés au build depuis le repo privé nirstudio-assets. */
-@font-face {
-  font-family: 'Crystal';
-  src: url('../fonts/Crystal-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Crystal';
-  src: url('../fonts/Crystal-Book.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
-  /* Crystal pour le display, Manrope pour tout le reste */
-  --font-display: 'Crystal', 'Manrope Variable', system-ui, sans-serif;
-  --font-body: 'Manrope Variable', system-ui, sans-serif;
+  /* Lato partout (Black pour le display, Regular pour le corps) */
+  --font-display: 'Lato', system-ui, sans-serif;
+  --font-body: 'Lato', system-ui, sans-serif;
 
-  /* Couleurs (extraites du site live nirlab.com) */
-  --blue: #0360e8;
-  --blue-dark: #024bb8;
-  --ink: #0a0a0c;          /* hero et sections sombres */
-  --ink-soft: #14141a;     /* cartes sur fond sombre */
-  --text: #111827;         /* corps de texte sur blanc */
-  --text-muted: #6b7280;
-  --text-on-dark: #e5e7eb;
+  /* Palette officielle 908 Devices (Brand Guide p.14-15) */
+  --blue: #0074c2;         /* 908 Medium Blue */
+  --blue-dark: #005a96;
+  --lightblue: #72bee6;    /* 908 Light Blue */
+  --orange: #f37137;       /* 908 Orange */
+  --orange-dark: #d95a20;
+  --ink: #0b2939;          /* 908 Deep Blue : hero et sections sombres */
+  --ink-soft: #11374d;     /* cartes sur fond sombre */
+  --text: #16222c;         /* corps de texte sur blanc */
+  --text-muted: #445362;   /* 908 Grey */
+  --text-on-dark: #e8edf2;
   --white: #ffffff;
-  --gray-bg: #f6f7f9;
-  --border: #e5e7eb;
-  --border-dark: #26262e;
+  --gray-bg: #f5f5f5;      /* 908 Grey 2 */
+  --border: #e3e7eb;
+  --border-dark: #1e4258;
 
   /* Rayons : boutons pill comme nirlab.com */
   --radius-card: 16px;
@@ -97,9 +82,9 @@ button {
 h1,
 h2 {
   font-family: var(--font-display);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
   text-wrap: balance;
 }
 h1 {
@@ -154,7 +139,7 @@ p {
   margin-bottom: 1rem;
 }
 .section--dark .kicker {
-  color: #5e97f2;
+  color: var(--lightblue);
 }
 .lead {
   font-size: clamp(1.05rem, 1.8vw, 1.25rem);
@@ -198,19 +183,20 @@ p {
 }
 
 /* Primaire : dégradé bleu avec relief et ombre portée colorée */
+/* CTA orange : la couleur signature 908 sur les actions principales */
 .btn--primary {
   color: var(--white);
-  background: linear-gradient(180deg, #2f7bf2 0%, var(--blue) 55%, #0250c4 100%);
+  background: linear-gradient(180deg, #f8875a 0%, var(--orange) 55%, #e05f24 100%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    0 8px 20px rgba(3, 96, 232, 0.32);
+    0 8px 20px rgba(243, 113, 55, 0.35);
 }
 .btn--primary:hover {
   transform: translateY(-2px);
-  background: linear-gradient(180deg, #3f88f7 0%, #1a70ef 55%, #0357d3 100%);
+  background: linear-gradient(180deg, #fa9163 0%, #f57f47 55%, #e8672c 100%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.32),
-    0 14px 30px rgba(3, 96, 232, 0.42);
+    0 14px 30px rgba(243, 113, 55, 0.45);
 }
 /* Sheen : reflet qui balaie le bouton au hover */
 .btn--primary::after {
@@ -255,7 +241,7 @@ p {
   transform: translateY(-2px);
   border-color: var(--blue);
   color: var(--blue);
-  background: rgba(3, 96, 232, 0.05);
+  background: rgba(0, 116, 194, 0.05);
   box-shadow: 0 8px 20px rgba(10, 10, 20, 0.07);
 }
 

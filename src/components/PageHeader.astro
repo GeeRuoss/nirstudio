@@ -46,7 +46,7 @@ const { kicker, title, lead } = Astro.props;
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(55% 90% at 88% 8%, rgba(3, 96, 232, 0.28) 0%, transparent 60%);
+    background: radial-gradient(55% 90% at 88% 8%, rgba(0, 116, 194, 0.28) 0%, transparent 60%);
     pointer-events: none;
   }
   .pagehead__inner {
@@ -60,7 +60,7 @@ const { kicker, title, lead } = Astro.props;
     animation: pagehead-rise 0.6s ease both;
   }
   .pagehead .kicker {
-    color: #5e97f2;
+    color: var(--lightblue);
   }
   .pagehead__lead {
     margin-top: 1.5rem;

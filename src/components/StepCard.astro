@@ -31,7 +31,7 @@ const { title, text } = Astro.props;
   }
   .stepcard:hover {
     transform: translateY(-4px);
-    border-color: rgba(3, 96, 232, 0.45);
+    border-color: rgba(0, 116, 194, 0.45);
     box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
   }
   /* Filet dégradé en tête de carte, s'étire au hover */
@@ -40,7 +40,7 @@ const { title, text } = Astro.props;
     inset: 0 auto auto 0;
     height: 4px;
     width: 56px;
-    background: linear-gradient(90deg, var(--blue), #5e97f2);
+    background: linear-gradient(90deg, var(--blue), var(--lightblue));
     border-radius: 0 0 4px 0;
     transition: width 0.35s ease;
   }

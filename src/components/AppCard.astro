@@ -1,6 +1,6 @@
 ---
 // Carte d'application cliquable (Agriculture / Food / Counterfeit / Industrial).
-// Photo optionnelle en tête, gros titre Crystal, flèche, invert bleu au hover.
+// Photo optionnelle en tête, gros titre display, flèche, invert bleu au hover.
 import Icon from './Icon.astro';
 
 interface Props {
@@ -81,7 +81,7 @@ const { title, text, icon, href, img } = Astro.props;
     align-items: center;
     justify-content: center;
     border-radius: 14px;
-    background: rgba(3, 96, 232, 0.1);
+    background: rgba(0, 116, 194, 0.1);
     color: var(--blue);
     transition: background 0.28s ease, color 0.28s ease;
   }
@@ -110,7 +110,7 @@ const { title, text, icon, href, img } = Astro.props;
     background: var(--blue);
     border-color: var(--blue);
     transform: translateY(-6px);
-    box-shadow: 0 24px 48px rgba(3, 96, 232, 0.28);
+    box-shadow: 0 24px 48px rgba(0, 116, 194, 0.28);
   }
   .appcard:hover .appcard__title {
     color: var(--white);

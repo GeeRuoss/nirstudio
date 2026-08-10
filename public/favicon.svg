@@ -1,4 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="7" fill="#0a0a0c"/>
-  <path d="M6 22L12 10l4 7 4-7 6 12" stroke="#0360e8" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Favicon intérim charte 908 : pic spectral orange sur Deep Blue (logo définitif en cours) -->
+  <rect width="64" height="64" rx="14" fill="#0b2939"/>
+  <path d="M8 44 C14 43 17 40 21 36 S28 20 32 20 40 40 45 41 54 38 56 30" stroke="#f37137" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <circle cx="32" cy="20" r="3.4" fill="#72bee6"/>
 </svg>

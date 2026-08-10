@@ -20,13 +20,7 @@ const links = NAV.filter((item) => item.href !== '/#contact');
       <!-- Lockup : 908devices (societe) en principal, NIRStudio en sous-marque -->
       <img class="nav__brand-908" src={withBase('/img/908devices-logo-white.png')} alt="908 Devices" width="640" height="108" />
       <span class="nav__brand-sep" aria-hidden="true"></span>
-      <span class="nav__brand-sub">
-        <svg width="22" height="13" viewBox="0 0 92.13 53.19" fill="var(--blue)" aria-hidden="true">
-          <polygon points="46.06 0 46.06 26.6 0 53.19 0 26.59 46.06 0" />
-          <polygon points="92.13 0 92.13 26.6 46.07 53.19 46.06 53.19 46.06 26.6 92.13 0" />
-        </svg>
-        <span class="nav__name">NIR<b>STUDIO</b></span>
-      </span>
+      <span class="nav__name">NIR<b>Studio</b></span>
     </a>
 
     <button class="burger" aria-label="Menu" aria-expanded="false" data-burger>
@@ -96,19 +90,17 @@ const links = NAV.filter((item) => item.href !== '/#contact');
     height: 22px;
     background: rgba(255, 255, 255, 0.22);
   }
-  .nav__brand-sub {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-  }
+  /* Wordmark intérim (logo définitif en cours) : construction miroir du logo
+     parent, NIR en Black + Studio en Light, un seul mot */
   .nav__name {
     font-family: var(--font-display);
-    font-weight: 400;
-    font-size: 1.02rem;
-    letter-spacing: 0.04em;
+    font-weight: 900;
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
   }
   .nav__name b {
-    font-weight: 700;
+    font-weight: 300;
+    color: var(--lightblue);
   }
   .nav__menu {
     display: flex;
@@ -131,7 +123,7 @@ const links = NAV.filter((item) => item.href !== '/#contact');
   }
   .nav__links a:hover,
   .nav__links a[aria-current='page'] {
-    color: #5e97f2;
+    color: var(--lightblue);
   }
   .nav__right {
     display: flex;

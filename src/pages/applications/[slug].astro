@@ -140,7 +140,7 @@ const others = APPLICATIONS.filter((a) => a.slug !== app.slug);
   }
   .case:hover {
     transform: translateY(-4px);
-    border-color: rgba(3, 96, 232, 0.45);
+    border-color: rgba(0, 116, 194, 0.45);
     box-shadow: 0 16px 40px rgba(10, 10, 20, 0.08);
   }
   .case__bar {
@@ -148,7 +148,7 @@ const others = APPLICATIONS.filter((a) => a.slug !== app.slug);
     inset: 0 auto auto 0;
     height: 4px;
     width: 56px;
-    background: linear-gradient(90deg, var(--blue), #5e97f2);
+    background: linear-gradient(90deg, var(--blue), var(--lightblue));
     border-radius: 0 0 4px 0;
     transition: width 0.35s ease;
   }
@@ -161,7 +161,7 @@ const others = APPLICATIONS.filter((a) => a.slug !== app.slug);
     font-weight: 700;
     font-size: 2rem;
     line-height: 1;
-    background: linear-gradient(135deg, var(--blue) 0%, #7fb0ff 90%);
+    background: linear-gradient(135deg, var(--blue) 0%, var(--lightblue) 90%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
