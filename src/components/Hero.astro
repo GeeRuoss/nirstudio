@@ -1,11 +1,17 @@
 ---
-// Hero : background officiel du kit de marque (device + phone dans l'image).
-// L'image passe par une variable CSS pour respecter le base path (staging /nirstudio/).
+// Hero : les deux renders officiels 908 (matériaux + huile d'olive) en fondu
+// enchaîné. Canvas étendus en noir vers le haut pour que le cover ne coupe rien.
 import { withBase } from '../lib/url';
-const heroBg = `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`;
+const heroBgs = [
+  `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`,
+  `--hero-bg: url('${withBase('/img/hero-bg-2.jpg')}')`,
+];
 ---
 
-<section class="hero" style={heroBg}>
+<section class="hero">
+  <div class="hero__bg" style={heroBgs[0]} aria-hidden="true"></div>
+  <div class="hero__bg hero__bg--alt" style={heroBgs[1]} aria-hidden="true"></div>
+  <div class="hero__scrim" aria-hidden="true"></div>
   <div class="container hero__inner">
     <div class="hero__copy">
       <h1>Your material, tested on the&nbsp;spot</h1>
@@ -24,20 +30,47 @@ const heroBg = `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`;
 
 <style>
   .hero {
-    /* L'image place le produit à droite : le copy vit à gauche, comme nirlab.com.
-       Scrim gauche pour la lisibilité du texte quand le viewport recadre le produit. */
-    /* Ancrage en bas : le canvas est etendu en noir vers le haut, donc le
-       recadrage cover ne mange que du noir, jamais la carafe ni le device */
-    background:
-      linear-gradient(90deg, rgba(4, 9, 24, 0.88) 0%, rgba(4, 9, 24, 0.55) 36%, rgba(4, 9, 24, 0) 62%),
-      #000 var(--hero-bg) no-repeat right 68% / cover;
+    position: relative;
+    overflow: hidden;
+    background: #000;
     color: var(--text-on-dark);
     min-height: 100vh;
     min-height: 100svh;
     display: flex;
     align-items: center;
   }
+  /* Deux calques d'image en fondu enchaîné : l'alternance présente les deux renders */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    background: var(--hero-bg) no-repeat right 68% / cover;
+  }
+  .hero__bg--alt {
+    opacity: 0;
+    animation: hero-swap 16s ease-in-out infinite;
+  }
+  @keyframes hero-swap {
+    0%,
+    40% {
+      opacity: 0;
+    }
+    50%,
+    90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  /* Scrim gauche pour la lisibilité du copy quel que soit le calque affiché */
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(4, 14, 24, 0.88) 0%, rgba(4, 14, 24, 0.55) 36%, rgba(4, 14, 24, 0) 62%);
+  }
   .hero__inner {
+    position: relative;
+    z-index: 1;
     width: 100%;
     padding-block: clamp(5rem, 12vw, 9rem);
   }
@@ -49,7 +82,7 @@ const heroBg = `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`;
   .hero__lead {
     margin-top: 1.5rem;
     font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-    color: #c7ccd4;
+    color: #c7d0d8;
     max-width: 32rem;
     animation: hero-rise 0.7s 0.12s ease both;
   }
@@ -72,10 +105,11 @@ const heroBg = `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`;
   }
   @media (max-width: 700px) {
     /* En mobile le produit reste visible mais sous un voile pour la lisibilité du texte */
-    .hero {
-      background:
-        linear-gradient(180deg, rgba(10, 10, 12, 0.3) 0%, rgba(10, 10, 12, 0.78) 55%, rgba(10, 10, 12, 0.9) 100%),
-        #000 var(--hero-bg) no-repeat 72% 68% / cover;
+    .hero__bg {
+      background-position: 72% bottom;
+    }
+    .hero__scrim {
+      background: linear-gradient(180deg, rgba(8, 14, 20, 0.3) 0%, rgba(8, 14, 20, 0.78) 55%, rgba(8, 14, 20, 0.9) 100%);
     }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -83,6 +117,10 @@ const heroBg = `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`;
     .hero__lead,
     .hero__cta {
       animation: none;
+    }
+    .hero__bg--alt {
+      animation: none;
+      opacity: 0;
     }
   }
 </style>
