@@ -26,9 +26,11 @@ const heroBg = `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`;
   .hero {
     /* L'image place le produit à droite : le copy vit à gauche, comme nirlab.com.
        Scrim gauche pour la lisibilité du texte quand le viewport recadre le produit. */
+    /* Ancrage en bas : le canvas est etendu en noir vers le haut, donc le
+       recadrage cover ne mange que du noir, jamais la carafe ni le device */
     background:
       linear-gradient(90deg, rgba(4, 9, 24, 0.88) 0%, rgba(4, 9, 24, 0.55) 36%, rgba(4, 9, 24, 0) 62%),
-      var(--ink) var(--hero-bg) no-repeat center right / cover;
+      #000 var(--hero-bg) no-repeat right 68% / cover;
     color: var(--text-on-dark);
     min-height: 100vh;
     min-height: 100svh;
@@ -73,7 +75,7 @@ const heroBg = `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`;
     .hero {
       background:
         linear-gradient(180deg, rgba(10, 10, 12, 0.3) 0%, rgba(10, 10, 12, 0.78) 55%, rgba(10, 10, 12, 0.9) 100%),
-        var(--ink) var(--hero-bg) no-repeat 72% center / cover;
+        #000 var(--hero-bg) no-repeat 72% 68% / cover;
     }
   }
   @media (prefers-reduced-motion: reduce) {

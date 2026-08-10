@@ -2,7 +2,7 @@
 // Barre flottante en pilule (direction bikeverbier) : translucide + flou,
 // se densifie au scroll, burger en mobile. Contact = bouton CTA à droite,
 // logo 908devices (société mère) à côté.
-import { NAV, SITE } from '../data/site';
+import { NAV } from '../data/site';
 import { withBase } from '../lib/url';
 
 // Page active pour marquer le lien courant (chemin sans le base path).
@@ -16,13 +16,17 @@ const links = NAV.filter((item) => item.href !== '/#contact');
 
 <header class="nav" data-nav>
   <div class="nav__inner">
-    <a href={withBase('/')} class="nav__brand" aria-label="NIRStudio, home">
-      <!-- Chevrons du logo officiel (kit de marque 2026) -->
-      <svg width="30" height="18" viewBox="0 0 92.13 53.19" fill="currentColor" aria-hidden="true">
-        <polygon points="46.06 0 46.06 26.6 0 53.19 0 26.59 46.06 0" />
-        <polygon points="92.13 0 92.13 26.6 46.07 53.19 46.06 53.19 46.06 26.6 92.13 0" />
-      </svg>
-      <span class="nav__name">NIR<b>STUDIO</b></span>
+    <a href={withBase('/')} class="nav__brand" aria-label="NIRStudio, a 908 Devices brand, home">
+      <!-- Lockup : 908devices (societe) en principal, NIRStudio en sous-marque -->
+      <img class="nav__brand-908" src={withBase('/img/908devices-logo-white.png')} alt="908 Devices" width="640" height="108" />
+      <span class="nav__brand-sep" aria-hidden="true"></span>
+      <span class="nav__brand-sub">
+        <svg width="22" height="13" viewBox="0 0 92.13 53.19" fill="var(--blue)" aria-hidden="true">
+          <polygon points="46.06 0 46.06 26.6 0 53.19 0 26.59 46.06 0" />
+          <polygon points="92.13 0 92.13 26.6 46.07 53.19 46.06 53.19 46.06 26.6 92.13 0" />
+        </svg>
+        <span class="nav__name">NIR<b>STUDIO</b></span>
+      </span>
     </a>
 
     <button class="burger" aria-label="Menu" aria-expanded="false" data-burger>
@@ -42,9 +46,6 @@ const links = NAV.filter((item) => item.href !== '/#contact');
         }
       </ul>
       <div class="nav__right">
-        <a href={SITE.parent.url} class="nav__parent" target="_blank" rel="noopener" aria-label="908 Devices, parent company">
-          <img src={withBase('/img/908devices-logo-white.png')} alt="908 Devices" width="640" height="108" />
-        </a>
         <a class="nav__cta" href={withBase('/#contact')}>Contact</a>
       </div>
     </nav>
@@ -83,15 +84,27 @@ const links = NAV.filter((item) => item.href !== '/#contact');
   .nav__brand {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.85rem;
   }
-  .nav__brand svg {
-    color: var(--blue);
+  .nav__brand-908 {
+    display: block;
+    height: 17px;
+    width: auto;
+  }
+  .nav__brand-sep {
+    width: 1px;
+    height: 22px;
+    background: rgba(255, 255, 255, 0.22);
+  }
+  .nav__brand-sub {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
   }
   .nav__name {
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: 1.25rem;
+    font-size: 1.02rem;
     letter-spacing: 0.04em;
   }
   .nav__name b {
@@ -124,19 +137,6 @@ const links = NAV.filter((item) => item.href !== '/#contact');
     display: flex;
     align-items: center;
     gap: 1rem;
-  }
-  .nav__parent {
-    display: inline-flex;
-    opacity: 0.8;
-    transition: opacity 0.2s ease;
-  }
-  .nav__parent img {
-    display: block;
-    height: 18px;
-    width: auto;
-  }
-  .nav__parent:hover {
-    opacity: 1;
   }
   .nav__cta {
     display: inline-flex;
@@ -220,6 +220,15 @@ const links = NAV.filter((item) => item.href !== '/#contact');
     .nav__cta {
       flex: 1;
       justify-content: center;
+    }
+  }
+  @media (max-width: 440px) {
+    /* Tres petit ecran : le lockup garde 908devices + chevrons */
+    .nav__name {
+      display: none;
+    }
+    .nav__brand {
+      gap: 0.65rem;
     }
   }
 </style>
