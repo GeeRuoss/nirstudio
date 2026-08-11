@@ -1,16 +1,18 @@
 ---
-// Hero : les deux renders officiels 908 (matériaux + huile d'olive) en fondu
-// enchaîné. Canvas étendus en noir vers le haut pour que le cover ne coupe rien.
+// Hero : les trois renders officiels 908 en fondu enchaîné
+// (matériaux → pharma → maïs/raisin). Canvas étendus en noir vers le haut.
 import { withBase } from '../lib/url';
 const heroBgs = [
   `--hero-bg: url('${withBase('/img/hero-bg.jpg')}')`,
   `--hero-bg: url('${withBase('/img/hero-bg-2.jpg')}')`,
+  `--hero-bg: url('${withBase('/img/hero-bg-3.jpg')}')`,
 ];
 ---
 
 <section class="hero">
   <div class="hero__bg" style={heroBgs[0]} aria-hidden="true"></div>
-  <div class="hero__bg hero__bg--alt" style={heroBgs[1]} aria-hidden="true"></div>
+  <div class="hero__bg hero__bg--l2" style={heroBgs[1]} aria-hidden="true"></div>
+  <div class="hero__bg hero__bg--l3" style={heroBgs[2]} aria-hidden="true"></div>
   <div class="hero__scrim" aria-hidden="true"></div>
   <div class="container hero__inner">
     <div class="hero__copy">
@@ -45,20 +47,41 @@ const heroBgs = [
     inset: 0;
     background: var(--hero-bg) no-repeat right 68% / cover;
   }
-  .hero__bg--alt {
+  /* Rotation à 3 : le calque 1 reste en fond, les calques 2 et 3 passent
+     par-dessus chacun leur tour (cycle 15s, ~5s par image) */
+  .hero__bg--l2,
+  .hero__bg--l3 {
     opacity: 0;
-    animation: hero-swap 11s ease-in-out infinite;
   }
-  @keyframes hero-swap {
+  .hero__bg--l2 {
+    animation: hero-l2 15s ease-in-out infinite;
+  }
+  .hero__bg--l3 {
+    animation: hero-l3 15s ease-in-out infinite;
+  }
+  @keyframes hero-l2 {
     0%,
-    36% {
+    28% {
       opacity: 0;
     }
-    46%,
-    86% {
+    35%,
+    61% {
       opacity: 1;
     }
-    96%,
+    68%,
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes hero-l3 {
+    0%,
+    61% {
+      opacity: 0;
+    }
+    68%,
+    94% {
+      opacity: 1;
+    }
     100% {
       opacity: 0;
     }
@@ -119,7 +142,8 @@ const heroBgs = [
     .hero__cta {
       animation: none;
     }
-    .hero__bg--alt {
+    .hero__bg--l2,
+    .hero__bg--l3 {
       animation: none;
       opacity: 0;
     }
